@@ -14,10 +14,6 @@ let productschema = {
     type: Number,
     required:true
   },
-  quantity: {
-    type: Number,
-    required: true
-  },
   sku: {
     type: String,
     required: true,
