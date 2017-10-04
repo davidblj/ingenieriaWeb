@@ -13,12 +13,14 @@ import {RestangularConfigFactory} from "./shared/restConfig";
 // servicios
 
 import { ProductService } from "./services/product.service";
+import { ProductFormComponent } from './pages/seller-dashboard/product-form/product-form.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomePageComponent
+    HomePageComponent,
+    ProductFormComponent
   ],
   imports: [
     BrowserModule,

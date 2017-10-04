@@ -1,0 +1,56 @@
+section {
+  height: 100%;
+  background:  #eeeeee;
+}
+
+.bars-icon {
+  color: #bdbdbd;
+  font-size: 4em;
+  margin-left: -1.25em !important;
+}
+
+.left-arrow-icon {
+  color: #b0bec5;
+  padding-right: 5px;
+}
+
+.btn-default {
+  border: 2px solid #b0bec5;
+  margin-left: 15px;
+
+  span {
+    color: #b0bec5;
+    font-size: 14px;
+  }
+}
+
+.card {
+  border: 2px solid #b0bec5;
+
+  .header {
+    border-bottom: thin solid #bdbdbd;
+  }
+
+  .footer {
+    margin: 2.5em;
+  }
+}
+
+.btn-submit {
+  color: white !important;
+  padding: 0.8em 2em 0.8em;
+  font-size: 15px;
+  background: #546e7a !important;
+  border-radius: 5px;
+  margin-right: 1em;
+
+}
+
+.btn-cancel {
+  color: #b0bec5 !important;
+  border-color: #bdbdbd;
+  padding: 0.8em 2em 0.8em;
+  background: #eeeeee !important;
+  font-size: 15px;
+}
+
