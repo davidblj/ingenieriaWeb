@@ -42,6 +42,23 @@ module.exports = function (wagner) {
       })
     }
   }));
+  
+ //localhost:3000/shop/productDetails?id=1
+  api.get('/productDetails', wagner.invoke(function (Product) {
 
+      return function(req, res) {
+
+        Product.find({_id: req.query.id}).exec( function(err, productDetail){
+           if(err) {
+             return res
+               .status(status.BAD_REQUEST)
+              .json({error: err.toString()});
+          }
+
+          return res.json(productDetail);
+
+        });
+      }
+    }));
   return api;
 }
