@@ -6,11 +6,15 @@ import { Product} from "../models/product";
 @Injectable()
 export class ProductService {
 
-  constructor(private  restangurlar: Restangular) { }
+  constructor(private  restangular: Restangular) { }
 
-   getProducts (): Observable<Product[]>{
+   getProducts(): Observable<Product[]>{
 
-    return this.restangurlar.all('shop/listProducts').getList();
+    return this.restangular.all('shop/listProducts').getList();
+   }
 
+   saveProduct(product: Product): Observable<string>{
+
+    return this.restangular.all('shop/addProduct').post(product);
    }
 }

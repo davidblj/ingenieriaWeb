@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RestangularModule } from 'ngx-restangular';
+import {ReactiveFormsModule} from "@angular/forms";
 
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
@@ -16,6 +17,7 @@ import { ProductService } from "./services/product.service";
 import { ProductFormComponent } from './pages/seller-dashboard/product-form/product-form.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +27,8 @@ import { ProductFormComponent } from './pages/seller-dashboard/product-form/prod
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RestangularModule.forRoot(RestangularConfigFactory)
+    RestangularModule.forRoot(RestangularConfigFactory),
+    ReactiveFormsModule
   ],
   providers: [
     ProductService
