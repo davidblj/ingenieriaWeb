@@ -14,6 +14,15 @@ let productschema = {
     type: Number,
     required:true
   },
+  price: {
+    type: Number,
+    required:true
+  },
+  image: {
+    data: Buffer,
+    contentType: String,
+    required: false 
+  },
   sku: {
     type: String,
     required: true,
