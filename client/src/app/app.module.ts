@@ -3,9 +3,12 @@ import { NgModule } from '@angular/core';
 import { RestangularModule } from 'ngx-restangular';
 import {ReactiveFormsModule} from "@angular/forms";
 
+// componentes
+
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
-import {AppRoutingModule} from "./app-routing/app-routing.module";
+import { AppRoutingModule} from "./app-routing/app-routing.module";
+import { CartListComponent } from './pages/cart-list/cart-list.component';
 
 // librerias
 
@@ -15,9 +18,7 @@ import {RestangularConfigFactory} from "./shared/restConfig";
 
 import { ProductService } from "./services/product.service";
 import { ProductFormComponent } from './pages/seller-dashboard/product-form/product-form.component';
-import { CartListComponent } from './pages/cart-list/cart-list.component';
-
-
+import { CartService } from "./services/cart.service";
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { CartListComponent } from './pages/cart-list/cart-list.component';
     ReactiveFormsModule
   ],
   providers: [
-    ProductService
+    ProductService,
+    CartService
   ],
   bootstrap: [AppComponent]
 })

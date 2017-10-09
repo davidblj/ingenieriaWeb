@@ -2,7 +2,8 @@ const PROXY_CONFIG = [
   {
     "context": [
       "/shop/listProducts",
-      "/shop/addProduct"
+      "/shop/addProduct",
+      "/client/addToCart"
     ],
     "target": "http://localhost:3000",
     "secure": false

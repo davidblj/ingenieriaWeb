@@ -24,9 +24,9 @@ let productschema = {
     required: false 
   },
   sku: {
-    type: String,
-    required: true,
-    unique: true
+    type: String
+   /* required: true,
+    unique: true*/
   }
 }
 

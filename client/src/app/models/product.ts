@@ -1,8 +1,8 @@
 export class Product {
 
-  name: String;
-  description:String;
-  quantity:Number;
-  sku:String;
-
+  _id: string;
+  name: string;
+  description: string;
+  quantity: number;
+  sku: string;
 }
