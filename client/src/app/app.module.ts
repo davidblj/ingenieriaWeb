@@ -19,13 +19,15 @@ import {RestangularConfigFactory} from "./shared/restConfig";
 import { ProductService } from "./services/product.service";
 import { ProductFormComponent } from './pages/seller-dashboard/product-form/product-form.component';
 import { CartService } from "./services/cart.service";
+import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
     ProductFormComponent,
-    CartListComponent
+    CartListComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
