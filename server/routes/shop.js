@@ -26,7 +26,6 @@ module.exports = function (wagner) {
     return function(req, res) {
 
       let reqProduct = req.body;
-      console.log(reqProduct);
 
       // todo: check for an exisiting product in the database
 
@@ -43,5 +42,22 @@ module.exports = function (wagner) {
     }
   }));
 
+ //localhost:3000/shop/productDetails?id=1
+  api.get('/productDetails', wagner.invoke(function (Product) {
+
+      return function(req, res) {
+
+        Product.find({_id: req.query.id}).exec( function(err, productDetail){
+           if(err) {
+             return res
+               .status(status.INTERNAL_SERVER_ERROR)
+              .json({error: err.toString()});
+          }
+
+          return res.json(productDetail);
+
+        });
+      }
+    }));
   return api;
 }
