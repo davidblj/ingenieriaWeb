@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
 $colors: (
-  irenic: #07beb8,
+  irenic: #22C9A6,
   serene: #3dccc7,
   tranquil: #68d8d6,
   calm: #9ceaef,
   cool: #c4fff9,
   ice: #ffffff,
-
   base: #454749
 );
 
@@ -18,7 +18,6 @@ section {
 
 .login-card {
   padding-top: 5em;
-
   .card-body {
     border-top: 5px solid #22C9A6;
   }
@@ -33,9 +32,7 @@ section {
   .tile-body {
     padding: 2rem;
   }
-
 }
-
 
 .form-input {
   $form-margin-bottom: 1rem;
@@ -47,7 +44,7 @@ section {
   $input-padding-bottom: .5rem;
   $input-padding-left: 0;
   $input-underline-color: #868e96;
-  $input-underline-color-focus: color("irenic");
+ $input-underline-color-focus: color("irenic");
 
   display: block;
   position: relative;
@@ -137,7 +134,8 @@ section {
     outline: none;
     opacity: 1;
     transition: transform .1s ease-in, opacity .1s ease-in, border-radius .1s ease-in;
-    right: -1px;
+    right: -2px;
+
 
     span {
       opacity: 1;
@@ -193,7 +191,7 @@ section {
     z-index: 1;
 
     .login-granted-content {
-      background-image: url(https://res.cloudinary.com/dgmilxzy7/image/upload/c_scale,w_700,o_25,b_rgb:07beb8/v1506735375/CodePen/ViddenPixel.jpg);
+
       background-position: center;
       background-size: cover;
       color: color("ice");
@@ -217,6 +215,8 @@ section {
     }
   }
 }
+
+
 
 
 /**
@@ -267,16 +267,12 @@ section {
   clear: both;
 }
 
+
 .float-right {
   float: right;
 }
 
 
-
-
-/**
- *
- */
 
 .spinner {
   width: 3rem;
