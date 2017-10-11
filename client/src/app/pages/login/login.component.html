@@ -1,51 +1,49 @@
-
 <section>
-
-  <div class="container" >
-
+  <div class="container">
     <div class="row justify-content-center login-card">
 
-      <div class="col-md-4">
+      <div class="col-md-5">
 
         <div class="card">
-          <div class="card-body">
+          <form novalidate [formGroup]="">
+            <div class="card-body">
 
-            <div class="title">
-              INGRESAR
-            </div>
-            <div class="title-body">
-               <label class="form-input">
+              <div class="title">
+                INGRESAR
+              </div>
+
+              <div class="title-body">
+
+                <label class="form-input">
                   <i class="material-icons">person</i>
-                  <input type="text" autofocus="true" required />
+                  <input type="text" required/>
                   <span class="label">Nombre de usuario</span>
-                 <div class="underline"></div>
+                  <div class="underline"></div>
                 </label>
 
-              <label class="form-input">
-                <i class="material-icons">vpn_key</i>
-                <input type="password" required />
-                <span class="label">Clave</span>
-                <div class="underline"></div>
-              </label>
+                <label class="form-input">
+                  <i class="material-icons">vpn_key</i>
+                  <input type="password" required/>
+                  <span class="label">Clave</span>
+                  <div class="underline"></div>
+                </label>
 
-              <div class="submit-container clearfix" style="margin-top: 2rem;">
-               <div id="submit" role="button" type="button" class="btn btn-irenic float-right" tabindex="0">
-                 <span> INGRESAR</span>
-               </div>
-                <div class="login-pending">
-                  <div class=spinner>
-                  <span class="dot1"></span>
-                    <span class="dot2"></span>
-                  </div>
-                  <div class="login-granted-content">
-                    <i class="material-icons">done</i>
-                  </div>
-
+                <div class="btn-section">
+                  <button type="button" class="btn btn-default">
+                    <span>INGRESAR</span>
+                  </button>
+                  <span class="text-muted">¿olvidaste tu contraseña ?</span>
                 </div>
+
               </div>
 
             </div>
-          </div>
+
+            <div class="card-footer">
+                <span class="text-muted">¿no tienes una cuenta?</span>
+                <span class="new-account">Has una aqui.</span>
+            </div>
+          </form>
         </div>
       </div>
     </div>
