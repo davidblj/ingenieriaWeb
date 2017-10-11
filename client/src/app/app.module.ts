@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { AppRoutingModule} from "./app-routing/app-routing.module";
 import { CartListComponent } from './pages/cart-list/cart-list.component';
+import { LoginComponent } from './pages/login/login.component';
 
 // librerias
 
@@ -19,7 +20,7 @@ import {RestangularConfigFactory} from "./shared/restConfig";
 import { ProductService } from "./services/product.service";
 import { ProductFormComponent } from './pages/seller-dashboard/product-form/product-form.component';
 import { CartService } from "./services/cart.service";
-import { LoginComponent } from './pages/login/login.component';
+import { LoginService } from "./services/login.service";
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { LoginComponent } from './pages/login/login.component';
   ],
   providers: [
     ProductService,
-    CartService
+    CartService,
+    LoginService
   ],
   bootstrap: [AppComponent]
 })
