@@ -1,0 +1,64 @@
+$background-color: #232331;
+$grey: #E7EFF6;
+$strong-grey: #928D96;
+$blue: #8ABBB5;
+
+.row {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.side-menu {
+  position: fixed;
+  width: 250px;
+  height: 100%;
+  background-color: $background-color;
+
+  .nav-item {
+    color: $strong-grey;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: bold;
+    font-size: 1em;
+    padding: {
+      left: 3.2em;
+      top: 2em;
+    };
+
+    i {
+      font-size: 2em;
+      padding-right: 0.5em;
+      position: relative;
+      color: $blue;
+      top: 6px;
+    }
+  }
+
+}
+
+.side-body {
+  margin-left: 260px;
+
+  .circle {
+    position: fixed;
+    top: 90%;
+    left: 95%;
+    background: $background-color;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+
+    i {
+      position: relative;
+      left: 0.05em;
+      line-height: 2.5em;
+      color: $grey;
+      font-size: 1.5em;
+    }
+  }
+}
+
+.onMouseOver {
+  cursor: pointer;
+}

@@ -2,14 +2,14 @@
   <nav class="navbar navbar-light navbar-expand-md">
 
     <div class="navbar-nav ml-auto">
-      <i class="fa fa-shopping-cart"></i>
-      <span class="count-box">
+      <div class="nav-item">
+        <i class="fa fa-shopping-cart onMouseOver" routerLink="/cart-list" routerLinkActive="active"></i>
         <span class="count">{{itemsInCart}}</span>
-      </span>
-    </div>
+      </div>
 
-    <div class="navbar-nav ">
-      <i class="fa fa-sign-in"></i>
+      <div class="nav-item">
+        <i class="fa fa-sign-in onMouseOver" routerLink="/login" routerLinkActive="active"></i>
+      </div>
     </div>
   </nav>
 </div>

@@ -1,33 +1,35 @@
 @import url('https://fonts.googleapis.com/css?family=Kumar+One');
 
 .navbar {
-  margin: 1.25em;
 
-  i {
-    font-size: 2em;
-    margin-left: 1em;
+  margin: {
+    top: 1.5em;
+    right: 1em;
   }
-}
 
-.count-box {
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  right: 0;
-  text-align: center;
+  .nav-item {
+    height: 3em;
 
-  .count {
-    position: absolute;
-    background: #ff5722;
-    color: #fff;
-    border-radius: 50%;
-    width: 26px;
-    height: 25px;
-    line-height: 25px;
-    font-size: smaller;
-    font-weight: 800;
-    top: -12px;
-    left:-2.6em;
+    i {
+      font-size: 2em;
+      margin-left: 1em;
+    }
+
+    .count {
+      display: block;
+      top: -47px;
+      left:4em;
+      position: relative;
+      background: #F4646A;
+      color: #fff;
+      border-radius: 50%;
+      width: 26px;
+      height: 25px;
+      text-align: center;
+      line-height: 25px;
+      font-size: smaller;
+      font-weight: 800;
+    }
   }
 }
 
@@ -37,11 +39,11 @@ section {
   min-height: 100%;
   padding: 30px 0;
   position: absolute;
-  background: #263238;
+  background: #C8CCCF;
 }
 
 .btn-default {
-  background: #ff5722;
+  background: #232331;
   color: #fff;
   font-weight: 700;
   text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
@@ -77,8 +79,8 @@ section {
     text-align: center;
 
     i {
-      background: #ff5722;
-      color: #fff;
+      background: #F4646A;
+      color: white;
       border-radius: 50%;
       width: 50px;
       height: 50px;
