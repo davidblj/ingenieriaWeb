@@ -1,6 +1,6 @@
 let mongoose = require('mongoose');
 
-let clientschema = {
+let userschema = {
 
   username: {
     type: String,
@@ -13,10 +13,14 @@ let clientschema = {
   address: {
     type: String,
     required: false
+  },
+  role: {
+    type: String,
+    required: true
   }
 }
 
-let schema = new mongoose.Schema(clientschema);
+let schema = new mongoose.Schema(userschema);
 
 module.exports = schema;
-module.exports.productschema = clientschema;
+module.exports.userschema = userschema;

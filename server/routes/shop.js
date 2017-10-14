@@ -43,7 +43,7 @@ module.exports = function (wagner) {
   }));
 
  //localhost:3000/shop/productDetails?id=1
-  api.get('/productDetails', wagner.invoke(function (Product) {
+  api.get('/productDetails', wagner.invoke(function(Product) {
 
       return function(req, res) {
 
@@ -59,5 +59,15 @@ module.exports = function (wagner) {
         });
       }
     }));
+
+    // api.get('/Products', wagner.invoke(function(Cart){
+    //   return function(req, res) {
+    //
+    //
+    //   }
+    //
+    // }));
+
+
   return api;
 }

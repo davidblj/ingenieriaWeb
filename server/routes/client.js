@@ -5,7 +5,7 @@ module.exports = function (wagner) {
 
   let api = express.Router();
 
-  api.post('/addToCart', wagner.invoke(function(Client, Cart) {
+  api.post('/addToCart', wagner.invoke(function(Cart) {
     return function(req, res) {
         let idClient = req.body.idClient;
         let idProduct = req.body.idProduct;
@@ -41,10 +41,10 @@ module.exports = function (wagner) {
     }
 }));
 
-    api.post('/registerClient', wagner.invoke(function(Client){
+    api.post('/registerClient', wagner.invoke(function(User){
       return function(req, res) {
         let reqClient= req.body;
-        Client(reqClient).save(function(error) {
+        User(reqClient).save(function(error) {
           if(error) {
             return res
                 .status(status.INTERNAL_SERVER_ERROR)
@@ -56,6 +56,21 @@ module.exports = function (wagner) {
 
       }
     }));
+
+ //    api.get('/listCart', wagner.invoke(function(Cart){
+ //      return function(req, res) {
+ //        Cart.findOne({ name: 'Val' }).populate({path: 'product', populate: { path: 'product' }
+ //
+ // });
+  //});
+
+    //   }
+    // }
+    // }));
+
+
+
+
 
   return api;
 }
