@@ -21,10 +21,19 @@ export class HomePageComponent implements OnInit {
   itemsInCart = 0;
   errMess:String;
 
+  username;
+
   constructor( private  productService: ProductService,
                private cartService: CartService) { }
 
   ngOnInit() {
+
+    const userInformation = JSON.parse(localStorage.getItem('currentUser'));
+
+    // todo: check if the user is logged in
+    if(userInformation) {
+      this.username = userInformation.user;
+    }
 
     this.productService.getProducts()
       .subscribe(
@@ -39,7 +48,10 @@ export class HomePageComponent implements OnInit {
       )
   }
 
-  // todo: check if the user is logged in
+  public logOut() {
+    this.username = null;
+    localStorage.removeItem('currentUser');
+  }
 
   // todo: check for an existing cart-list and update the visual que (itemsInCart)
 

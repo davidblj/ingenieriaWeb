@@ -33,6 +33,8 @@
                     <span>INGRESAR</span>
                   </button>
                   <span class="text-muted">¿olvidaste tu contraseña ?</span>
+
+                  <div *ngIf="errmess" class="bad-request">{{errmess}}</div>
                 </div>
 
               </div>

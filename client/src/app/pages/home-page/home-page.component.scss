@@ -7,12 +7,19 @@
     right: 1em;
   }
 
+  .username {
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    padding-left: 1.5em;
+    font-weight: bold;
+  }
+
   .nav-item {
     height: 3em;
 
     i {
       font-size: 2em;
-      margin-left: 1em;
+      margin-left: 1.2em;
     }
 
     .count {
