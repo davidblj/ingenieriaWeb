@@ -21,6 +21,15 @@ module.exports = function (wagner) {
       });
     }
   }));
+  
+  api.get('/listProductsByVendor', wagner.invoke(function (Product) {
+
+      // todo: this
+      return function (req, res) {
+
+          // Product.find({})
+      }
+  }));
 
   api.post('/addProduct', auth.verifyToken, wagner.invoke(function (Product) {
 

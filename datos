@@ -79,6 +79,18 @@
         }
 }
 
+// addToCart (POST):    /client/addToCart
+
+{
+    "idClient": "59e1f7596ae65112b9576641",
+    "idProduct": "59e22044cab3f527365b9e45"
+}
+
+{
+    "idClient": "59e1f7596ae65112b9576641",
+    "idProduct": "59e22050cab3f527365b9e46"
+}
+
 // token para:
 
 david:
@@ -90,4 +102,42 @@ isabel:
 esteban:
     {"user":"esteban","role":"vendor","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OWUyMDViNzllNGVlNzFlM2VlN2JmMzQiLCJ1c2VybmFtZSI6ImVzdGViYW4iLCJyb2xlIjoidmVuZG9yIiwiZXhwIjoxNTA4NTkzMjI0LCJpYXQiOjE1MDc5ODg0MjR9.TXimRcEWOKtRv4GbaMqbcEQ4x-YdGJElLAdSyB9ErGs"}
     id: 59e205b79e4ee71e3ee7bf34
+
+
+RETURN TYPES
+
+{
+    products: [
+    {"id:" "id1", "id_vendor": "vendor1"},
+    {"id:" "id2", "id_vendor": "vendor2"}
+    ]
+}
+
+{
+    "batch": [{
+        "vendor": "vendor_id",
+        "products": [
+            {"id": "id1", "name" : "nameValue"},
+            {"id": "id1", "name" : "nameValue"}
+            ],
+        "hasCoupon": true
+    },
+    {
+      "vendor": "vendor_id",
+      "products": [
+            {"id": "id1", "name" : "nameValue"},
+            {"id": "id1", "name" : "nameValue"}
+            ],
+      "hasCoupon": true
+    }]
+}
+
+{
+  "client":"59e1f7596ae65112b9576641",
+  "batch":[{
+    "id_vendor":"59e205b79e4ee71e3ee7bf34",
+    "products":[
+        {"_id":"59e22050cab3f527365b9e46","name":"reloj","description":"fancy","quantity":1,"price":1,"id_vendor":"59e205b79e4ee71e3ee7bf34","__v":0}]
+    }]
+}
 
