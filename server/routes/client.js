@@ -38,23 +38,25 @@ module.exports = function (wagner) {
                 });
             }
         })
-    }
-}));
+     }
+    }));
 
-    api.post('/registerClient', wagner.invoke(function(User){
-      return function(req, res) {
-        let reqClient= req.body;
-        User(reqClient).save(function(error) {
-          if(error) {
-            return res
-                .status(status.INTERNAL_SERVER_ERROR)
-                .json({error: error.toString()});
-          }
-          let content = { message: 'Se registró exitosamente el cliente'};
-          res.json(content);
-        })
+    // todo: use a middleware for authentication
+    api.get('/listClients', wagner.invoke(function (User) {
 
-      }
+        return function (req, res) {
+
+            User.find({role: 'client'}).exec(function (error, clients) {
+
+                if(error) {
+                    return res
+                        .status(status.INTERNAL_SERVER_ERROR)
+                        .json({error: error.toString()});
+                }
+
+                return res.json(clients);
+            })
+        }
     }));
 
     api.get('/listCart', wagner.invoke(function(Cart,Product, Coupon){
@@ -65,13 +67,8 @@ module.exports = function (wagner) {
           console.log("lista los productos del carro");
 
         })
-
-
       }
     }));
 
-
-
-
   return api;
-}
+};

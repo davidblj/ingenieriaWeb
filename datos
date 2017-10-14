@@ -19,3 +19,23 @@
 	"role" : "vendor",
 	"__v" : 0
 }
+
+// register
+
+{
+    "username" : "david",
+    "password" : "david",
+    "role" : "client"
+}
+
+// login
+
+{
+    "username": "david",
+    "password": "david"
+}
+
+// token para:
+
+david: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OWUxZjc1OTZhZTY1MTEyYjk1NzY2NDEiLCJ1c2VybmFtZSI6ImRhdmlkIiwicm9sZSI6ImNsaWVudCIsImV4cCI6MTUwODU4ODY0NCwiaWF0IjoxNTA3OTgzODQ0fQ.d4YLl-uWG0otCw0qNiFBWT_AfFb6qkgwJXeBCros8Vw"
+
