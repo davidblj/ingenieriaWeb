@@ -1,5 +1,6 @@
 let express = require('express');
 let status = require('http-status');
+let auth = require('../middleware/auth');
 
 module.exports = function (wagner) {
 
@@ -41,10 +42,19 @@ module.exports = function (wagner) {
      }
     }));
 
-    // todo: use a middleware for authentication
-    api.get('/listClients', wagner.invoke(function (User) {
+    // Request headers:  name: x-access-token  value: xxx.xxx.xxx
+    api.get('/listClients', auth.verifyToken, wagner.invoke(function (User) {
 
         return function (req, res) {
+
+            let userRole = req.decoded.role;
+            console.log(userRole);
+
+            if(userRole !== 'vendor') {
+                return res
+                    .status(status.FORBIDDEN)
+                    .json({error: 'No tienes la autorizacion para este tipo de peticion'});
+            }
 
             User.find({role: 'client'}).exec(function (error, clients) {
 
@@ -59,6 +69,7 @@ module.exports = function (wagner) {
         }
     }));
 
+    // todo: use the authentication middleware
     api.get('/listCart', wagner.invoke(function(Cart,Product, Coupon){
       return function(req, res) {
         let idClient= req.query.idCliente;

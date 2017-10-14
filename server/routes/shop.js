@@ -1,5 +1,6 @@
 let express = require('express');
 let status = require('http-status');
+let auth = require('../middleware/auth');
 
 module.exports = function (wagner) {
 
@@ -21,25 +22,34 @@ module.exports = function (wagner) {
     }
   }));
 
-  api.post('/addProduct', wagner.invoke(function (Product) {
+  api.post('/addProduct', auth.verifyToken, wagner.invoke(function (Product) {
 
-    return function(req, res) {
+      return function (req, res) {
 
-      let reqProduct = req.body;
+          let reqProduct = req.body.content;
+          let userRole = req.decoded.role;
+          let id_vendor = req.decoded._id;
 
-      // todo: check for an exisiting product in the database
+          if (userRole !== 'vendor') {
+              return res
+                  .status(status.FORBIDDEN)
+                  .json({error: 'No tienes la autorizacion para este tipo de peticion'});
+          }
 
-      Product(reqProduct).save( function(error) {
-        if(error) {
-          return res
-              .status(status.INTERNAL_SERVER_ERROR)
-              .json({error: error.toString()});
-        }
+          reqProduct.id_vendor = id_vendor;
+          console.log(reqProduct);
 
-        let content = { message: 'El producto se ha creado'};
-        res.json(content);
-      })
-    }
+          Product(reqProduct).save(function (error) {
+              if (error) {
+                  return res
+                      .status(status.INTERNAL_SERVER_ERROR)
+                      .json({error: error.toString()});
+              }
+
+              let content = {message: 'El producto se ha creado'};
+              res.json(content);
+          })
+      }
   }));
 
  //localhost:3000/shop/productDetails?id=1
@@ -70,4 +80,4 @@ module.exports = function (wagner) {
 
 
   return api;
-}
+};

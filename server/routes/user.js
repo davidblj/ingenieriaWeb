@@ -47,7 +47,12 @@ module.exports = function (wagner) {
                     }
 
                     let token = user.generateJwt();
-                    res.json(token);
+                    let content = {
+                        user: user.username,
+                        role: user.role,
+                        token: token
+                    };
+                    res.json(content);
                 })
         }
     }));

@@ -1,34 +1,40 @@
 let mongoose = require('mongoose');
+let Schema = mongoose.Schema;
 
 let productschema = {
 
-  name: {
-    type: String,
-    required: true
-  },
-  description: {
-    type: String,
-    required:true
-  },
-  quantity: {
-    type: Number,
-    required:true
-  },
-  price: {
-    type: Number,
-    required:true
-  },
-  image: {
-    data: Buffer,
-    contentType: String,
-    required: false 
-  },
-  sku: {
-    type: String,
-    required: true,
-    unique: true
-  }
-}
+    // todo: verify a unique name for each vendor in a registration
+    name: {
+        type: String,
+        required: true
+    },
+    description: {
+        type: String,
+        required: true
+    },
+    id_vendor: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    quantity: {
+        type: Number,
+        required: true
+    },
+    price: {
+        type: Number,
+        required: true
+    },
+    image: {
+        data: Buffer,
+        contentType: String,
+        required: false
+    }
+    /*sku: {
+      type: String,
+      required: true,
+      unique: true
+    }*/
+};
 
 let schema = new mongoose.Schema(productschema);
 

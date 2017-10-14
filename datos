@@ -20,7 +20,7 @@
 	"__v" : 0
 }
 
-// register
+// register (POST):  /user/registerUser/
 
 {
     "username" : "david",
@@ -28,14 +28,50 @@
     "role" : "client"
 }
 
-// login
+{
+    "username" : "isabel",
+    "password" : "isabel",
+    "role" : "client"
+}
+
+{
+    "username" : "esteban",
+    "password" : "esteban",
+    "role" : "vendor"
+}
+
+// login (POST):   /user/login
 
 {
     "username": "david",
     "password": "david"
 }
 
+{
+    "username": "esteban",
+    "password": "esteban"
+}
+
+// addProduct (POST):  /shop/
+
+{
+    "content": {
+        "name": "reloj",
+        "description": "fancy",
+        "quantity": 1,
+        "price": 1
+    },
+    "user": {
+        "username": "esteban",
+        "role": "vendor",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OWUyMDViNzllNGVlNzFlM2VlN2JmMzQiLCJ1c2VybmFtZSI6ImVzdGViYW4iLCJyb2xlIjoidmVuZG9yIiwiZXhwIjoxNTA4NTkzMjI0LCJpYXQiOjE1MDc5ODg0MjR9.TXimRcEWOKtRv4GbaMqbcEQ4x-YdGJElLAdSyB9ErGs"
+    }
+}
+
 // token para:
 
-david: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OWUxZjc1OTZhZTY1MTEyYjk1NzY2NDEiLCJ1c2VybmFtZSI6ImRhdmlkIiwicm9sZSI6ImNsaWVudCIsImV4cCI6MTUwODU4ODY0NCwiaWF0IjoxNTA3OTgzODQ0fQ.d4YLl-uWG0otCw0qNiFBWT_AfFb6qkgwJXeBCros8Vw"
+david:
+    {"user":"david","role":"client","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OWUxZjc1OTZhZTY1MTEyYjk1NzY2NDEiLCJ1c2VybmFtZSI6ImRhdmlkIiwicm9sZSI6ImNsaWVudCIsImV4cCI6MTUwODU5MzI2OCwiaWF0IjoxNTA3OTg4NDY4fQ.2sokn8DLSGbcCv4PEqt6HaBSMm57zYGggnShCW7erE0"}
+esteban:
+    {"user":"esteban","role":"vendor","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OWUyMDViNzllNGVlNzFlM2VlN2JmMzQiLCJ1c2VybmFtZSI6ImVzdGViYW4iLCJyb2xlIjoidmVuZG9yIiwiZXhwIjoxNTA4NTkzMjI0LCJpYXQiOjE1MDc5ODg0MjR9.TXimRcEWOKtRv4GbaMqbcEQ4x-YdGJElLAdSyB9ErGs"}
 
