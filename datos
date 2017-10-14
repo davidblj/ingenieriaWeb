@@ -1,0 +1,143 @@
+{
+	"_id" : ObjectId("59e133f3f663224b6c90c9a7"),
+	"username" : "maria.martinez",
+	"password" : "1234",
+	"role" : "client",
+	"__v" : 0
+}
+{
+	"_id" : ObjectId("59e133fff663224b6c90c9a8"),
+	"username" : "david.jaramillo",
+	"password" : "98765",
+	"role" : "client",
+	"__v" : 0
+}
+{
+	"_id" : ObjectId("59e13404f663224b6c90c9a9"),
+	"username" : "neyder.daza",
+	"password" : "98765",
+	"role" : "vendor",
+	"__v" : 0
+}
+
+// register (POST):  /user/registerUser/
+
+{
+    "username" : "david",
+    "password" : "david",
+    "role" : "client"
+}
+
+{
+    "username" : "isabel",
+    "password" : "isabel",
+    "role" : "client"
+}
+
+{
+    "username" : "esteban",
+    "password" : "esteban",
+    "role" : "vendor"
+}
+
+// login (POST):   /user/login
+
+{
+    "username": "david",
+    "password": "david"
+}
+
+{
+    "username": "esteban",
+    "password": "esteban"
+}
+
+// addProduct (POST):  /shop/addProduct
+
+{
+    "content": {
+        "name": "reloj",
+        "description": "fancy",
+        "quantity": 1,
+        "price": 1
+    },
+    "user": {
+        "username": "esteban",
+        "role": "vendor",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OWUyMDViNzllNGVlNzFlM2VlN2JmMzQiLCJ1c2VybmFtZSI6ImVzdGViYW4iLCJyb2xlIjoidmVuZG9yIiwiZXhwIjoxNTA4NTkzMjI0LCJpYXQiOjE1MDc5ODg0MjR9.TXimRcEWOKtRv4GbaMqbcEQ4x-YdGJElLAdSyB9ErGs"
+    }
+}
+
+// assignCoupon (POST):  /vendor/assignCoupon
+
+{
+    "clients": ["59e1f7596ae65112b9576641", "59e1fab2be5da4178dacc4fb"],
+    "user": {
+            "username": "esteban",
+            "role": "vendor",
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OWUyMDViNzllNGVlNzFlM2VlN2JmMzQiLCJ1c2VybmFtZSI6ImVzdGViYW4iLCJyb2xlIjoidmVuZG9yIiwiZXhwIjoxNTA4NTkzMjI0LCJpYXQiOjE1MDc5ODg0MjR9.TXimRcEWOKtRv4GbaMqbcEQ4x-YdGJElLAdSyB9ErGs"
+        }
+}
+
+// addToCart (POST):    /client/addToCart
+
+{
+    "idClient": "59e1f7596ae65112b9576641",
+    "idProduct": "59e22044cab3f527365b9e45"
+}
+
+{
+    "idClient": "59e1f7596ae65112b9576641",
+    "idProduct": "59e22050cab3f527365b9e46"
+}
+
+// token para:
+
+david:
+    {"user":"david","role":"client","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OWUxZjc1OTZhZTY1MTEyYjk1NzY2NDEiLCJ1c2VybmFtZSI6ImRhdmlkIiwicm9sZSI6ImNsaWVudCIsImV4cCI6MTUwODU5MzI2OCwiaWF0IjoxNTA3OTg4NDY4fQ.2sokn8DLSGbcCv4PEqt6HaBSMm57zYGggnShCW7erE0"}
+    id: 59e1f7596ae65112b9576641
+isabel:
+    {"user":"isabel","role":"client","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OWUxZmFiMmJlNWRhNDE3OGRhY2M0ZmIiLCJ1c2VybmFtZSI6ImlzYWJlbCIsInJvbGUiOiJjbGllbnQiLCJleHAiOjE1MDg1OTY4NzUsImlhdCI6MTUwNzk5MjA3NX0.FR7cP0ixVvQtMYt9LqLUHZNV7HHwuLXz4o0a3PzpPE4"}
+    id: 59e1fab2be5da4178dacc4fb
+esteban:
+    {"user":"esteban","role":"vendor","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OWUyMDViNzllNGVlNzFlM2VlN2JmMzQiLCJ1c2VybmFtZSI6ImVzdGViYW4iLCJyb2xlIjoidmVuZG9yIiwiZXhwIjoxNTA4NTkzMjI0LCJpYXQiOjE1MDc5ODg0MjR9.TXimRcEWOKtRv4GbaMqbcEQ4x-YdGJElLAdSyB9ErGs"}
+    id: 59e205b79e4ee71e3ee7bf34
+
+
+RETURN TYPES
+
+{
+    products: [
+    {"id:" "id1", "id_vendor": "vendor1"},
+    {"id:" "id2", "id_vendor": "vendor2"}
+    ]
+}
+
+{
+    "batch": [{
+        "vendor": "vendor_id",
+        "products": [
+            {"id": "id1", "name" : "nameValue"},
+            {"id": "id1", "name" : "nameValue"}
+            ],
+        "hasCoupon": true
+    },
+    {
+      "vendor": "vendor_id",
+      "products": [
+            {"id": "id1", "name" : "nameValue"},
+            {"id": "id1", "name" : "nameValue"}
+            ],
+      "hasCoupon": true
+    }]
+}
+
+{
+  "client":"59e1f7596ae65112b9576641",
+  "batch":[{
+    "id_vendor":"59e205b79e4ee71e3ee7bf34",
+    "products":[
+        {"_id":"59e22050cab3f527365b9e46","name":"reloj","description":"fancy","quantity":1,"price":1,"id_vendor":"59e205b79e4ee71e3ee7bf34","__v":0}]
+    }]
+}
+

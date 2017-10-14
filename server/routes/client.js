@@ -1,15 +1,101 @@
 let express = require('express');
 let status = require('http-status');
+let auth = require('../middleware/auth');
 
 module.exports = function (wagner) {
 
   let api = express.Router();
 
-  api.post('/addToCart', wagner.invoke(function(Client, Cart) {
+  // todo: use the authentication middleware to get the client id
+  api.post('/addToCart', wagner.invoke(function(Cart, Product) {
     return function(req, res) {
+
         let idClient = req.body.idClient;
         let idProduct = req.body.idProduct;
-        Cart.findOne({client: idClient}).exec(function(err, cart) {
+
+        // todo: find a product by id
+        Product.findById(idProduct, function (error, product) {
+
+            if (error) {
+                return res
+                    .status(status.INTERNAL_SERVER_ERROR)
+                    .json({
+                        error: error.toString()
+                    });
+            }
+
+            let productDetails = product;
+            // console.log("detalles", productDetails);
+
+            // todo: get its vendor
+            let productVendor = product.id_vendor;
+            console.log(productVendor);
+
+            // todo: return the cart from an specific client
+            Cart.findOne({client: idClient}).exec(function (error, cart) {
+
+                if(cart) {
+
+                    cart.batch.filter(function (group) {
+
+                        let currentVendorId = group.id_vendor;
+                        // console.log(currentVendorId);
+
+                        // todo: check if the product vendor is already in the cart (an iteration or using a query with mongoose)
+                        // todo: add the product (where it should be) to the product list whether the vendor id already exists or not
+                        if(currentVendorId.equals(productVendor)){
+
+                            //console.log("success");
+                            group.products.push(productDetails);
+                            cart.save();
+
+                            //console.log(group);
+
+                            let content = {
+                                message: 'El producto se agregó correctamente'
+                            };
+                            return res.json(content);
+
+                        } else {
+
+                            // todo: set a boolean variable
+                        }
+                    });
+
+                    // todo: create a "batch" field, and push its value.
+
+                } else {
+
+                    // todo: create an object and save it to the cart schema
+
+                    let cart = {
+                        client: idClient,
+                        batch: [{
+                            id_vendor:  productVendor,
+                            products: [productDetails]
+                        }]
+                    };
+
+                    //console.log(JSON.stringify(cart));
+
+                    Cart(cart).save(function (error) {
+
+                        if(error){
+                            return res
+                                .status(status.INTERNAL_SERVER_ERROR)
+                                .json({error: error.toString()});
+                        }
+
+                        let content = { message: 'El carro se ha inicializado' };
+                        res.json(content);
+                    })
+                }
+            })
+        });
+
+
+        /*Cart.findOne({client: idClient}).exec(function(error, cart) {
+
             if (cart) {
               Cart.findOneAndUpdate({client: idClient},{$push: {product: idProduct}}, function(error) {
                     if (error) {
@@ -27,6 +113,7 @@ module.exports = function (wagner) {
                 });
             } else {
                 let cart = {"client": idClient,"product": idProduct};
+
                 Cart(cart).save(function(error) {
                         if (error) {
                             return res
@@ -37,25 +124,48 @@ module.exports = function (wagner) {
                         res.json(content);
                 });
             }
-        })
-    }
-}));
+        })*/
+     }
+    }));
 
-    api.post('/registerClient', wagner.invoke(function(Client){
+    // Request headers:  name: x-access-token  value: xxx.xxx.xxx
+    api.get('/listClients', auth.verifyToken, wagner.invoke(function (User) {
+
+        return function (req, res) {
+
+            let userRole = req.decoded.role;
+            console.log(userRole);
+
+            if(userRole !== 'vendor') {
+                return res
+                    .status(status.FORBIDDEN)
+                    .json({error: 'No tienes la autorizacion para este tipo de peticion'});
+            }
+
+            User.find({role: 'client'}).exec(function (error, clients) {
+
+                if(error) {
+                    return res
+                        .status(status.INTERNAL_SERVER_ERROR)
+                        .json({error: error.toString()});
+                }
+
+                return res.json(clients);
+            })
+        }
+    }));
+
+    // todo: use the authentication middleware
+    api.get('/listCart', wagner.invoke(function(Cart,Product, Coupon){
       return function(req, res) {
-        let reqClient= req.body;
-        Client(reqClient).save(function(error) {
-          if(error) {
-            return res
-                .status(status.INTERNAL_SERVER_ERROR)
-                .json({error: error.toString()});
-          }
-          let content = { message: 'Se registró exitosamente el cliente'};
-          res.json(content);
-        })
+        let idClient= req.query.idCliente;
 
+        Cart.find({_id: idClient}).exec(function(err,cart) {
+          console.log("lista los productos del carro");
+
+        })
       }
     }));
 
   return api;
-}
+};

@@ -1,5 +1,6 @@
 let express = require('express');
 let status = require('http-status');
+let auth = require('../middleware/auth');
 
 module.exports = function (wagner) {
 
@@ -20,30 +21,48 @@ module.exports = function (wagner) {
       });
     }
   }));
+  
+  api.get('/listProductsByVendor', wagner.invoke(function (Product) {
 
-  api.post('/addProduct', wagner.invoke(function (Product) {
+      // todo: this
+      return function (req, res) {
 
-    return function(req, res) {
+          // Product.find({})
+      }
+  }));
 
-      let reqProduct = req.body;
+  api.post('/addProduct', auth.verifyToken, wagner.invoke(function (Product) {
 
-      // todo: check for an exisiting product in the database
+      return function (req, res) {
 
-      Product(reqProduct).save( function(error) {
-        if(error) {
-          return res
-              .status(status.INTERNAL_SERVER_ERROR)
-              .json({error: error.toString()});
-        }
+          let reqProduct = req.body.content;
+          let userRole = req.decoded.role;
+          let id_vendor = req.decoded._id;
 
-        let content = { message: 'El producto se ha creado'};
-        res.json(content);
-      })
-    }
+          if (userRole !== 'vendor') {
+              return res
+                  .status(status.FORBIDDEN)
+                  .json({error: 'No tienes la autorizacion para este tipo de peticion'});
+          }
+
+          reqProduct.id_vendor = id_vendor;
+          console.log(reqProduct);
+
+          Product(reqProduct).save(function (error) {
+              if (error) {
+                  return res
+                      .status(status.INTERNAL_SERVER_ERROR)
+                      .json({error: error.toString()});
+              }
+
+              let content = {message: 'El producto se ha creado'};
+              res.json(content);
+          })
+      }
   }));
 
  //localhost:3000/shop/productDetails?id=1
-  api.get('/productDetails', wagner.invoke(function (Product) {
+  api.get('/productDetails', wagner.invoke(function(Product) {
 
       return function(req, res) {
 
@@ -59,5 +78,15 @@ module.exports = function (wagner) {
         });
       }
     }));
+
+    // api.get('/Products', wagner.invoke(function(Cart){
+    //   return function(req, res) {
+    //
+    //
+    //   }
+    //
+    // }));
+
+
   return api;
-}
+};
