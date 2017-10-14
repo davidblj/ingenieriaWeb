@@ -57,17 +57,18 @@ module.exports = function (wagner) {
       }
     }));
 
- //    api.get('/listCart', wagner.invoke(function(Cart){
- //      return function(req, res) {
- //        Cart.findOne({ name: 'Val' }).populate({path: 'product', populate: { path: 'product' }
- //
- // });
-  //});
+    api.get('/listCart', wagner.invoke(function(Cart,Product, Coupon){
+      return function(req, res) {
+        let idClient= req.query.idCliente;
 
-    //   }
-    // }
-    // }));
+        Cart.find({_id: idClient}).exec(function(err,cart) {
+          console.log("lista los productos del carro");
 
+        })
+
+
+      }
+    }));
 
 
 
