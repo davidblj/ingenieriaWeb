@@ -52,7 +52,7 @@
     "password": "esteban"
 }
 
-// addProduct (POST):  /shop/
+// addProduct (POST):  /shop/addProduct
 
 {
     "content": {
@@ -68,10 +68,26 @@
     }
 }
 
+// assignCoupon (POST):  /vendor/assignCoupon
+
+{
+    "clients": ["59e1f7596ae65112b9576641", "59e1fab2be5da4178dacc4fb"],
+    "user": {
+            "username": "esteban",
+            "role": "vendor",
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OWUyMDViNzllNGVlNzFlM2VlN2JmMzQiLCJ1c2VybmFtZSI6ImVzdGViYW4iLCJyb2xlIjoidmVuZG9yIiwiZXhwIjoxNTA4NTkzMjI0LCJpYXQiOjE1MDc5ODg0MjR9.TXimRcEWOKtRv4GbaMqbcEQ4x-YdGJElLAdSyB9ErGs"
+        }
+}
+
 // token para:
 
 david:
     {"user":"david","role":"client","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OWUxZjc1OTZhZTY1MTEyYjk1NzY2NDEiLCJ1c2VybmFtZSI6ImRhdmlkIiwicm9sZSI6ImNsaWVudCIsImV4cCI6MTUwODU5MzI2OCwiaWF0IjoxNTA3OTg4NDY4fQ.2sokn8DLSGbcCv4PEqt6HaBSMm57zYGggnShCW7erE0"}
+    id: 59e1f7596ae65112b9576641
+isabel:
+    {"user":"isabel","role":"client","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OWUxZmFiMmJlNWRhNDE3OGRhY2M0ZmIiLCJ1c2VybmFtZSI6ImlzYWJlbCIsInJvbGUiOiJjbGllbnQiLCJleHAiOjE1MDg1OTY4NzUsImlhdCI6MTUwNzk5MjA3NX0.FR7cP0ixVvQtMYt9LqLUHZNV7HHwuLXz4o0a3PzpPE4"}
+    id: 59e1fab2be5da4178dacc4fb
 esteban:
     {"user":"esteban","role":"vendor","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OWUyMDViNzllNGVlNzFlM2VlN2JmMzQiLCJ1c2VybmFtZSI6ImVzdGViYW4iLCJyb2xlIjoidmVuZG9yIiwiZXhwIjoxNTA4NTkzMjI0LCJpYXQiOjE1MDc5ODg0MjR9.TXimRcEWOKtRv4GbaMqbcEQ4x-YdGJElLAdSyB9ErGs"}
+    id: 59e205b79e4ee71e3ee7bf34
 
