@@ -34,7 +34,7 @@
                     <span class="title">Ingresa el nombre del articulo</span>
                   </div>
                   <div class="form-group">
-                    <input class="form-control">
+                    <input formControlName="name" class="form-control">
                   </div>
 
                   <div class="sub-header">
@@ -53,17 +53,18 @@
                     <span class="title">Escribe los detalles</span>
                   </div>
                   <div class="form-group">
-                    <textarea class="form-control" placeholder="detalles especiales del producto"></textarea>
+                    <textarea formControlName="description" class="form-control"
+                              placeholder="detalles especiales del producto"></textarea>
                   </div>
 
                   <div class="row row-padding" >
                     <div class="col-sm-5">
                       <label>Precio</label>
-                      <input class="form-control" placeholder="$ 0">
+                      <input formControlName="price" class="form-control" placeholder="$ 0">
                     </div>
                     <div class="col-sm-3">
                       <label>Cantidad</label>
-                      <input class="form-control" placeholder="0">
+                      <input formControlName="quantity" class="form-control" placeholder="0">
                     </div>
                   </div>
                 </div>

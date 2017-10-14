@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from "@angular/forms";
-import { Product } from "../../../models/product";
-import { ProductService } from "../../../services/product.service";
 import { Router } from "@angular/router";
+
+// models
+
+import { Product } from "../../../models/product";
+
+// services
+
+import { ProductService } from "../../../services/product.service";
 
 @Component({
   selector: 'app-product-form',
@@ -17,29 +23,31 @@ export class ProductFormComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private productService: ProductService,
               private router: Router) {
+
     this.createForm();
   }
 
   ngOnInit() {
   }
 
+  // todo: make all fields required
   createForm() {
     this.productForm = this.formBuilder.group({
-      name: 'reloj',
-      description: 'caro',
-      quantity: 0,
-      sku: 'unico'
+      name: '',
+      description: '',
+      price: '',
+      quantity: ''
     });
 
     // todo: validate changes
   }
 
   onSubmit() {
-    this.productData = this.productForm.value;
+    this.productData = new Product(this.productForm.value);
 
     this.productService.saveProduct(this.productData).subscribe(
       () => {
-        this.router.navigate(['home']);
+        this.router.navigate(['/dashboard']);
       },
       (errmess) => {
 

@@ -49,6 +49,7 @@ module.exports = function (wagner) {
                     let token = user.generateJwt();
                     let content = {
                         user: user.username,
+                        id: user._id,
                         role: user.role,
                         token: token
                     };
