@@ -22,6 +22,7 @@ import { ProductFormComponent } from './pages/seller-dashboard/product-form/prod
 import { CartService } from "./services/cart.service";
 import { LoginService } from "./services/login.service";
 import { WorkstationComponent } from './pages/seller-dashboard/workstation/workstation.component';
+import { InventoryComponent } from './pages/seller-dashboard/inventory/inventory.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { WorkstationComponent } from './pages/seller-dashboard/workstation/works
     ProductFormComponent,
     CartListComponent,
     LoginComponent,
-    WorkstationComponent
+    WorkstationComponent,
+    InventoryComponent
   ],
   imports: [
     BrowserModule,

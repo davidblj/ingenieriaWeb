@@ -38,25 +38,6 @@ $blue: #8ABBB5;
 
 .side-body {
   margin-left: 260px;
-
-  .circle {
-    position: fixed;
-    top: 90%;
-    left: 95%;
-    background: $background-color;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    text-align: center;
-
-    i {
-      position: relative;
-      left: 0.05em;
-      line-height: 2.5em;
-      color: $grey;
-      font-size: 1.5em;
-    }
-  }
 }
 
 .onMouseOver {
