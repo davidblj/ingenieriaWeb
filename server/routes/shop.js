@@ -22,12 +22,28 @@ module.exports = function (wagner) {
     }
   }));
   
-  api.get('/listProductsByVendor', wagner.invoke(function (Product) {
+  api.get('/listProductsByVendor', auth.verifyToken, wagner.invoke(function (Product) {
 
-      // todo: this
       return function (req, res) {
 
-          // Product.find({})
+          let userRole = req.decoded.role;
+          let id_vendor = req.decoded._id;
+
+          if (userRole !== 'vendor') {
+              return res
+                  .status(status.FORBIDDEN)
+                  .json({error: 'No tienes la autorizacion para este tipo de peticion'});
+          }
+
+          Product.find({id_vendor: id_vendor}).exec(function (err, products) {
+              if (err) {
+                  return res
+                      .status(status.INTERNAL_SERVER_ERROR)
+                      .json({error: error.toString()});
+              }
+
+              return res.json(products);
+          })
       }
   }));
 
