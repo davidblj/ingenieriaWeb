@@ -13,7 +13,7 @@ module.exports = function (wagner) {
         let idClient = req.body.idClient;
         let idProduct = req.body.idProduct;
 
-        // todo: find a product by id
+        // find a product by id
         Product.findById(idProduct, function (error, product) {
 
             if (error) {
@@ -27,46 +27,62 @@ module.exports = function (wagner) {
             let productDetails = product;
             // console.log("detalles", productDetails);
 
-            // todo: get its vendor
+            // get its vendor
             let productVendor = product.id_vendor;
             console.log(productVendor);
 
-            // todo: return the cart from an specific client
+            //return the cart from an specific client
             Cart.findOne({client: idClient}).exec(function (error, cart) {
 
                 if(cart) {
+
+                    let vendorExist;
 
                     cart.batch.filter(function (group) {
 
                         let currentVendorId = group.id_vendor;
                         // console.log(currentVendorId);
 
-                        // todo: check if the product vendor is already in the cart (an iteration or using a query with mongoose)
-                        // todo: add the product (where it should be) to the product list whether the vendor id already exists or not
+                        // check if the product vendor is already in the cart (using an iteration over the array)
                         if(currentVendorId.equals(productVendor)){
 
+                            vendorExist = true;
                             //console.log("success");
                             group.products.push(productDetails);
                             cart.save();
 
-                            //console.log(group);
+                            console.log(group);
 
                             let content = {
                                 message: 'El producto se agregó correctamente'
                             };
                             return res.json(content);
-
-                        } else {
-
-                            // todo: set a boolean variable
                         }
                     });
 
-                    // todo: create a "batch" field, and push its value.
+                    // handling the asynchronous call from "cart.save"
+                    if(!vendorExist) {
+
+                        let batch = {
+                            id_vendor: productVendor,
+                            products: [productDetails]
+                        };
+
+                        cart.batch.push(batch);
+                        cart.save();
+
+                        console.log(cart);
+
+                        let content = {
+                            message: 'El producto se agrego a un lote diferente'
+                        };
+                        return res.json(content);
+                    }
+
 
                 } else {
 
-                    // todo: create an object and save it to the cart schema
+                    // create a new object and save it to the cart schema
 
                     let cart = {
                         client: idClient,
