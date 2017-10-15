@@ -35,6 +35,12 @@
 }
 
 {
+    "username" : "juan",
+    "password" : "juan",
+    "role" : "client"
+}
+
+{
     "username" : "esteban",
     "password" : "esteban",
     "role" : "vendor"
@@ -57,6 +63,12 @@
     "username": "esteban",
     "password": "esteban"
 }
+
+{
+    "username": "juan",
+    "password": "juan"
+}
+
 {
     "username": "neyder",
     "password": "neyder"
@@ -104,6 +116,15 @@
         }
 }
 
+{
+    "clients": ["59e1f7596ae65112b9576641", "59e1fab2be5da4178dacc4fb"],
+    "user": {
+           "username":"neyder",
+           "role":"vendor",
+           "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OWUzNmIwMjA5YWY1YzE3OTNjMWVkNTIiLCJ1c2VybmFtZSI6Im5leWRlciIsInJvbGUiOiJ2ZW5kb3IiLCJleHAiOjE1MDg2ODEyMTEsImlhdCI6MTUwODA3NjQxMX0.JJJQrpupmbiYOMXuYg0SGxURB_H8wnul8FuIh-8KZro"
+        }
+}
+
 // addToCart (POST):    /client/addToCart
 
 // de los productos de esteban
@@ -122,6 +143,12 @@
     "idProduct": "59e36c1909af5c1793c1ed53"
 }
 
+// listCart (GET):  /client/addToCart
+
+    params:
+idClient: 59e1f7596ae65112b9576641  (david)
+idClient: 59e1fab2be5da4178dacc4fb  (isabel)
+
 // token para:
 
 david:
@@ -130,7 +157,9 @@ david:
 isabel:
     {"user":"isabel","role":"client","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OWUxZmFiMmJlNWRhNDE3OGRhY2M0ZmIiLCJ1c2VybmFtZSI6ImlzYWJlbCIsInJvbGUiOiJjbGllbnQiLCJleHAiOjE1MDg1OTY4NzUsImlhdCI6MTUwNzk5MjA3NX0.FR7cP0ixVvQtMYt9LqLUHZNV7HHwuLXz4o0a3PzpPE4"}
     id: 59e1fab2be5da4178dacc4fb
-
+juan:
+    {"user":"juan","role":"client","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OWUzOWQwZWM1N2M2YzMyZGFjMGY2NmMiLCJ1c2VybmFtZSI6Imp1YW4iLCJyb2xlIjoiY2xpZW50IiwiZXhwIjoxNTA4Njk0MDkyLCJpYXQiOjE1MDgwODkyOTJ9.qvYM3JgJYybencsgTHlrKRj6JVFFuqRCj5kNS6T4O2g"}
+    id: 59e39d0ec57c6c32dac0f66c
 esteban:
     {"user":"esteban","role":"vendor","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OWUyMDViNzllNGVlNzFlM2VlN2JmMzQiLCJ1c2VybmFtZSI6ImVzdGViYW4iLCJyb2xlIjoidmVuZG9yIiwiZXhwIjoxNTA4NTkzMjI0LCJpYXQiOjE1MDc5ODg0MjR9.TXimRcEWOKtRv4GbaMqbcEQ4x-YdGJElLAdSyB9ErGs"}
     id: 59e205b79e4ee71e3ee7bf34
@@ -144,6 +173,7 @@ RETURN TYPES
 
 
 Estructura del carrito con cupones
+
 {
     "batch": [{
         "vendor": "vendor_id",
@@ -163,5 +193,116 @@ Estructura del carrito con cupones
     }]
 }
 
+Estructura del carrito de compras
+carrito de david
+{
+    "_id" : ObjectId("59e3727e63e09f19909bf732"),
+    "client" : ObjectId("59e1f7596ae65112b9576641"),
+    "batch" : [
+            {
+                    "id_vendor" : ObjectId("59e36b0209af5c1793c1ed52"),
+                    "_id" : ObjectId("59e3727e63e09f19909bf733"),
+                    "products" : [
+                            {
+                                    "_id" : ObjectId("59e36c1909af5c1793c1ed53"),
+                                    "name" : "teclado",
+                                    "description" : "razer",
+                                    "quantity" : 1,
+                                    "price" : 1,
+                                    "id_vendor" : ObjectId("59e36b0209af5c1793c1ed52")
+                            },
+                            {
+                                    "id_vendor" : ObjectId("59e36b0209af5c1793c1ed52"),
+                                    "price" : 1,
+                                    "quantity" : 1,
+                                    "description" : "razer",
+                                    "name" : "teclado",
+                                    "_id" : ObjectId("59e36c1909af5c1793c1ed53")
+                            },
+                            {
+                                    "id_vendor" : ObjectId("59e36b0209af5c1793c1ed52"),
+                                    "price" : 1,
+                                    "quantity" : 1,
+                                    "description" : "razer",
+                                    "name" : "teclado",
+                                    "_id" : ObjectId("59e36c1909af5c1793c1ed53")
+                            }
+                    ]
+            },
+            {
+                    "id_vendor" : ObjectId("59e205b79e4ee71e3ee7bf34"),
+                    "_id" : ObjectId("59e372e063e09f19909bf734"),
+                    "products" : [
+                            {
+                                    "_id" : ObjectId("59e22050cab3f527365b9e46"),
+                                    "name" : "reloj",
+                                    "description" : "fancy",
+                                    "quantity" : 1,
+                                    "price" : 1,
+                                    "id_vendor" : ObjectId("59e205b79e4ee71e3ee7bf34")
+                            },
+                            {
+                                    "id_vendor" : ObjectId("59e205b79e4ee71e3ee7bf34"),
+                                    "price" : 1,
+                                    "quantity" : 1,
+                                    "description" : "fancy",
+                                    "name" : "reloj",
+                                    "_id" : ObjectId("59e22050cab3f527365b9e46")
+                            }
+                    ]
+            }
+    ],
+    "__v" : 4
+}
+carrito de isabel
+{
+    "_id" : ObjectId("59e3743eb4626b1a285e0760"),
+    "client" : ObjectId("59e1fab2be5da4178dacc4fb"),
+    "batch" : [
+            {
+                    "id_vendor" : ObjectId("59e36b0209af5c1793c1ed52"),
+                    "_id" : ObjectId("59e3743eb4626b1a285e0761"),
+                    "products" : [
+                            {
+                                    "_id" : ObjectId("59e36c1909af5c1793c1ed53"),
+                                    "name" : "teclado",
+                                    "description" : "razer",
+                                    "quantity" : 1,
+                                    "price" : 1,
+                                    "id_vendor" : ObjectId("59e36b0209af5c1793c1ed52")
+                            }
+                    ]
+            }
+    ],
+    "__v" : 0
+}
+
+
+estructura del cupon
+
+cupones que asigno esteban
+{
+        "_id" : ObjectId("59e22805a5315729f1320262"),
+        "id_vendor" : ObjectId("59e205b79e4ee71e3ee7bf34"),
+        "clients" : [
+                ObjectId("59e1f7596ae65112b9576641"),
+                ObjectId("59e1fab2be5da4178dacc4fb"),
+                ObjectId("59e1f7596ae65112b9576641"),
+                ObjectId("59e1fab2be5da4178dacc4fb"),
+                ObjectId("59e1f7596ae65112b9576641"),
+                ObjectId("59e1fab2be5da4178dacc4fb")
+        ],
+        "__v" : 0
+}
+cupones que asigno neyder
+{
+        "_id" : ObjectId("59e376f951846f1aee742687"),
+        "id_vendor" : ObjectId("59e36b0209af5c1793c1ed52"),
+        "clients" : [
+                ObjectId("59e1f7596ae65112b9576641"),
+                ObjectId("59e1fab2be5da4178dacc4fb")
+        ],
+        "__v" : 0
+}
 
 

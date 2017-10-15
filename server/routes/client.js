@@ -23,35 +23,28 @@ module.exports = function (wagner) {
                         error: error.toString()
                     });
             }
-
             let productDetails = product;
-            // console.log("detalles", productDetails);
 
             // get its vendor
             let productVendor = product.id_vendor;
-            console.log(productVendor);
 
             //return the cart from an specific client
             Cart.findOne({client: idClient}).exec(function (error, cart) {
 
                 if(cart) {
-
                     let vendorExist;
 
+                    // todo: replace this loop with a sub-document search
                     cart.batch.filter(function (group) {
 
                         let currentVendorId = group.id_vendor;
-                        // console.log(currentVendorId);
 
                         // check if the product vendor is already in the cart (using an iteration over the array)
                         if(currentVendorId.equals(productVendor)){
 
                             vendorExist = true;
-                            //console.log("success");
                             group.products.push(productDetails);
                             cart.save();
-
-                            console.log(group);
 
                             let content = {
                                 message: 'El producto se agregó correctamente'
@@ -62,7 +55,6 @@ module.exports = function (wagner) {
 
                     // handling the asynchronous call from "cart.save"
                     if(!vendorExist) {
-
                         let batch = {
                             id_vendor: productVendor,
                             products: [productDetails]
@@ -71,19 +63,15 @@ module.exports = function (wagner) {
                         cart.batch.push(batch);
                         cart.save();
 
-                        console.log(cart);
-
                         let content = {
                             message: 'El producto se agrego a un lote diferente'
                         };
                         return res.json(content);
                     }
 
-
                 } else {
 
                     // create a new object and save it to the cart schema
-
                     let cart = {
                         client: idClient,
                         batch: [{
@@ -91,8 +79,6 @@ module.exports = function (wagner) {
                             products: [productDetails]
                         }]
                     };
-
-                    //console.log(JSON.stringify(cart));
 
                     Cart(cart).save(function (error) {
 
@@ -108,39 +94,6 @@ module.exports = function (wagner) {
                 }
             })
         });
-
-
-        /*Cart.findOne({client: idClient}).exec(function(error, cart) {
-
-            if (cart) {
-              Cart.findOneAndUpdate({client: idClient},{$push: {product: idProduct}}, function(error) {
-                    if (error) {
-                        return res
-                            .status(status.INTERNAL_SERVER_ERROR)
-                            .json({
-                                error: error.toString()
-                            });
-                    }
-
-                    let content = {
-                        message: 'El producto se agregó correctamente'
-                    };
-                    res.json(content);
-                });
-            } else {
-                let cart = {"client": idClient,"product": idProduct};
-
-                Cart(cart).save(function(error) {
-                        if (error) {
-                            return res
-                                .status(status.INTERNAL_SERVER_ERROR)
-                                .json({error: error.toString()});
-                        }
-                        let content = { message: 'El carro se ha inicializado'};
-                        res.json(content);
-                });
-            }
-        })*/
      }
     }));
 
@@ -172,16 +125,52 @@ module.exports = function (wagner) {
     }));
 
     // todo: use the authentication middleware
-    api.get('/listCart', wagner.invoke(function(Cart,Product, Coupon){
-      return function(req, res) {
-        let idClient= req.query.idCliente;
+    api.get('/listCart', wagner.invoke(function (Cart, Coupon) {
 
-        Cart.find({_id: idClient}).exec(function(err,cart) {
-          console.log("lista los productos del carro");
+        return function (req, res) {
 
-        })
-      }
+            let idClient = req.query.idClient;
+            console.log(idClient);
+
+            // todo(r2): persist this value for security purposes
+            Cart.findOne({client: idClient}).lean().exec(function (err, cart) {
+
+                if(!cart) {
+                    return res.json({error: "el carro esta vacio"});
+                }
+
+                let batchLength = cart.batch.length;
+                let counter = 0;
+
+                // todo (r2): iterate through an array without "filter".
+                // return each vendor in our batch entry
+                cart.batch.filter(function (group, index) {
+
+                    let vendor = group.id_vendor;
+
+                    // todo (r2): query all documents to avoid operations on top of an asynchronous call
+                    // find the existance of that vendor in the coupon's documents
+                    Coupon.find({id_vendor: vendor, clients: idClient}).exec(function (error, coupon) {
+
+                        // todo (r2): add a quantity value
+                        // if the response is successful or not, set a new object with a hasCoupon field
+                        if (coupon.length > 0) {
+                            cart.batch[index].hasCoupon = true;
+                        } else {
+                            cart.batch[index].hasCoupon = false;
+                        }
+
+                        // handle the asynchronous call from Coupon.find()
+                        counter++;
+                        if(counter === (batchLength)) {
+                            return res.json(cart);
+                        }
+                    });
+                });
+            });
+        }
     }));
 
-  return api;
+
+    return api;
 };
