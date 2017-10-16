@@ -3,7 +3,6 @@ import { ProductService } from "../../services/product.service";
 
 // modelos
 
-import { Product } from "../../models/product";
 import { Cart } from "../../models/cart";
 
 // servicios
@@ -17,7 +16,7 @@ import { CartService } from "../../services/cart.service";
 })
 export class HomePageComponent implements OnInit {
 
-  products: Product[];
+  products: Object[];
   itemsInCart = 0;
   errMess:String;
 

@@ -8,7 +8,7 @@ export class ProductService {
 
   constructor(private  restangular: Restangular) { }
 
-   getProducts(): Observable<Product[]>{
+   getProducts(): Observable<Object[]>{
 
     return this.restangular.all('shop/listProducts').getList();
    }
@@ -16,5 +16,10 @@ export class ProductService {
    saveProduct(product: Product): Observable<string>{
 
     return this.restangular.all('shop/addProduct').post(product);
+   }
+
+   getProductsByVendor(token: string): Observable<Object[]>{
+
+    return this.restangular.all('shop/listProductsByVendor').getList({}, {'x-access-token': token})
    }
 }
