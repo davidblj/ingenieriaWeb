@@ -30,7 +30,7 @@ export class ProductFormComponent implements OnInit {
   ngOnInit() {
   }
 
-  // todo: make all fields required
+  // todo: make all fields require
   createForm() {
     this.productForm = this.formBuilder.group({
       name: '',
