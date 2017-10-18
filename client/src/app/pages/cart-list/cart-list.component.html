@@ -45,6 +45,19 @@
                 <span class="slider round"></span>
               </label>
 
+              <div class="row coupon-list">
+
+                <div class="col-md-auto mr-0">
+                  <span class="coupon-tag">Tienes cupones de: </span>
+                </div>
+
+                <div class="col-6 pl-0">
+                  <a class="btn btn-coupon" *ngFor="let vendor of vendorsName; let i = index"
+                  (click)="onCouponClicked(vendor, i)" [ngClass]="{'dismissed' :  !vendorsCoupon[i]}">{{vendor | slice:0:7}} </a>
+                </div>
+
+              </div>
+
             </section>
           </div>
 

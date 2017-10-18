@@ -11,9 +11,14 @@ export class CartListComponent implements OnInit {
   cartProducts;
   batch;
   priceByVendor = [];
-  subtotalPrice = 0;
-  totalPrice = 0;
-  discount = 0;
+
+  vendorsName = [];
+  vendorsCoupon = [];
+  done = false;
+
+  subtotalPrice;
+  totalPrice;
+  discount;
   shipping = 15000;
 
   constructor(private cartService: CartService) { }
@@ -36,6 +41,10 @@ export class CartListComponent implements OnInit {
 
   public getPriceByVendor(vendorBatch) {
 
+    this.subtotalPrice = 0;
+    this.totalPrice = 0;
+    this.discount = 0;
+
     vendorBatch.forEach((vendor, index) => {
 
       let vendorPrice = 0;
@@ -49,12 +58,19 @@ export class CartListComponent implements OnInit {
       if(vendor.hasCoupon) {
         this.getDiscount(vendorPrice);
         vendorPrice = +(vendorPrice * (9/10)).toFixed(2) ;
+
+        if(!this.done) {
+          this.vendorsName.push(vendor.id_vendor);
+          this.vendorsCoupon.push(true);
+        }
       }
 
       this.priceByVendor[index] = vendorPrice;
     });
 
     this.getTotalPrice();
+    this.done = true;
+    console.log(this.vendorsName);
     console.log(this.priceByVendor);
   }
 
@@ -85,5 +101,21 @@ export class CartListComponent implements OnInit {
       this.shipping = 15000;
       this.totalPrice += this.shipping;
     }
+  }
+
+
+  public onCouponClicked(id_vendor: string, index: number) {
+
+    this.vendorsCoupon[index] = !this.vendorsCoupon[index];    // para estilos
+
+    this.batch.forEach((vendor,vendorIndex) => {
+
+      if(vendor.id_vendor === id_vendor) {
+        this.batch[vendorIndex].hasCoupon = !this.batch[vendorIndex].hasCoupon;
+      }
+    });
+
+    this.getPriceByVendor(this.batch);
+    console.log(this.batch);
   }
 }

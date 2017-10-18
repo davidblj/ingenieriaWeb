@@ -118,7 +118,7 @@
   padding-top: 1em;
 
   .shipping {
-    padding-right: 0.5em;
+    padding-right: 1em;
     position: relative;
     top: -15px;
     font-weight: bold;
@@ -182,6 +182,45 @@
 
   .slider.round:before {
     border-radius: 50%;
+  }
+
+  .coupon-list {
+
+    margin-right: 2em;
+
+    .coupon-tag {
+      position: relative;
+      top: -5.5px;
+      font-weight: bold;
+      font-size: 15px;
+      letter-spacing: 0.3px;
+      color: #616161;
+    }
+
+    .btn {
+      background: #43a047;
+      font-size: small;
+      margin: {
+        right: 4px;
+        bottom: 5px;
+      }
+      box-shadow: 1px 4px 4px rgba(0,0,0,0.2);
+    }
+
+    .btn-coupon {
+      padding: {
+        top: 4px;
+        bottom: 4px;
+      };
+    }
+
+    .dismissed {
+      background: #6CB284;
+      color: #bdbdbd;
+      box-shadow: 1px 4px 4px rgba(0,0,0,0);
+    }
+
+
   }
 }
 
