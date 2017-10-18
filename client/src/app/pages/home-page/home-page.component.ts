@@ -8,6 +8,7 @@ import { Cart } from "../../models/cart";
 // servicios
 
 import { CartService } from "../../services/cart.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-home-page',
@@ -23,13 +24,13 @@ export class HomePageComponent implements OnInit {
   username;
 
   constructor( private  productService: ProductService,
-               private cartService: CartService) { }
+               private cartService: CartService,
+               private router: Router) { }
 
   ngOnInit() {
 
     const userInformation = JSON.parse(localStorage.getItem('currentUser'));
 
-    // todo: check if the user is logged in
     if(userInformation) {
       this.username = userInformation.user;
     }
@@ -54,8 +55,11 @@ export class HomePageComponent implements OnInit {
 
   // todo: check for an existing cart-list and update the visual que (itemsInCart)
 
-  // send a post request (with a fixed client id, but a real product id)
   public addToCart(productId: string) {
+
+    if (!this.username) {
+      this.router.navigate(['/login']);
+    }
 
     let cart = new Cart(productId);
 
@@ -75,5 +79,4 @@ export class HomePageComponent implements OnInit {
     );
   }
 
-  // todo: set a different use case if the user is not logged in
 }

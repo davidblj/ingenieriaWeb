@@ -16,6 +16,10 @@ let productschema = {
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
+    vendorName: {
+      type: String,
+      required: true
+    },
     quantity: {
         type: Number,
         required: true

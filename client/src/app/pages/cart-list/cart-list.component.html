@@ -15,7 +15,7 @@
                       <img src="http://sonofabitbkk.com/wp-content/uploads/2015/11/img9s1.jpg">
                 </div>
                 <div class="media-body">
-                  <h4>{{product.name}}</h4>
+                  <h4>{{product.name}} <small>{{product.vendorName}}</small></h4>
                   <p>{{product.description}}</p>
                 </div>
                 <div class="media-right align-self-center">
@@ -45,15 +45,15 @@
                 <span class="slider round"></span>
               </label>
 
-              <div class="row coupon-list">
+              <div class="row coupon-list" *ngIf="vendorsIds.length">
 
                 <div class="col-md-auto mr-0">
                   <span class="coupon-tag">Tienes cupones de: </span>
                 </div>
 
-                <div class="col-6 pl-0">
-                  <a class="btn btn-coupon" *ngFor="let vendor of vendorsName; let i = index"
-                  (click)="onCouponClicked(vendor, i)" [ngClass]="{'dismissed' :  !vendorsCoupon[i]}">{{vendor | slice:0:7}} </a>
+                <div class="col-6 pl-0" >
+                  <a class="btn btn-coupon" *ngFor="let vendor of vendorsIds; let i = index"
+                  (click)="onCouponClicked(vendor, i)" [ngClass]="{'dismissed' :  !vendorsCoupon[i]}">{{vendorsName[i]}} </a>
                 </div>
 
               </div>

@@ -13,6 +13,10 @@ let cartschema = {
             type: Schema.Types.ObjectId,
             ref: 'User'
         },
+        vendorName: {
+            type: String,
+            required: true
+        },
         products: [ Product.productschema ]
     }]
     /*product: [{

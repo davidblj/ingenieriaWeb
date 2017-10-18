@@ -54,6 +54,7 @@ module.exports = function (wagner) {
           let reqProduct = req.body.content;
           let userRole = req.decoded.role;
           let id_vendor = req.decoded._id;
+          let vendorName = req.decoded.username;
 
           if (userRole !== 'vendor') {
               return res
@@ -62,6 +63,7 @@ module.exports = function (wagner) {
           }
 
           reqProduct.id_vendor = id_vendor;
+          reqProduct.vendorName = vendorName;
           console.log(reqProduct);
 
           Product(reqProduct).save(function (error) {

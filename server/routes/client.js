@@ -26,6 +26,7 @@ module.exports = function (wagner) {
 
             // get its vendor
             let productVendor = product.id_vendor;
+            let vendorName = product.vendorName;
 
             //return the cart from an specific client
             Cart.findOne({client: idClient}).exec(function (error, cart) {
@@ -56,6 +57,7 @@ module.exports = function (wagner) {
                     if(!vendorExist) {
                         let batch = {
                             id_vendor: productVendor,
+                            vendorName: vendorName,
                             products: [productDetails]
                         };
 
@@ -75,6 +77,7 @@ module.exports = function (wagner) {
                         client: idClient,
                         batch: [{
                             id_vendor:  productVendor,
+                            vendorName: vendorName,
                             products: [productDetails]
                         }]
                     };

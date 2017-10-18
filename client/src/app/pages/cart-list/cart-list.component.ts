@@ -12,10 +12,13 @@ export class CartListComponent implements OnInit {
   batch;
   priceByVendor = [];
 
+  // coupon reactivity logic
   vendorsName = [];
+  vendorsIds = [];
   vendorsCoupon = [];
   done = false;
 
+  // cart pricing details
   subtotalPrice;
   totalPrice;
   discount;
@@ -60,7 +63,8 @@ export class CartListComponent implements OnInit {
         vendorPrice = +(vendorPrice * (9/10)).toFixed(2) ;
 
         if(!this.done) {
-          this.vendorsName.push(vendor.id_vendor);
+          this.vendorsName.push(vendor.vendorName);
+          this.vendorsIds.push(vendor.id_vendor);
           this.vendorsCoupon.push(true);
         }
       }

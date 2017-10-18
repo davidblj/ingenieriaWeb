@@ -6,14 +6,17 @@ import {LoginComponent} from '../pages/login/login.component';
 import {WorkstationComponent} from '../pages/seller-dashboard/workstation/workstation.component';
 import {InventoryComponent} from '../pages/seller-dashboard/inventory/inventory.component';
 import {CouponsComponent} from '../pages/coupons/coupons.component';
+import {VendorAuthGuard} from './guards/vendor.guard';
+import {ClientAuthGuard} from "./guards/cart.guard";
 
 export const routes: Routes = [
+  // todo: redirect a vendor to its dashboard whenever he access the homepage
   {path: 'home', component: HomePageComponent},
   {path: 'new', component: ProductFormComponent},
-  {path: 'cart-list', component: CartListComponent},
+  {path: 'cart-list', component: CartListComponent, canActivate: [ClientAuthGuard]},
   {path: 'login', component: LoginComponent},
   {
-    path: 'dashboard', component: WorkstationComponent,
+    path: 'dashboard', component: WorkstationComponent, canActivate: [VendorAuthGuard],
     children: [
       {
         path: '', redirectTo: 'inventory', pathMatch: 'full'

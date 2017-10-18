@@ -26,6 +26,8 @@ import { ProductFormComponent } from './pages/seller-dashboard/product-form/prod
 import { CartService } from './services/cart.service';
 import { LoginService } from './services/login.service';
 import { CouponService } from './services/coupon.service';
+import {VendorAuthGuard} from "./app-routing/guards/vendor.guard";
+import {ClientAuthGuard} from "./app-routing/guards/cart.guard";
 
 
 @NgModule({
@@ -50,7 +52,9 @@ import { CouponService } from './services/coupon.service';
     ProductService,
     CartService,
     LoginService,
-    CouponService
+    CouponService,
+    VendorAuthGuard,
+    ClientAuthGuard
   ],
   bootstrap: [AppComponent]
 })
