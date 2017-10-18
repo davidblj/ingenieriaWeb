@@ -5,7 +5,7 @@ import {CartListComponent} from '../pages/cart-list/cart-list.component';
 import {LoginComponent} from '../pages/login/login.component';
 import {WorkstationComponent} from '../pages/seller-dashboard/workstation/workstation.component';
 import {InventoryComponent} from '../pages/seller-dashboard/inventory/inventory.component';
-
+import {CouponsComponent} from '../pages/coupons/coupons.component';
 
 export const routes: Routes = [
   {path: 'home', component: HomePageComponent},
@@ -16,8 +16,15 @@ export const routes: Routes = [
     path: 'dashboard', component: WorkstationComponent,
     children: [
       {
-        path: '',
+        path: '', redirectTo: 'inventory', pathMatch: 'full'
+      },
+      {
+        path: 'inventory',
         component: InventoryComponent
+      },
+      {
+        path: 'coupons',
+        component: CouponsComponent
       }
     ]
   },

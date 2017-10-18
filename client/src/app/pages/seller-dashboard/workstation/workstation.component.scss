@@ -15,6 +15,7 @@ $blue: #8ABBB5;
   background-color: $background-color;
 
   .nav-item {
+    outline: none;
     color: $strong-grey;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -42,4 +43,8 @@ $blue: #8ABBB5;
 
 .onMouseOver {
   cursor: pointer;
+
+  span:hover {
+    color: $blue;
+  }
 }

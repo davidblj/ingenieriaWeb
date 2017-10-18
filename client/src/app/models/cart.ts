@@ -1,10 +1,10 @@
 export class Cart {
-  idClient: string;
+  user: Object;
   idProduct: string;
 
-  constructor(idClient: string, idProduct: string) {
+  constructor( idProduct: string) {
 
-    this.idClient = idClient;
+    this.user = JSON.parse(localStorage.getItem('currentUser'));
     this.idProduct = idProduct;
   }
 }

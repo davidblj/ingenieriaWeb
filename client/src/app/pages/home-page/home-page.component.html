@@ -14,7 +14,7 @@
       <div class="nav-item" *ngIf="!username" >
         <i class="fa fa-sign-in onMouseOver" routerLink="/login" routerLinkActive="active"></i>
       </div>
-      <div class="nav-item" *ngIf="username" style="color: #604D4D">
+      <div class="nav-item" *ngIf="username" style="color: #D94C44;">
         <i class="fa fa-sign-out onMouseOver"  (click)="logOut()" routerLinkActive="active"></i>
       </div>
     </div>
@@ -34,7 +34,7 @@
             <div class="card-body">
               <span class="badge-box"><i class="fa fa-plus onMouseOver"></i></span>
               <h4 class="card-title">{{product.name}}</h4>
-              <p>45.0000 <i class="fa fa-usd"></i></p>
+              <p>{{product.price}} <i class="fa fa-usd"></i></p>
 
               <div class="row">
                 <div class="mr-auto"></div>

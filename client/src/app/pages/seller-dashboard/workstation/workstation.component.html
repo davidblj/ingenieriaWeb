@@ -7,9 +7,15 @@
     <div class="mt-5"></div>
 
     <nav class="navbar-nav">
-      <div class="nav-item"><i class="fa fa-eye"></i>Inventario</div>
-      <div class="nav-item"><i class="fa fa-ticket"></i>Cupones</div>
-      <div class="nav-item"><i class="fa fa-th"></i>Reportes</div>
+      <div class="nav-item onMouseOver" [routerLink]="['inventory']"><i class="fa fa-eye "></i>
+        <span>Inventario</span>
+      </div>
+      <div class="nav-item onMouseOver" [routerLink]="['coupons']"><i class="fa fa-ticket "></i>
+        <span>Cupones</span>
+      </div>
+      <div class="nav-item onMouseOver"><i class="fa fa-th "></i>
+        <span>Reportes</span>
+      </div>
     </nav>
 
   </div>

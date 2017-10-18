@@ -12,4 +12,9 @@ export class CartService {
 
     return this.restangular.all('client/addToCart').post(cart);
   }
+
+  returnCartProducts(token: string): Observable<any> {
+
+    return this.restangular.one('client/listCart').get({}, {'x-access-token': token});
+  }
 }

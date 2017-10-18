@@ -57,8 +57,7 @@ export class HomePageComponent implements OnInit {
   // send a post request (with a fixed client id, but a real product id)
   public addToCart(productId: string) {
 
-    let userId = '59daccd6ae04e14645ef3dd9';
-    let cart = new Cart(userId, productId);
+    let cart = new Cart(productId);
 
     // todo: HANDLE repeated products
 

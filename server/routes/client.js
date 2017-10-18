@@ -6,11 +6,10 @@ module.exports = function (wagner) {
 
   let api = express.Router();
 
-  // todo: use the authentication middleware to get the client id
-  api.post('/addToCart', wagner.invoke(function(Cart, Product) {
+  api.post('/addToCart', auth.verifyToken, wagner.invoke(function(Cart, Product) {
     return function(req, res) {
 
-        let idClient = req.body.idClient;
+        let idClient = req.decoded._id;
         let idProduct = req.body.idProduct;
 
         // find a product by id
@@ -124,12 +123,12 @@ module.exports = function (wagner) {
         }
     }));
 
-    // todo: use the authentication middleware
-    api.get('/listCart', wagner.invoke(function (Cart, Coupon) {
+    api.get('/listCart', auth.verifyToken, wagner.invoke(function (Cart, Coupon) {
 
         return function (req, res) {
 
-            let idClient = req.query.idClient;
+            let idClient = req.decoded._id;
+            //let idClient = req.query.idClient;
             console.log(idClient);
 
             // todo(r2): persist this value for security purposes

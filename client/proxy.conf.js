@@ -7,6 +7,7 @@ const PROXY_CONFIG = [
       "/shop/listProductsByVendor",
       "/client/addToCart",
       "/client/listClients",
+      "/client/listCart",
       "/user/login"
     ],
     "target": "http://localhost:3000",
