@@ -29,8 +29,7 @@ let productschema = {
         required: true
     },
     image: {
-        data: Buffer,
-        contentType: String,
+        type: String,
         required: false
     }
     /*sku: {

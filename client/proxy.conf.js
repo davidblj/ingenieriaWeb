@@ -4,6 +4,7 @@ const PROXY_CONFIG = [
       "/vendor/assignCoupon",
       "/shop/listProducts",
       "/shop/addProduct",
+      "/shop/postImage",
       "/shop/listProductsByVendor",
       "/client/addToCart",
       "/client/listClients",

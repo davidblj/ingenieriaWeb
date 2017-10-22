@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
 
@@ -17,6 +17,7 @@ import { ProductService } from "../../../services/product.service";
 })
 export class ProductFormComponent implements OnInit {
 
+  @ViewChild('fileInput') fileInput;
   productForm: FormGroup;
   productData: Product;
 
@@ -43,17 +44,42 @@ export class ProductFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.productData = new Product(this.productForm.value);
 
-    this.productService.saveProduct(this.productData).subscribe(
-      () => {
-        this.router.navigate(['/dashboard']);
-      },
-      (errmess) => {
+    let fileInput = this.fileInput.nativeElement;
 
-        // todo: set a proper error message
-        console.log(errmess);
-      }
-    )
+    if (fileInput.files && fileInput.files[0]) {
+
+      this.productService.postImage(fileInput.files[0]).subscribe(
+        (route) => {
+
+          let productInformation = this.productForm.value;
+          productInformation.image = route;
+
+          this.productData = new Product(productInformation);
+
+          this.productService.saveProduct(this.productData).subscribe(
+            () => {
+              this.router.navigate(['/dashboard']);
+            },
+            (errmess) => {
+
+              // todo: set a proper error message in the client UI
+              console.log(errmess);
+            }
+          );
+
+        },
+        (errmess) => {
+
+          // todo: set a proper error message in the client UI
+          console.log(errmess);
+        }
+      );
+
+    } else {
+
+      // todo: set a proper error message in the client UI
+      console.log('Selecciona una imagen antes de enviar el formulario')
+    }
   }
 }

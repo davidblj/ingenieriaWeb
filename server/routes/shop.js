@@ -1,6 +1,7 @@
 let express = require('express');
 let status = require('http-status');
 let auth = require('../middleware/auth');
+let upload = require('../config/multer');
 
 module.exports = function (wagner) {
 
@@ -46,6 +47,20 @@ module.exports = function (wagner) {
           })
       }
   }));
+
+  api.post('/postImage', upload.single('photo'), function (req, res) {
+
+      let route = req.file.path;
+
+      // todo: test this case
+      if(!route) {
+          return res
+              .status(status.BAD_REQUEST)
+              .json({error: 'No has seleccionado una imagen'});
+      }
+
+      return res.json({route: route});
+  });
 
   api.post('/addProduct', auth.verifyToken, wagner.invoke(function (Product) {
 
@@ -96,15 +111,6 @@ module.exports = function (wagner) {
         });
       }
     }));
-
-    // api.get('/Products', wagner.invoke(function(Cart){
-    //   return function(req, res) {
-    //
-    //
-    //   }
-    //
-    // }));
-
 
   return api;
 };
