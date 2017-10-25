@@ -11,7 +11,7 @@ module.exports = function (wagner) {
 
     return function(req, res) {
 
-      Product.find({}).exec( function(err, products){
+      Product.find({quantity: {$gt: 0}}).exec( function(err, products){
         if(err) {
           return res
             .status(status.BAD_REQUEST)

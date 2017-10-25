@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 // services
 
 import { CartService } from '../../services/cart.service';
+import { CartList } from '../../models/cart-list';
 
 @Component({
   selector: 'app-cart-list',
@@ -138,10 +139,11 @@ export class CartListComponent implements OnInit {
   public buyProducts() {
 
     // let cart = JSON.stringify(this.batch);
-    this.cartService.buyProducts(this.batch).subscribe(
+    let cart = new CartList(this.batch);
+    this.cartService.buyProducts(cart).subscribe(
       (response) => {
 
       }
-    )
+    );
   }
 }

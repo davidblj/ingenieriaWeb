@@ -174,12 +174,15 @@ module.exports = function (wagner) {
     }));
 
     // todo: use the authentication middleware
-    api.post('/buyProducts', wagner.invoke(function (Product) {
+    api.post('/buyProducts', auth.verifyToken, wagner.invoke(function (Product, Cart) {
 
         return function (req, res) {
 
-            let productsByVendor = req.body;
-            console.log(productsByVendor);
+            let productsByVendor = req.body.content;
+
+            let idClient = req.decoded._id;
+            console.log(productsByVendor, " ", idClient);
+
             let productList = [];
 
             productsByVendor.forEach((vendorBatch) => {
@@ -189,23 +192,27 @@ module.exports = function (wagner) {
                 });
             });
 
-            // todo: validate an empty card
-            Product.find({_id: { $in: productList}}, function (error, products) {
+            // todo: validate for products with no items in the inventory, validate an empty card
+            Product.update({_id:  { $in: productList}}, {$inc: { soldQuantity: 1,  quantity: -1}}, {multi: true}, function (err) {
 
-                products.forEach((product) => {
+                if(err) {
+                    return res
+                        .status(status.INTERNAL_SERVER_ERROR)
+                        .json({error: err.toString()});
+                }
 
-                    // todo: validate for products with no items in the inventory
-                    product.update({$inc: { soldQuantity: 1,  quantity: -1}}, function (err, resp) {
+                console.log(idClient);
 
-                        if(err) {
-                            return res
-                                .status(status.INTERNAL_SERVER_ERROR)
-                                .json({error: err.toString()});
-                        }
-                    });
-                });
+                Cart.findOne({client: idClient}).remove(function (err) {
 
-                return res.json({message: "Los productos se han comprado satisfactoriamente"});
+                    if(err) {
+                        return res
+                            .status(status.INTERNAL_SERVER_ERROR)
+                            .json({error: err.toString()});
+                    }
+
+                    return res.json({message: "Los productos se han comprado satisfactoriamente"});
+                })
             });
 
             // todo: modify the reports document
