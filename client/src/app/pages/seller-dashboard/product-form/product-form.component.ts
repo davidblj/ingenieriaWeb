@@ -4,11 +4,12 @@ import { Router } from "@angular/router";
 
 // models
 
-import { Product } from "../../../models/product";
+import { Product } from '../../../models/product';
 
 // services
 
-import { ProductService } from "../../../services/product.service";
+import { ProductService } from '../../../services/product.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-product-form',
@@ -23,7 +24,8 @@ export class ProductFormComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private productService: ProductService,
-              private router: Router) {
+              private router: Router,
+              private location: Location) {
 
     this.createForm();
   }
@@ -41,6 +43,10 @@ export class ProductFormComponent implements OnInit {
     });
 
     // todo: validate changes
+  }
+
+  goBack() {
+    this.location.back();
   }
 
   onSubmit() {
