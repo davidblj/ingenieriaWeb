@@ -17,4 +17,9 @@ export class CartService {
 
     return this.restangular.one('client/listCart').get({}, {'x-access-token': token});
   }
+
+  buyProducts(cart: any): Observable<any> {
+
+    return this.restangular.all('client/buyProducts').post(cart);
+  }
 }

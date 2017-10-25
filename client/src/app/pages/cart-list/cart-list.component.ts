@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
+
+// services
+
 import { CartService } from '../../services/cart.service';
 
 @Component({
@@ -24,7 +28,8 @@ export class CartListComponent implements OnInit {
   discount;
   shipping = 15000;
 
-  constructor(private cartService: CartService) { }
+  constructor(private cartService: CartService,
+              private location: Location) { }
 
   ngOnInit() {
 
@@ -41,6 +46,7 @@ export class CartListComponent implements OnInit {
       }
     )
   }
+
 
   public getPriceByVendor(vendorBatch) {
 
@@ -121,5 +127,21 @@ export class CartListComponent implements OnInit {
 
     this.getPriceByVendor(this.batch);
     console.log(this.batch);
+  }
+
+
+  public goBack() {
+    this.location.back();
+  }
+
+
+  public buyProducts() {
+
+    // let cart = JSON.stringify(this.batch);
+    this.cartService.buyProducts(this.batch).subscribe(
+      (response) => {
+
+      }
+    )
   }
 }

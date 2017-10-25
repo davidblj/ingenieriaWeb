@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
+import { Location } from '@angular/common';
 
 // models
 
@@ -9,7 +10,6 @@ import { Product } from '../../../models/product';
 // services
 
 import { ProductService } from '../../../services/product.service';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-product-form',

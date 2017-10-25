@@ -173,6 +173,44 @@ module.exports = function (wagner) {
         }
     }));
 
+    // todo: use the authentication middleware
+    api.post('/buyProducts', wagner.invoke(function (Product) {
+
+        return function (req, res) {
+
+            let productsByVendor = req.body;
+            console.log(productsByVendor);
+            let productList = [];
+
+            productsByVendor.forEach((vendorBatch) => {
+
+                vendorBatch.products.forEach((products) => {
+                  productList.push(products._id);
+                });
+            });
+
+            // todo: validate an empty card
+            Product.find({_id: { $in: productList}}, function (error, products) {
+
+                products.forEach((product) => {
+
+                    // todo: validate for products with no items in the inventory
+                    product.update({$inc: { soldQuantity: 1,  quantity: -1}}, function (err, resp) {
+
+                        if(err) {
+                            return res
+                                .status(status.INTERNAL_SERVER_ERROR)
+                                .json({error: err.toString()});
+                        }
+                    });
+                });
+
+                return res.json({message: "Los productos se han comprado satisfactoriamente"});
+            });
+
+            // todo: modify the reports document
+        }
+    }));
 
     return api;
 };

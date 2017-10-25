@@ -3,14 +3,16 @@
   <div class="card-body">
     <ul>
       <li class="row header">
-        <div class="col-sm-10">NOMBRE</div>
-        <div class="col-sm-1 price">PRECIO</div>
-        <div class="col-sm-1 stock">STOCK</div>
+        <div class="col-sm-6">NOMBRE</div>
+        <div class="col-sm-2 price">PRECIO</div>
+        <div class="col-sm-2 stock">EN STOCK</div>
+        <div class="col-sm-2 sold">VENDIDOS</div>
       </li>
       <li class="row item" *ngFor="let product of products">
-        <div class="col-sm-10">{{product.name}}</div>
-        <div class="col-sm-1">{{product.price}}</div>
-        <div class="col-sm-1">{{product.quantity}}</div>
+        <div class="col-sm-6">{{product.name}}</div>
+        <div class="col-sm-2">{{product.price}}</div>
+        <div class="col-sm-2">{{product.quantity}}</div>
+        <div class="col-sm-2">{{product.soldQuantity}}</div>
       </li>
     </ul>
   </div>

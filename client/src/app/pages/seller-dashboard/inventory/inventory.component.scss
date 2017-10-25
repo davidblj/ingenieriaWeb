@@ -45,12 +45,17 @@ $header-font-color: #616161;
 
       .price {
         position: relative;
-        left: -10px;
+        left: 0;
       }
 
       .stock {
         position: relative;
         left: -26px;
+      }
+
+      .sold {
+        position: relative;
+        left: -32px;
       }
     }
 

@@ -5,7 +5,7 @@ import {CartListComponent} from '../pages/cart-list/cart-list.component';
 import {LoginComponent} from '../pages/login/login.component';
 import {WorkstationComponent} from '../pages/seller-dashboard/workstation/workstation.component';
 import {InventoryComponent} from '../pages/seller-dashboard/inventory/inventory.component';
-import {CouponsComponent} from '../pages/coupons/coupons.component';
+import {CouponsComponent} from '../pages/seller-dashboard/coupons/coupons.component';
 import {VendorAuthGuard} from './guards/vendor.guard';
 import {ClientAuthGuard} from "./guards/cart.guard";
 

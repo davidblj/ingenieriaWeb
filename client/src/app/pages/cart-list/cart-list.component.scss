@@ -96,6 +96,10 @@
   padding-top: 0.5em;
   margin-right: 1em;
 
+  .btn {
+    cursor: pointer;
+  }
+
   .btn-continue {
     padding: 5px 20px;
     margin-right: 1.25em;
@@ -115,7 +119,6 @@
     box-shadow: 1px 4px 4px rgba(0,0,0,0.2);
   }
 }
-
 
 .coupon-section {
 
@@ -223,8 +226,6 @@
       color: #bdbdbd;
       box-shadow: 1px 4px 4px rgba(0,0,0,0);
     }
-
-
   }
 }
 
