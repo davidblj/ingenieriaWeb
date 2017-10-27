@@ -39,7 +39,7 @@ import {ClientAuthGuard} from "./app-routing/guards/cart.guard";
     LoginComponent,
     WorkstationComponent,
     InventoryComponent,
-    CouponsComponent
+    CouponsComponent,
   ],
   imports: [
     BrowserModule,

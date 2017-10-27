@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "startClient": "cd client && ng build --watch",
     "startServer": "nodemon ./server.js",
     "startDataBase": "mongod --dbpath /data/db/"
   },
