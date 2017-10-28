@@ -174,7 +174,7 @@ module.exports = function (wagner) {
     }));
 
     // todo: use the authentication middleware
-    api.post('/buyProducts', auth.verifyToken, wagner.invoke(function (Product, Cart, Report) {
+    api.post('/buyProducts', auth.verifyToken, wagner.invoke(function (Product, Cart, Report, Coupon) {
       return function (req, res) {
         let productsByVendor = req.body.content;
 
@@ -197,6 +197,21 @@ module.exports = function (wagner) {
 
           if(vendorBatch.hasCoupon) {
               discount = subtotal * 0.1;
+              Coupon.findOne({id_vendor: idVendor}).exec(function(err, coupon){
+                if(err){
+                    return res
+                        .status(status.INTERNAL_SERVER_ERROR)
+                        .json({error: error.toString()});
+                }
+                if (coupon) {
+                  console.log(coupon, "este es un cupon antes de");
+                 let index = coupon.clients.indexOf(idClient);
+                  if (index > -1) {
+                    coupon.clients.splice(index, 1);
+                    coupon.save();
+                  }
+                }
+              });
           }
 
           Report.findOne({id_vendor: idVendor}).exec(function(err, report) {
