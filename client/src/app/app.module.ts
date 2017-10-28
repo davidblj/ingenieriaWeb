@@ -13,6 +13,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { WorkstationComponent } from './pages/seller-dashboard/workstation/workstation.component';
 import { InventoryComponent } from './pages/seller-dashboard/inventory/inventory.component';
 import { CouponsComponent} from './pages/seller-dashboard/coupons/coupons.component';
+import {VendorAuthGuard} from './app-routing/guards/vendor.guard';
+import {ClientAuthGuard} from './app-routing/guards/cart.guard';
 
 // librerias
 
@@ -26,8 +28,8 @@ import { ProductFormComponent } from './pages/seller-dashboard/product-form/prod
 import { CartService } from './services/cart.service';
 import { LoginService } from './services/login.service';
 import { CouponService } from './services/coupon.service';
-import {VendorAuthGuard} from "./app-routing/guards/vendor.guard";
-import {ClientAuthGuard} from "./app-routing/guards/cart.guard";
+import { ReportsComponent } from './pages/seller-dashboard/reports/reports.component';
+import { ReportService } from './services/report.service';
 
 
 @NgModule({
@@ -40,6 +42,7 @@ import {ClientAuthGuard} from "./app-routing/guards/cart.guard";
     WorkstationComponent,
     InventoryComponent,
     CouponsComponent,
+    ReportsComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,7 +57,8 @@ import {ClientAuthGuard} from "./app-routing/guards/cart.guard";
     LoginService,
     CouponService,
     VendorAuthGuard,
-    ClientAuthGuard
+    ClientAuthGuard,
+    ReportService
   ],
   bootstrap: [AppComponent]
 })
