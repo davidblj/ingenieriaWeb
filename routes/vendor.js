@@ -56,5 +56,31 @@ module.exports = function (wagner) {
           }
   }));
 
+  api.get('/getReports', auth.verifyToken, wagner.invoke(function (Report) {
+
+      return function (req, res) {
+
+          let userRole = req.decoded.role;
+          let idVendor = req.decoded._id;
+
+          // todo: remove duplicate code
+          if (userRole !== 'vendor') {
+              return res
+                  .status(status.FORBIDDEN)
+                  .json({error: 'No tienes la autorizacion para este tipo de peticion'});
+          }
+
+          Report.findOne({id_vendor: idVendor}).exec(function (err, report) {
+              if (err) {
+                  return res
+                      .status(status.INTERNAL_SERVER_ERROR)
+                      .json({error: error.toString()});
+              }
+
+              return res.json(report);
+          })
+      }
+  }));
+
   return api;
 };
