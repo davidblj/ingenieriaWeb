@@ -94,10 +94,21 @@
       <div class="row">
         <div class="footer ml-auto">
           <button class="btn btn-continue" (click)="goBack()">Seguir buscando</button>
-          <button class="btn btn-checkout" (click)="buyProducts()">Comprar</button>
+          <button class="btn btn-checkout" (click)="buyProducts(content)">Comprar</button>
         </div>
       </div>
 
     </div>
   </div>
 </section>
+
+<!-- todo: use a component instead of a template-->
+<ng-template #content let-c="close">
+  <div class="modal-body message">
+    <span class="title">Tu compra se ha realizado con exito</span>
+    <span class="hint" *ngIf="shipping === 0">¡Ven y reclama tus productos!</span>
+    <span class="hint" *ngIf="shipping !== 0">¡El pedido llegara a tu casa en menos de 1 hora!</span>
+    <a (click)="goBack(); c()" class="btn btn-continue">Continuar</a>
+  </div>
+</ng-template>
+

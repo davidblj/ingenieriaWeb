@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 // services
 
@@ -30,7 +31,8 @@ export class CartListComponent implements OnInit {
   shipping = 15000;
 
   constructor(private cartService: CartService,
-              private location: Location) { }
+              private location: Location,
+              private modalService: NgbModal) { }
 
   ngOnInit() {
 
@@ -136,13 +138,16 @@ export class CartListComponent implements OnInit {
   }
 
 
-  public buyProducts() {
+  public buyProducts(content) {
 
     // let cart = JSON.stringify(this.batch);
     let cart = new CartList(this.batch);
     this.cartService.buyProducts(cart).subscribe(
       (response) => {
 
+        console.log(response);
+        // todo: close modal when clicked outside the modal
+        this.modalService.open(content);
       }
     );
   }

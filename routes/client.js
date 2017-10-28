@@ -185,8 +185,6 @@ module.exports = function (wagner) {
 
         productsByVendor.forEach((vendorBatch) => {
 
-          // save document
-
           let idVendor = vendorBatch.id_vendor;
           let products = vendorBatch.products;
           let discount = 0;
@@ -213,7 +211,7 @@ module.exports = function (wagner) {
                     products: products,
                     discount: discount,
                     subtotal: subtotal
-                }
+                };
 
               report.batch.push(batch);
               report.save();
@@ -228,7 +226,7 @@ module.exports = function (wagner) {
                         discount: discount,
                         subtotal: subtotal
                     }]
-                  }
+                  };
                 Report(report).save(function(error){
                   if(error){
                       return res
@@ -241,7 +239,8 @@ module.exports = function (wagner) {
         });
       });
 
-      // todo: validate for products with no items in the inventory, validate an empty card
+      // todo: validate an empty cart and products with no items in the inventory
+      // todo: bug fix - repeated products in productList is not updating more than once
       Product.update({_id:  { $in: productList}}, {$inc: { soldQuantity: 1,  quantity: -1}}, {multi: true}, function (err) {
 
           if(err) {

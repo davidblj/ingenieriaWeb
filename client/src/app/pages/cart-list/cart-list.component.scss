@@ -229,3 +229,30 @@
   }
 }
 
+.message {
+  text-align: center;
+
+  .title {
+    display: block;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 0.5em;
+  }
+
+  .hint {
+    display: block;
+    margin-top: 0.2em;
+    font-size: small;
+    color: #C4C0CD;
+  }
+
+  .btn-continue {
+    cursor: pointer;
+    margin-top: 1em;
+    display: block;
+    padding: 5px 20px;
+    color: #232331;
+    border-color: #232331;
+    border-radius: 10px;
+  }
+}
