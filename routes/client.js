@@ -174,50 +174,96 @@ module.exports = function (wagner) {
     }));
 
     // todo: use the authentication middleware
-    api.post('/buyProducts', auth.verifyToken, wagner.invoke(function (Product, Cart) {
+    api.post('/buyProducts', auth.verifyToken, wagner.invoke(function (Product, Cart, Report) {
+      return function (req, res) {
+        let productsByVendor = req.body.content;
 
-        return function (req, res) {
+        let idClient = req.decoded._id;
+        console.log(productsByVendor, " ", idClient);
 
-            let productsByVendor = req.body.content;
+        let productList = [];
 
-            let idClient = req.decoded._id;
-            console.log(productsByVendor, " ", idClient);
+        productsByVendor.forEach((vendorBatch) => {
 
-            let productList = [];
+          // save document
 
-            productsByVendor.forEach((vendorBatch) => {
+          let idVendor = vendorBatch.id_vendor;
+          let products = vendorBatch.products;
+          let discount = 0;
+          let subtotal = 0;
 
-                vendorBatch.products.forEach((products) => {
-                  productList.push(products._id);
-                });
-            });
+          vendorBatch.products.forEach((products) => {
+            productList.push(products._id);
+            subtotal += products.price;
+          });
 
-            // todo: validate for products with no items in the inventory, validate an empty card
-            Product.update({_id:  { $in: productList}}, {$inc: { soldQuantity: 1,  quantity: -1}}, {multi: true}, function (err) {
+          if(vendorBatch.hasCoupon) {
+              discount = subtotal * 0.1;
+          }
 
-                if(err) {
-                    return res
-                        .status(status.INTERNAL_SERVER_ERROR)
-                        .json({error: err.toString()});
+          Report.findOne({id_vendor: idVendor}).exec(function(err, report) {
+            if(err){
+                return res
+                    .status(status.INTERNAL_SERVER_ERROR)
+                    .json({error: error.toString()});
+            }
+
+            if(report) {
+              let batch = {
+                    products: products,
+                    discount: discount,
+                    subtotal: subtotal
                 }
 
-                console.log(idClient);
+              report.batch.push(batch);
+              report.save();
 
-                Cart.findOne({client: idClient}).remove(function (err) {
+              console.log('Se agrego un grupo de productos al vendedor')
 
-                    if(err) {
-                        return res
-                            .status(status.INTERNAL_SERVER_ERROR)
-                            .json({error: err.toString()});
-                    }
+              } else {
+                  let report = {
+                    id_vendor: idVendor,
+                    batch: [{
+                        products: products,
+                        discount: discount,
+                        subtotal: subtotal
+                    }]
+                  }
+                Report(report).save(function(error){
+                  if(error){
+                      return res
+                          .status(status.INTERNAL_SERVER_ERROR)
+                          .json({error: error.toString()});
+                  }
+                  console.log('Se creo el reporte')
+                });
+            }
+        });
+      });
 
-                    return res.json({message: "Los productos se han comprado satisfactoriamente"});
-                })
-            });
+      // todo: validate for products with no items in the inventory, validate an empty card
+      Product.update({_id:  { $in: productList}}, {$inc: { soldQuantity: 1,  quantity: -1}}, {multi: true}, function (err) {
 
-            // todo: modify the reports document
-        }
-    }));
+          if(err) {
+              return res
+                  .status(status.INTERNAL_SERVER_ERROR)
+                  .json({error: err.toString()});
+          }
 
-    return api;
+          console.log(idClient);
+
+          Cart.findOne({client: idClient}).remove(function (err) {
+
+              if(err) {
+                  return res
+                      .status(status.INTERNAL_SERVER_ERROR)
+                      .json({error: err.toString()});
+              }
+
+              return res.json({message: "Los productos se han comprado satisfactoriamente"});
+          })
+      });
+    }
+  }));
+  return api;
 };

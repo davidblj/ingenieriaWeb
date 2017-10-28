@@ -22,7 +22,7 @@ export class ProductService {
     let formData = new FormData();
     formData.append('photo', file);
 
-    let URL = 'http://localhost:4200/shop/postImage';
+    let URL = 'http://localhost:3000/shop/postImage';
 
     return this.http.post(URL, formData).map((res: Response) => res.json().route);
   }
