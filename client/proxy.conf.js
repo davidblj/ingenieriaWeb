@@ -2,6 +2,7 @@ const PROXY_CONFIG = [
   {
     "context": [
       "/vendor/assignCoupon",
+      "/vendor/getReports",
       "/shop/listProducts",
       "/shop/addProduct",
       "/shop/postImage",

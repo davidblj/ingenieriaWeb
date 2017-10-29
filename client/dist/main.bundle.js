@@ -164,6 +164,8 @@ var _a;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_seller_dashboard_coupons_coupons_component__ = __webpack_require__("../../../../../src/app/pages/seller-dashboard/coupons/coupons.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__guards_vendor_guard__ = __webpack_require__("../../../../../src/app/app-routing/guards/vendor.guard.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__guards_cart_guard__ = __webpack_require__("../../../../../src/app/app-routing/guards/cart.guard.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_seller_dashboard_reports_reports_component__ = __webpack_require__("../../../../../src/app/pages/seller-dashboard/reports/reports.component.ts");
+
 
 
 
@@ -192,6 +194,10 @@ var routes = [
             {
                 path: 'coupons',
                 component: __WEBPACK_IMPORTED_MODULE_6__pages_seller_dashboard_coupons_coupons_component__["a" /* CouponsComponent */]
+            },
+            {
+                path: 'reports',
+                component: __WEBPACK_IMPORTED_MODULE_9__pages_seller_dashboard_reports_reports_component__["a" /* ReportsComponent */]
             }
         ]
     },
@@ -348,8 +354,8 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_19__services_login_service__["a" /* LoginService */],
             __WEBPACK_IMPORTED_MODULE_20__services_coupon_service__["a" /* CouponService */],
             __WEBPACK_IMPORTED_MODULE_12__app_routing_guards_vendor_guard__["a" /* VendorAuthGuard */],
-            __WEBPACK_IMPORTED_MODULE_13__app_routing_guards_cart_guard__["a" /* ClientAuthGuard */],
-            __WEBPACK_IMPORTED_MODULE_22__services_report_service__["a" /* ReportService */]
+            __WEBPACK_IMPORTED_MODULE_22__services_report_service__["a" /* ReportService */],
+            __WEBPACK_IMPORTED_MODULE_13__app_routing_guards_cart_guard__["a" /* ClientAuthGuard */]
         ],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */]]
     })
@@ -447,7 +453,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".row-section {\n  padding-top: 5em;\n  padding-bottom: 3em;\n  height: auto;\n  min-height: 100%;\n  background: #232331; }\n  .row-section .row-block {\n    background: #C8CCCF;\n    border-radius: 5px;\n    padding: 20px; }\n    .row-section .row-block .media {\n      padding: 15px 20px;\n      border-radius: 5px;\n      box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.04);\n      background: #E4E8E6; }\n      .row-section .row-block .media .media-left img {\n        width: auto;\n        height: 125px; }\n      .row-section .row-block .media .media-body p {\n        color: #424242;\n        padding: 7px 15px;\n        font-size: 14px; }\n      .row-section .row-block .media .media-body h4 {\n        color: #232331;\n        font-size: 25px;\n        font-weight: 600;\n        margin-bottom: 0;\n        padding-left: 14px;\n        margin-top: 12px; }\n        .row-section .row-block .media .media-body h4 small {\n          font-size: 10px; }\n      .row-section .row-block .media .media-right {\n        color: #232331;\n        font-weight: 700;\n        font-size: 30px;\n        padding: 0 0.5em; }\n    .row-section .row-block ul {\n      margin: 0;\n      padding: 0; }\n      .row-section .row-block ul li {\n        list-style: none;\n        margin-bottom: 20px; }\n      .row-section .row-block ul li:last-child {\n        margin-bottom: 0; }\n\n.price-section {\n  margin-top: 1em; }\n  .price-section .d-flex {\n    padding: 5px 0;\n    font-size: 15px; }\n    .price-section .d-flex .tag {\n      font-weight: 700;\n      color: #616161; }\n    .price-section .d-flex .value {\n      color: #424242; }\n    .price-section .d-flex .total {\n      font-weight: 600;\n      font-size: 18px; }\n\n.footer {\n  padding-top: 0.5em;\n  margin-right: 1em; }\n  .footer .btn {\n    cursor: pointer; }\n  .footer .btn-continue {\n    padding: 5px 20px;\n    margin-right: 1.25em;\n    background: #E4E8E6;\n    color: #F4646A;\n    border-radius: 20px;\n    box-shadow: 1px 4px 4px rgba(0, 0, 0, 0.2); }\n  .footer .btn-checkout {\n    padding: 5px 20px;\n    background: #F4646A;\n    color: #E4E8E6;\n    border-radius: 20px;\n    box-shadow: 1px 4px 4px rgba(0, 0, 0, 0.2); }\n\n.coupon-section {\n  padding-top: 1em;\n  /* Rounded sliders */ }\n  .coupon-section .shipping {\n    padding-right: 1em;\n    position: relative;\n    top: -15px;\n    font-weight: bold;\n    font-size: 15px;\n    letter-spacing: 0.3px;\n    color: #616161; }\n  .coupon-section .switch {\n    position: relative;\n    display: inline-block;\n    width: 50px;\n    height: 24px; }\n  .coupon-section .switch input {\n    display: none; }\n  .coupon-section .slider {\n    position: absolute;\n    cursor: pointer;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    background-color: #ef5350;\n    transition: .4s; }\n  .coupon-section .slider:before {\n    position: absolute;\n    content: \"\";\n    height: 18px;\n    width: 17px;\n    left: 3px;\n    bottom: 3px;\n    background-color: white;\n    transition: .4s; }\n  .coupon-section input:checked + .slider {\n    background-color: #2196F3; }\n  .coupon-section input:focus + .slider {\n    box-shadow: 0 0 1px #2196F3; }\n  .coupon-section input:checked + .slider:before {\n    -webkit-transform: translateX(26px);\n    transform: translateX(26px); }\n  .coupon-section .slider.round {\n    border-radius: 34px; }\n  .coupon-section .slider.round:before {\n    border-radius: 50%; }\n  .coupon-section .coupon-list {\n    margin-right: 2em; }\n    .coupon-section .coupon-list .coupon-tag {\n      position: relative;\n      top: -5.5px;\n      font-weight: bold;\n      font-size: 15px;\n      letter-spacing: 0.3px;\n      color: #616161; }\n    .coupon-section .coupon-list .btn {\n      background: #43a047;\n      font-size: small;\n      margin-right: 4px;\n      margin-bottom: 5px;\n      box-shadow: 1px 4px 4px rgba(0, 0, 0, 0.2); }\n    .coupon-section .coupon-list .btn-coupon {\n      padding-top: 4px;\n      padding-bottom: 4px; }\n    .coupon-section .coupon-list .dismissed {\n      background: #6CB284;\n      color: #bdbdbd;\n      box-shadow: 1px 4px 4px transparent; }\n\n.message {\n  text-align: center; }\n  .message .title {\n    display: block;\n    font-size: 20px;\n    font-weight: bold;\n    margin-top: 0.5em; }\n  .message .hint {\n    display: block;\n    margin-top: 0.2em;\n    font-size: small;\n    color: #C4C0CD; }\n  .message .btn-continue {\n    cursor: pointer;\n    margin-top: 1em;\n    display: block;\n    padding: 5px 20px;\n    color: #232331;\n    border-color: #232331;\n    border-radius: 10px; }\n", ""]);
+exports.push([module.i, ".row-section {\n  padding-top: 5em;\n  padding-bottom: 3em;\n  height: auto;\n  min-height: 100%;\n  background: #232331; }\n  .row-section .row-block {\n    background: #C8CCCF;\n    border-radius: 5px;\n    padding: 20px; }\n    .row-section .row-block .media {\n      padding: 15px 20px;\n      border-radius: 5px;\n      box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.04);\n      background: #E4E8E6; }\n      .row-section .row-block .media .media-left img {\n        width: auto;\n        height: 125px; }\n      .row-section .row-block .media .media-body p {\n        color: #424242;\n        padding: 7px 15px;\n        font-size: 14px; }\n      .row-section .row-block .media .media-body h4 {\n        color: #232331;\n        font-size: 25px;\n        font-weight: 600;\n        margin-bottom: 0;\n        padding-left: 14px;\n        margin-top: 12px; }\n        .row-section .row-block .media .media-body h4 small {\n          font-size: 10px; }\n      .row-section .row-block .media .media-right {\n        color: #232331;\n        font-weight: 700;\n        font-size: 30px;\n        padding: 0 0.5em; }\n    .row-section .row-block ul {\n      margin: 0;\n      padding: 0; }\n      .row-section .row-block ul li {\n        list-style: none;\n        margin-bottom: 20px; }\n      .row-section .row-block ul li:last-child {\n        margin-bottom: 0; }\n\n.price-section {\n  margin-top: 1em; }\n  .price-section .d-flex {\n    padding: 5px 0;\n    font-size: 15px; }\n    .price-section .d-flex .tag {\n      font-weight: 700;\n      color: #616161; }\n    .price-section .d-flex .value {\n      color: #424242; }\n    .price-section .d-flex .total {\n      font-weight: 600;\n      font-size: 18px; }\n\n.footer {\n  padding-top: 0.5em;\n  margin-right: 1em; }\n  .footer .btn {\n    cursor: pointer; }\n  .footer .btn-continue {\n    padding: 5px 20px;\n    margin-right: 1.25em;\n    background: #E4E8E6;\n    color: #F4646A;\n    border-radius: 20px;\n    box-shadow: 1px 4px 4px rgba(0, 0, 0, 0.2); }\n  .footer .btn-checkout {\n    padding: 5px 20px;\n    background: #F4646A;\n    color: #E4E8E6;\n    border-radius: 20px;\n    box-shadow: 1px 4px 4px rgba(0, 0, 0, 0.2); }\n\n.coupon-section {\n  padding-top: 1em;\n  /* Rounded sliders */ }\n  .coupon-section .shipping {\n    padding-right: 1em;\n    position: relative;\n    top: -15px;\n    font-weight: bold;\n    font-size: 15px;\n    letter-spacing: 0.3px;\n    color: #616161; }\n  .coupon-section .switch {\n    position: relative;\n    display: inline-block;\n    width: 50px;\n    height: 24px; }\n  .coupon-section .switch input {\n    display: none; }\n  .coupon-section .slider {\n    position: absolute;\n    cursor: pointer;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    background-color: #ef5350;\n    transition: .4s; }\n  .coupon-section .slider:before {\n    position: absolute;\n    content: \"\";\n    height: 18px;\n    width: 17px;\n    left: 3px;\n    bottom: 3px;\n    background-color: white;\n    transition: .4s; }\n  .coupon-section input:checked + .slider {\n    background-color: #2196F3; }\n  .coupon-section input:focus + .slider {\n    box-shadow: 0 0 1px #2196F3; }\n  .coupon-section input:checked + .slider:before {\n    -webkit-transform: translateX(26px);\n    transform: translateX(26px); }\n  .coupon-section .slider.round {\n    border-radius: 34px; }\n  .coupon-section .slider.round:before {\n    border-radius: 50%; }\n  .coupon-section .coupon-list {\n    margin-right: 2em; }\n    .coupon-section .coupon-list .coupon-tag {\n      position: relative;\n      top: -5.5px;\n      font-weight: bold;\n      font-size: 15px;\n      letter-spacing: 0.3px;\n      color: #616161; }\n    .coupon-section .coupon-list .btn {\n      background: #43a047;\n      font-size: small;\n      margin-right: 4px;\n      margin-bottom: 5px;\n      box-shadow: 1px 4px 4px rgba(0, 0, 0, 0.2); }\n    .coupon-section .coupon-list .btn-coupon {\n      padding-top: 4px;\n      padding-bottom: 4px; }\n    .coupon-section .coupon-list .dismissed {\n      background: #6CB284;\n      color: #bdbdbd;\n      box-shadow: 1px 4px 4px transparent; }\n\n.message {\n  text-align: center; }\n  .message .title {\n    display: block;\n    font-size: 20px;\n    font-weight: bold;\n    margin-top: 0.5em; }\n  .message .hint {\n    display: block;\n    margin-top: 0.2em;\n    font-size: small;\n    color: #C4C0CD; }\n  .message .btn-continue {\n    cursor: pointer;\n    margin-top: 1em;\n    display: block;\n    padding: 5px 20px;\n    color: #232331;\n    border-color: #232331;\n    border-radius: 10px; }\n    .message .btn-continue:hover {\n      background: #232331;\n      color: white; }\n", ""]);
 
 // exports
 
@@ -596,7 +602,7 @@ var _a, _b, _c;
 /***/ "../../../../../src/app/pages/home-page/home-page.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div>\n  <nav class=\"navbar navbar-light navbar-expand-md\">\n\n    <div class=\"navbar-nav\" *ngIf=\"username\">\n      <div class=\"nav-item username\">{{username}}</div>\n    </div>\n\n    <div class=\"navbar-nav ml-auto\">\n      <div class=\"nav-item\">\n        <i class=\"fa fa-shopping-cart onMouseOver\" routerLink=\"/cart-list\" routerLinkActive=\"active\"></i>\n        <span class=\"count\">{{itemsInCart}}</span>\n      </div>\n\n      <div class=\"nav-item\" *ngIf=\"!username\" >\n        <i class=\"fa fa-sign-in onMouseOver\" routerLink=\"/login\" routerLinkActive=\"active\"></i>\n      </div>\n      <div class=\"nav-item\" *ngIf=\"username\" style=\"color: #D94C44;\">\n        <i class=\"fa fa-sign-out onMouseOver\"  (click)=\"logOut()\" routerLinkActive=\"active\"></i>\n      </div>\n    </div>\n  </nav>\n</div>\n\n<section>\n  <div class=\"container\">\n    <div class=\"row\">\n        <div class=\"col-sm-4\" *ngFor=\"let product of products\">\n\n          <div class=\"card custom-card\">\n            <img class=\"card-img-top onMouseOver\"\n                 src=\"http://localhost:3000/{{product.image}}\"\n                 alt=\"Card image cap\">\n\n            <div class=\"card-body\">\n              <span class=\"badge-box\"><i class=\"fa fa-plus onMouseOver\"></i></span>\n              <h4 class=\"card-title\">{{product.name}}</h4>\n              <p>{{product.price}} <i class=\"fa fa-usd\"></i></p>\n\n              <div class=\"row\">\n                <div class=\"mr-auto\"></div>\n                <div class=\"details\">\n                  <a href=\"#\" class=\"btn btn-default text-uppercase onMouseOver\">Comprar</a>\n                  <i class=\"fa fa-cart-plus onMouseOver\" (click)=\"addToCart(product._id)\"></i>\n                </div>\n              </div>\n            </div>\n          </div>\n\n      </div>\n    </div>\n  </div>\n</section>\n\n"
+module.exports = "<div>\n  <nav class=\"navbar navbar-light navbar-expand-md\">\n\n    <div class=\"navbar-nav\" *ngIf=\"username\">\n      <div class=\"nav-item username\">{{username}}</div>\n    </div>\n\n    <div class=\"navbar-nav ml-auto\">\n      <div class=\"nav-item\">\n        <i class=\"fa fa-shopping-cart onMouseOver\" routerLink=\"/cart-list\" routerLinkActive=\"active\"></i>\n        <span class=\"count\">{{itemsInCart}}</span>\n      </div>\n\n      <div class=\"nav-item\" *ngIf=\"!username\" >\n        <i class=\"fa fa-sign-in onMouseOver\" routerLink=\"/login\" routerLinkActive=\"active\"></i>\n      </div>\n      <div class=\"nav-item\" *ngIf=\"username\" style=\"color: #D94C44;\">\n        <i class=\"fa fa-sign-out onMouseOver\"  (click)=\"logOut()\" routerLinkActive=\"active\"></i>\n      </div>\n    </div>\n  </nav>\n</div>\n\n<section>\n  <div class=\"container\">\n    <div class=\"row\">\n        <div class=\"col-sm-4\" *ngFor=\"let product of products\">\n\n          <div class=\"card custom-card\">\n            <img class=\"card-img-top onMouseOver\"\n                 src=\"http://localhost:3000/{{product.image}}\"\n                 alt=\"Card image cap\">\n\n            <div class=\"card-body\">\n              <span class=\"badge-box\"><i class=\"fa fa-plus onMouseOver\"></i></span>\n              <h4 class=\"card-title\">{{product.name}}</h4>\n              <p>{{product.price}} <i class=\"fa fa-usd\"></i></p>\n\n              <div class=\"row\">\n                <div class=\"mr-auto\"></div>\n                <div class=\"details\">\n                  <a class=\"btn btn-default text-uppercase onMouseOver\" (click)=\"addToCart(product._id, true)\">Comprar</a>\n                  <i class=\"fa fa-cart-plus onMouseOver\" (click)=\"addToCart(product._id, false)\"></i>\n                </div>\n              </div>\n            </div>\n          </div>\n\n      </div>\n    </div>\n  </div>\n</section>\n\n"
 
 /***/ }),
 
@@ -608,7 +614,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Kumar+One);", ""]);
 
 // module
-exports.push([module.i, ".navbar {\n  margin-top: 1.5em;\n  margin-right: 1em; }\n  .navbar .username {\n    letter-spacing: 5px;\n    text-transform: uppercase;\n    padding-left: 1.5em;\n    font-weight: bold; }\n  .navbar .nav-item {\n    height: 3em; }\n    .navbar .nav-item i {\n      font-size: 2em;\n      margin-left: 1.2em; }\n    .navbar .nav-item .count {\n      display: block;\n      top: -47px;\n      left: 4em;\n      position: relative;\n      background: #F4646A;\n      color: #fff;\n      border-radius: 50%;\n      width: 26px;\n      height: 25px;\n      text-align: center;\n      line-height: 25px;\n      font-size: smaller;\n      font-weight: 800; }\n\nsection {\n  width: 100%;\n  height: auto;\n  min-height: 100%;\n  padding: 30px 0;\n  position: absolute;\n  background: #C8CCCF; }\n\n.btn-default {\n  background: #232331;\n  color: #fff;\n  font-weight: 700;\n  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);\n  font-size: 14px; }\n\n.card {\n  box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.3);\n  border: none;\n  margin-bottom: 30px; }\n  .card .card-img-top {\n    width: 100%;\n    height: auto;\n    max-height: 197px; }\n  .card .card-body {\n    position: relative;\n    padding-top: 40px; }\n\n.custom-card .badge-box {\n  position: absolute;\n  top: -20px;\n  left: 50%;\n  width: 100px;\n  height: 100px;\n  margin-left: -50px;\n  text-align: center; }\n  .custom-card .badge-box i {\n    background: #F4646A;\n    color: white;\n    border-radius: 50%;\n    width: 50px;\n    height: 50px;\n    line-height: 50px;\n    text-align: center;\n    font-size: 20px; }\n\n.details {\n  padding-right: 1em; }\n  .details i {\n    padding-left: 0.5em;\n    position: relative;\n    text-align: center;\n    font-size: 40px;\n    top: 10px; }\n\n.onMouseOver {\n  cursor: pointer; }\n\n.card-01.height-fix {\n  height: 455px;\n  overflow: hidden; }\n", ""]);
+exports.push([module.i, ".navbar {\n  margin-top: 1.5em;\n  margin-right: 1em; }\n  .navbar .username {\n    letter-spacing: 5px;\n    text-transform: uppercase;\n    padding-left: 1.5em;\n    font-weight: bold; }\n  .navbar .nav-item {\n    height: 3em; }\n    .navbar .nav-item i {\n      font-size: 2em;\n      margin-left: 1.2em; }\n    .navbar .nav-item .count {\n      display: block;\n      top: -47px;\n      left: 4em;\n      position: relative;\n      background: #F4646A;\n      color: #fff;\n      border-radius: 50%;\n      width: 26px;\n      height: 25px;\n      text-align: center;\n      line-height: 25px;\n      font-size: smaller;\n      font-weight: 800; }\n\nsection {\n  width: 100%;\n  height: auto;\n  min-height: 100%;\n  padding: 30px 0;\n  position: absolute;\n  background: #C8CCCF; }\n\n.btn-default {\n  background: #232331;\n  color: #fff !important;\n  font-weight: 700;\n  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);\n  font-size: 14px; }\n\n.card {\n  box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.3);\n  border: none;\n  margin-bottom: 30px; }\n  .card .card-img-top {\n    width: 100%;\n    height: auto;\n    max-height: 197px; }\n  .card .card-body {\n    position: relative;\n    padding-top: 40px; }\n\n.custom-card .badge-box {\n  position: absolute;\n  top: -20px;\n  left: 50%;\n  width: 100px;\n  height: 100px;\n  margin-left: -50px;\n  text-align: center; }\n  .custom-card .badge-box i {\n    background: #F4646A;\n    color: white;\n    border-radius: 50%;\n    width: 50px;\n    height: 50px;\n    line-height: 50px;\n    text-align: center;\n    font-size: 20px; }\n\n.details {\n  padding-right: 1em; }\n  .details i {\n    padding-left: 0.5em;\n    position: relative;\n    text-align: center;\n    font-size: 40px;\n    top: 10px; }\n\n.onMouseOver {\n  cursor: pointer; }\n\n.card-01.height-fix {\n  height: 455px;\n  overflow: hidden; }\n", ""]);
 
 // exports
 
@@ -670,7 +676,7 @@ var HomePageComponent = (function () {
         localStorage.removeItem('currentUser');
     };
     // todo: check for an existing cart-list and update the visual que (itemsInCart)
-    HomePageComponent.prototype.addToCart = function (productId) {
+    HomePageComponent.prototype.addToCart = function (productId, showCart) {
         var _this = this;
         if (!this.username) {
             this.router.navigate(['/login']);
@@ -678,8 +684,13 @@ var HomePageComponent = (function () {
         var cart = new __WEBPACK_IMPORTED_MODULE_2__models_cart__["a" /* Cart */](productId);
         // todo: HANDLE repeated products
         this.cartService.saveToCart(cart).subscribe(function (message) {
-            _this.itemsInCart++;
-            console.log(message, _this.itemsInCart);
+            if (showCart) {
+                _this.router.navigate(['/cart-list']);
+            }
+            else {
+                _this.itemsInCart++;
+                console.log(message, _this.itemsInCart);
+            }
         }, function (errmess) {
             // todo: set a proper response. In a modal, maybe.
             console.log('Sorry, something went wrong: ', errmess);
@@ -808,7 +819,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".card {\n  background-color: #F8F4F6;\n  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);\n  margin-left: 2em;\n  margin-right: 2.5em; }\n  .card ul {\n    list-style-type: none;\n    padding-left: 0;\n    margin-bottom: 0; }\n    .card ul li {\n      padding-top: 0.7em;\n      padding-bottom: 0.7em;\n      padding-left: 1em;\n      border-bottom-style: solid;\n      border-bottom-width: 1px;\n      border-bottom-color: #DADFEB; }\n      .card ul li input[type=checkbox] {\n        position: relative;\n        top: 3px;\n        outline: none;\n        -webkit-transform: scale(1.5);\n                transform: scale(1.5); }\n      .card ul li span {\n        padding-left: 1.5em;\n        font-size: 15px;\n        color: #757575; }\n      .card ul li ~ li:last-child {\n        border-bottom: none; }\n\n.circle {\n  position: relative;\n  top: -15px;\n  left: 46%;\n  background: #232331;\n  border-radius: 50%;\n  width: 50px;\n  height: 50px;\n  text-align: center; }\n  .circle i {\n    position: relative;\n    line-height: 1.2em;\n    color: white;\n    font-size: 2.5em; }\n\n.onMouseOver {\n  cursor: pointer; }\n", ""]);
+exports.push([module.i, ".card {\n  background-color: #FCFCFC;\n  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);\n  margin-left: 2em;\n  margin-right: 2.5em; }\n  .card ul {\n    list-style-type: none;\n    padding-left: 0;\n    margin-bottom: 0; }\n    .card ul li {\n      padding-top: 0.7em;\n      padding-bottom: 0.7em;\n      padding-left: 1em;\n      border-bottom-style: solid;\n      border-bottom-width: 1px;\n      border-bottom-color: #DADFEB; }\n      .card ul li input[type=checkbox] {\n        position: relative;\n        top: 3px;\n        outline: none;\n        -webkit-transform: scale(1.5);\n                transform: scale(1.5); }\n      .card ul li span {\n        padding-left: 1.5em;\n        font-size: 15px;\n        color: #757575; }\n      .card ul li ~ li:last-child {\n        border-bottom: none; }\n\n.circle {\n  position: relative;\n  top: -15px;\n  left: 46%;\n  background: #232331;\n  border-radius: 50%;\n  width: 50px;\n  height: 50px;\n  text-align: center; }\n  .circle i {\n    position: relative;\n    line-height: 1.2em;\n    color: white;\n    font-size: 2.5em; }\n\n.onMouseOver {\n  cursor: pointer; }\n", ""]);
 
 // exports
 
@@ -903,7 +914,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".circle {\n  position: fixed;\n  top: 90%;\n  left: 95%;\n  background: #232331;\n  border-radius: 50%;\n  outline: none;\n  width: 60px;\n  height: 60px;\n  text-align: center; }\n  .circle i {\n    position: relative;\n    left: 0.05em;\n    line-height: 2.5em;\n    color: #E7EFF6;\n    font-size: 1.5em; }\n\n.card {\n  background-color: #EEE9EE; }\n  .card .card-body {\n    padding-top: 1.6em; }\n  .card ul {\n    padding-left: 1.5em;\n    padding-right: 1.5em; }\n    .card ul .header {\n      color: #616161;\n      font-size: 0.8em;\n      font-weight: 800; }\n      .card ul .header .price {\n        position: relative;\n        left: 0; }\n      .card ul .header .stock {\n        position: relative;\n        left: -26px; }\n      .card ul .header .sold {\n        position: relative;\n        left: -32px; }\n    .card ul .item {\n      background-color: #F8F4F6;\n      color: #757575;\n      border-radius: 4px;\n      list-style-type: none;\n      margin-top: 0.5em;\n      padding: 0.5em;\n      border-style: solid;\n      border-width: 1px;\n      border-color: #BDC8D7; }\n\n.onMouseOver {\n  cursor: pointer; }\n", ""]);
+exports.push([module.i, ".circle {\n  position: fixed;\n  top: 90%;\n  left: 95%;\n  background: #232331;\n  border-radius: 50%;\n  outline: none;\n  width: 60px;\n  height: 60px;\n  text-align: center; }\n  .circle i {\n    position: relative;\n    left: 0.05em;\n    line-height: 2.5em;\n    color: #E7EFF6;\n    font-size: 1.5em; }\n\n.card {\n  background-color: #FCFCFC; }\n  .card .card-body {\n    padding-top: 1.6em; }\n  .card ul {\n    padding-left: 1.5em;\n    padding-right: 1.5em; }\n    .card ul .header {\n      color: #616161;\n      font-size: 0.8em;\n      font-weight: 800; }\n      .card ul .header .price {\n        position: relative;\n        left: 0; }\n      .card ul .header .stock {\n        position: relative;\n        left: -26px; }\n      .card ul .header .sold {\n        position: relative;\n        left: -32px; }\n    .card ul .item {\n      background-color: #F8F4F6;\n      color: #757575;\n      border-radius: 4px;\n      list-style-type: none;\n      margin-top: 0.5em;\n      padding: 0.5em;\n      border-style: solid;\n      border-width: 1px;\n      border-color: #BDC8D7; }\n\n.onMouseOver {\n  cursor: pointer; }\n", ""]);
 
 // exports
 
@@ -1085,7 +1096,7 @@ var _a, _b, _c, _d;
 /***/ "../../../../../src/app/pages/seller-dashboard/reports/reports.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  reports works!\n</p>\n"
+module.exports = "<section>\n  <div class=\"card\">\n    <span class=\"month\">OCTUBRE</span>\n    <ngb-tabset>\n\n      <ngb-tab title=\"Productos\">\n        <ng-template ngbTabContent>\n\n          <div class=\"content\">\n\n            <ul class=\"list\">\n              <li class=\"row header\">\n                <div class=\"col-sm-11\">NOMBRE</div>\n                <div class=\"col-sm-1\">PRECIO</div>\n              </li>\n              <li class=\"row item\" *ngFor=\"let product of productList\">\n                <div class=\"col-sm-11\">&ensp;{{product.name}}</div>\n                <div class=\"col-sm-1\">{{product.price}}</div>\n              </li>\n            </ul>\n\n          </div>\n\n          <div class=\"summary-spacing\">\n            <span class=\"summary\">VENTAS: {{productsSold | number:'.0-2'}}</span>\n            <span class=\"summary\">TOTAL: ${{totalGained | number:'.0-2'}}</span>\n          </div>\n\n        </ng-template>\n      </ngb-tab>\n\n      <ngb-tab title=\"Cupones\">\n        <ng-template ngbTabContent>\n\n            <div class=\"content\">\n\n              <ul class=\"list\">\n                <li class=\"row header\">\n                  <div class=\"col-sm-9\">ARTICULOS</div>\n                  <div class=\"col-sm-2\">SUBTOTAL</div>\n                  <div class=\"col-sm-1\">DESCUENTO</div>\n                </li>\n                <li class=\"row item\" *ngFor=\"let coupon of couponList\">\n                  <div class=\"col-sm-9\">&ensp;{{coupon.quantity}}</div>\n                  <div class=\"col-sm-2\">{{coupon.subtotal}}</div>\n                  <div class=\"col-sm-1\">{{coupon.discount}}</div>\n                </li>\n              </ul>\n\n            </div>\n\n          <div class=\"summary-spacing\">\n            <span class=\"summary\">CUPONES: {{usedDiscounts | number:'.0-2'}}</span>\n            <span class=\"summary\">TOTAL: ${{totalLost | number:'.0-2'}}</span>\n          </div>\n\n        </ng-template>\n      </ngb-tab>\n\n    </ngb-tabset>\n  </div>\n\n</section>\n"
 
 /***/ }),
 
@@ -1097,7 +1108,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "section {\n  margin: 2em; }\n  section .card {\n    padding: 3em; }\n\n/deep/ .nav-link {\n  outline: none; }\n\n.content {\n  border-left-style: solid;\n  border-left-color: #ddd;\n  border-left-width: 1px;\n  border-bottom-style: solid;\n  border-bottom-color: #ddd;\n  border-bottom-width: 1px;\n  border-right-style: solid;\n  border-right-color: #ddd;\n  border-right-width: 1px; }\n  .content .list {\n    padding-top: 0.5em;\n    list-style: none; }\n\nul {\n  width: 97%; }\n  ul .header {\n    color: #616161;\n    font-size: 0.8em;\n    font-weight: 800;\n    margin-top: 3em;\n    margin-bottom: 1.5em; }\n  ul .item {\n    color: #757575;\n    padding-top: 0.7em;\n    padding-bottom: 0.7em;\n    border-bottom-style: solid;\n    border-bottom-color: #ddd;\n    border-bottom-width: 1px; }\n  ul .item:last-child {\n    border-bottom-style: none; }\n\n.summary-spacing {\n  margin-left: 1em;\n  margin-top: 1.5em; }\n  .summary-spacing .summary {\n    letter-spacing: 3px;\n    font-size: 22px;\n    font-weight: bold;\n    color: #263238;\n    padding-right: 1.5em; }\n\n.month {\n  color: #C8CCCF;\n  text-align: center;\n  letter-spacing: 1px;\n  font-size: 27px;\n  font-weight: bold; }\n", ""]);
 
 // exports
 
@@ -1129,15 +1140,45 @@ var ReportsComponent = (function () {
     function ReportsComponent(reportService) {
         this.reportService = reportService;
         this.productList = [];
+        this.usedDiscounts = 0;
         this.couponList = [];
+        this.totalGained = 0;
+        this.totalLost = 0;
     }
     ReportsComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.reportService.getReports().subscribe(function (reports) {
-            _this.process(reports);
+        var user = localStorage.getItem('currentUser');
+        var token = JSON.parse(user).token;
+        console.log(token);
+        this.reportService.getReports(token).subscribe(function (reports) {
+            _this.processReport(reports);
         });
     };
-    ReportsComponent.prototype.process = function (reports) {
+    ReportsComponent.prototype.processReport = function (reports) {
+        var _this = this;
+        var productsPerReport;
+        var discount;
+        var subtotal;
+        reports.batch.forEach(function (report, index) {
+            productsPerReport = 0;
+            subtotal = report.subtotal;
+            discount = report.discount;
+            report.products.forEach(function (product) {
+                _this.totalGained += product.price;
+                _this.productList.push(product);
+                productsPerReport++; //discount group
+            });
+            if (discount !== 0) {
+                _this.usedDiscounts++;
+                var coupon = {};
+                coupon['subtotal'] = subtotal;
+                coupon['discount'] = discount;
+                coupon['quantity'] = productsPerReport;
+                _this.couponList.push(coupon);
+                _this.totalLost += discount;
+            }
+        });
+        this.productsSold = this.productList.length;
     };
     return ReportsComponent;
 }());
@@ -1158,7 +1199,7 @@ var _a;
 /***/ "../../../../../src/app/pages/seller-dashboard/workstation/workstation.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <!-- uncomment code for absolute positioning tweek see top comment in css -->\n  <!-- <div class=\"absolute-wrapper\"> </div> -->\n  <!-- Menu -->\n  <div class=\"side-menu\">\n\n    <div class=\"mt-5\"></div>\n\n    <nav class=\"navbar-nav\">\n      <div class=\"nav-item onMouseOver\" [routerLink]=\"['inventory']\"><i class=\"fa fa-eye \"></i>\n        <span>Inventario</span>\n      </div>\n      <div class=\"nav-item onMouseOver\" [routerLink]=\"['coupons']\"><i class=\"fa fa-ticket \"></i>\n        <span>Cupones</span>\n      </div>\n      <div class=\"nav-item onMouseOver\"><i class=\"fa fa-th \"></i>\n        <span>Reportes</span>\n      </div>\n    </nav>\n\n  </div>\n\n  <div class=\"container-fluid\">\n    <div class=\"side-body\">\n\n      <router-outlet></router-outlet>\n\n    </div>\n  </div>\n\n</div>\n"
+module.exports = "<div class=\"row\">\n  <!-- uncomment code for absolute positioning tweek see top comment in css -->\n  <!-- <div class=\"absolute-wrapper\"> </div> -->\n  <!-- Menu -->\n  <div class=\"side-menu\">\n\n    <div class=\"mt-5\"></div>\n\n    <nav class=\"navbar-nav\">\n      <div class=\"nav-item onMouseOver\" [routerLink]=\"['inventory']\"><i class=\"fa fa-eye \"></i>\n        <span>Inventario</span>\n      </div>\n      <div class=\"nav-item onMouseOver\" [routerLink]=\"['coupons']\"><i class=\"fa fa-ticket \"></i>\n        <span>Cupones</span>\n      </div>\n      <div class=\"nav-item onMouseOver\" [routerLink]=\"['reports']\"><i class=\"fa fa-th \"></i>\n        <span>Reportes</span>\n      </div>\n    </nav>\n\n  </div>\n\n  <div class=\"container-fluid\">\n    <div class=\"side-body\">\n\n      <router-outlet></router-outlet>\n\n    </div>\n  </div>\n\n</div>\n"
 
 /***/ }),
 
@@ -1380,7 +1421,7 @@ var ProductService = (function () {
     ProductService.prototype.postImage = function (file) {
         var formData = new FormData();
         formData.append('photo', file);
-        var URL = 'http://localhost:3000/shop/postImage';
+        var URL = 'https://ingeweb.herokuapp.com/shop/postImage';
         return this.http.post(URL, formData).map(function (res) { return res.json().route; });
     };
     ProductService.prototype.saveProduct = function (product) {
@@ -1424,8 +1465,8 @@ var ReportService = (function () {
     function ReportService(restangular) {
         this.restangular = restangular;
     }
-    ReportService.prototype.getReports = function () {
-        return this.restangular.all('vendor/getReports').getList();
+    ReportService.prototype.getReports = function (token) {
+        return this.restangular.one('vendor/getReports').get({}, { 'x-access-token': token });
     };
     return ReportService;
 }());

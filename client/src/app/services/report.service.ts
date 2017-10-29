@@ -7,8 +7,8 @@ export class ReportService {
 
   constructor(private restangular: Restangular) { }
 
-  getReports(): Observable<Object[]> {
+  getReports(token: string): Observable<Object[]> {
 
-    return this.restangular.all('vendor/getReports').getList();
+    return this.restangular.one('vendor/getReports').get({}, {'x-access-token': token})
   }
 }

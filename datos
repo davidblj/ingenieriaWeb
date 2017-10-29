@@ -306,3 +306,29 @@ cupones que asigno neyder
 }
 
 
+Heroku
+
+mongodb (produccion/dev):
+
+    module.exports = {
+          'secret': 'ingWeb',
+          'database': 'mongodb://admin:admin123@ds237855.mlab.com:37855/heroku_tvjsm4s9'
+        };
+
+    module.exports = {
+      'secret': 'ingWeb',
+      'database': 'mongodb://localhost:27017/shop'
+    };
+
+
+Peticiones (produccion/dev):
+
+    export const baseURL = 'https://ingeweb.herokuapp.com/';
+
+    export const baseURL = 'http://localhost:4200/';
+
+Fotos
+
+    let URL = 'http://localhost:4200/shop/postImage';
+
+    let URL = 'https://ingeweb.herokuapp.com/shop/postImage';

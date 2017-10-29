@@ -1,0 +1,96 @@
+$border-color: #ddd;
+$header-font-color: #616161;
+$font-color: #757575;
+$title-color: #263238;
+
+section {
+  margin: 2em;
+
+  .card {
+    padding: 3em;
+  }
+}
+
+/deep/ .nav-link {
+  outline: none;
+}
+
+.content {
+  border-left: {
+    style: solid;
+    color: $border-color;
+    width: 1px;
+  };
+
+  border-bottom: {
+    style: solid;
+    color: $border-color;
+    width: 1px;
+  };
+
+  border-right: {
+    style: solid;
+    color: $border-color;
+    width: 1px;
+  };
+
+  .list {
+    padding-top: 0.5em;
+    list-style: none;
+  }
+}
+
+
+ul {
+  width: 97%;
+
+  .header {
+    color: $header-font-color;
+    font-size: 0.8em;
+    font-weight: 800;
+    margin: {
+      top: 3em;
+      bottom: 1.5em;
+    }
+  }
+
+  .item {
+    color: $font-color;
+    padding: {
+      top: 0.7em;
+      bottom: 0.7em;
+    }
+    border-bottom: {
+      style: solid;
+      color: $border-color;
+      width: 1px;
+    };
+  }
+
+  .item:last-child {
+    border-bottom: {
+      style: none;
+    };
+  }
+}
+
+.summary-spacing {
+  margin-left: 1em;
+  margin-top: 1.5em;
+
+  .summary {
+    letter-spacing: 3px;
+    font-size: 22px;
+    font-weight: bold;
+    color: $title-color ;
+    padding-right: 1.5em;
+  }
+}
+
+.month {
+  color: #C8CCCF;
+  text-align: center;
+  letter-spacing: 1px;
+  font-size: 27px;
+  font-weight: bold;
+}

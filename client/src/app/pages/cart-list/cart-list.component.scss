@@ -254,5 +254,10 @@
     color: #232331;
     border-color: #232331;
     border-radius: 10px;
+
+    &:hover{
+      background: #232331;
+      color: white;
+    }
   }
 }

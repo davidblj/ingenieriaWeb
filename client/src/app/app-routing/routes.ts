@@ -7,7 +7,8 @@ import {WorkstationComponent} from '../pages/seller-dashboard/workstation/workst
 import {InventoryComponent} from '../pages/seller-dashboard/inventory/inventory.component';
 import {CouponsComponent} from '../pages/seller-dashboard/coupons/coupons.component';
 import {VendorAuthGuard} from './guards/vendor.guard';
-import {ClientAuthGuard} from "./guards/cart.guard";
+import {ClientAuthGuard} from './guards/cart.guard';
+import {ReportsComponent} from '../pages/seller-dashboard/reports/reports.component';
 
 export const routes: Routes = [
   // todo: redirect a vendor to its dashboard whenever he access the homepage
@@ -28,6 +29,10 @@ export const routes: Routes = [
       {
         path: 'coupons',
         component: CouponsComponent
+      },
+      {
+        path: 'reports',
+        component: ReportsComponent
       }
     ]
   },

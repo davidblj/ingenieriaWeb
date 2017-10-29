@@ -39,8 +39,8 @@
               <div class="row">
                 <div class="mr-auto"></div>
                 <div class="details">
-                  <a href="#" class="btn btn-default text-uppercase onMouseOver">Comprar</a>
-                  <i class="fa fa-cart-plus onMouseOver" (click)="addToCart(product._id)"></i>
+                  <a class="btn btn-default text-uppercase onMouseOver" (click)="addToCart(product._id, true)">Comprar</a>
+                  <i class="fa fa-cart-plus onMouseOver" (click)="addToCart(product._id, false)"></i>
                 </div>
               </div>
             </div>

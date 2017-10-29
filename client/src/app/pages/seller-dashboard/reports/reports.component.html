@@ -1,3 +1,63 @@
-<p>
-  reports works!
-</p>
+<section>
+  <div class="card">
+    <span class="month">OCTUBRE</span>
+    <ngb-tabset>
+
+      <ngb-tab title="Productos">
+        <ng-template ngbTabContent>
+
+          <div class="content">
+
+            <ul class="list">
+              <li class="row header">
+                <div class="col-sm-11">NOMBRE</div>
+                <div class="col-sm-1">PRECIO</div>
+              </li>
+              <li class="row item" *ngFor="let product of productList">
+                <div class="col-sm-11">&ensp;{{product.name}}</div>
+                <div class="col-sm-1">{{product.price}}</div>
+              </li>
+            </ul>
+
+          </div>
+
+          <div class="summary-spacing">
+            <span class="summary">VENTAS: {{productsSold | number:'.0-2'}}</span>
+            <span class="summary">TOTAL: ${{totalGained | number:'.0-2'}}</span>
+          </div>
+
+        </ng-template>
+      </ngb-tab>
+
+      <ngb-tab title="Cupones">
+        <ng-template ngbTabContent>
+
+            <div class="content">
+
+              <ul class="list">
+                <li class="row header">
+                  <div class="col-sm-9">ARTICULOS</div>
+                  <div class="col-sm-2">SUBTOTAL</div>
+                  <div class="col-sm-1">DESCUENTO</div>
+                </li>
+                <li class="row item" *ngFor="let coupon of couponList">
+                  <div class="col-sm-9">&ensp;{{coupon.quantity}}</div>
+                  <div class="col-sm-2">{{coupon.subtotal}}</div>
+                  <div class="col-sm-1">{{coupon.discount}}</div>
+                </li>
+              </ul>
+
+            </div>
+
+          <div class="summary-spacing">
+            <span class="summary">CUPONES: {{usedDiscounts | number:'.0-2'}}</span>
+            <span class="summary">TOTAL: ${{totalLost | number:'.0-2'}}</span>
+          </div>
+
+        </ng-template>
+      </ngb-tab>
+
+    </ngb-tabset>
+  </div>
+
+</section>

@@ -55,7 +55,7 @@ export class HomePageComponent implements OnInit {
 
   // todo: check for an existing cart-list and update the visual que (itemsInCart)
 
-  public addToCart(productId: string) {
+  public addToCart(productId: string, showCart: boolean) {
 
     if (!this.username) {
       this.router.navigate(['/login']);
@@ -68,8 +68,12 @@ export class HomePageComponent implements OnInit {
     this.cartService.saveToCart(cart).subscribe(
       message => {
 
-        this.itemsInCart ++;
-        console.log(message, this.itemsInCart);
+        if(showCart) {
+          this.router.navigate(['/cart-list']);
+        } else  {
+          this.itemsInCart ++;
+          console.log(message, this.itemsInCart);
+        }
       },
       errmess => {
 
@@ -78,5 +82,4 @@ export class HomePageComponent implements OnInit {
       }
     );
   }
-
 }

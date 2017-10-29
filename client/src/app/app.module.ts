@@ -57,8 +57,8 @@ import { ReportService } from './services/report.service';
     LoginService,
     CouponService,
     VendorAuthGuard,
-    ClientAuthGuard,
-    ReportService
+    ReportService,
+    ClientAuthGuard
   ],
   bootstrap: [AppComponent]
 })
