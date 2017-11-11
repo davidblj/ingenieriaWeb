@@ -11,7 +11,8 @@ module.exports = function(wagner) {
   let Cart = mongoose.model('Cart', require('./client/cart'), 'carts');
   let Coupon= mongoose.model('Coupon', require('./seller/coupons'), 'coupons');
   let Account = mongoose.model('Account', require('./bank/debit_account'), 'accounts');
-
+  let Record = mongoose.model('Record',require('./bank/record'),'records');
+  let Bank_worker = mongoose.model('Bank_worker',require('./bank/user'),'bank_workers');
 
   let models = {
     Product: Product,
@@ -19,8 +20,9 @@ module.exports = function(wagner) {
     Cart: Cart,
     Coupon: Coupon,
     Report: Report,
-    Account: Account
-
+    Account: Account,
+    Record: Record,
+    Bank_worker: Bank_worker
   };
 
   _.each(models, function (value, key) {

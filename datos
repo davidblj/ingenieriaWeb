@@ -332,3 +332,27 @@ Fotos
     let URL = 'http://localhost:4200/shop/postImage';
 
     let URL = 'https://ingeweb.herokuapp.com/shop/postImage';
+
+
+---------------------------------------------------------------------------
+
+http://localhost:3000/bank/getAccountNumber?identification=22
+
+	cuenta del banco de maria
+
+{
+	"identification": "22",
+	"account_number": "2",
+	"password": "secret",
+	"balance": 0
+}
+
+	cuenta de maria
+
+{
+  "username" : "maria" ,
+  "password" : "maria" ,
+  "address" : "Cra 80b -" ,
+  "role" : "client" ,
+  "identification" : "22"
+}

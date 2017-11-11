@@ -12,18 +12,6 @@ let userschema = {
     type: String,
     required: true
   },
-  address: {
-    type: String,
-    required: false
-  },
-  role: {
-    type: String,
-    required: true
-  },
-  identification:{
-    type: String,
-    required: true
-  }
 };
 
 let schema = new mongoose.Schema(userschema);
@@ -35,7 +23,6 @@ schema.methods.generateJwt = function () {
     return jwt.sign({
         _id: this._id,
         username: this.username,
-        role: this.role,
         exp: parseInt(expiry.getTime()/1000)
     }, config.secret);
 };

@@ -1,7 +1,7 @@
 let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
-let accountschema = {
+let deliveryschema = {
     identification: {
       type: String,
       required: true
