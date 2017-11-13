@@ -9,11 +9,21 @@ import {CouponsComponent} from '../pages/seller-dashboard/coupons/coupons.compon
 import {VendorAuthGuard} from './guards/vendor.guard';
 import {ClientAuthGuard} from './guards/cart.guard';
 import {ReportsComponent} from '../pages/seller-dashboard/reports/reports.component';
-import { DashboardComponent } from '../pages/admin-dashboard/dashboard/dashboard.component';
+import {DashboardComponent} from '../pages/admin-dashboard/dashboard/dashboard.component';
+import {AccountRegistrationComponent} from '../pages/admin-dashboard/account-registration/account-registration.component';
 
 export const routes: Routes = [
+
+  // todo: fake a new page or a new module on each entity
+  {path: 'bank', component: DashboardComponent,
+    children: [
+      {
+        path: '', component: AccountRegistrationComponent
+      }
+    ]
+  },
+
   // todo: redirect a vendor to its dashboard whenever he access the homepage
-  {path: 'bank', component: DashboardComponent},
   {path: 'home', component: HomePageComponent},
   {path: 'new', component: ProductFormComponent},
   {path: 'cart-list', component: CartListComponent, canActivate: [ClientAuthGuard]},

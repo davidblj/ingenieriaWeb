@@ -18,6 +18,7 @@ import { ClientAuthGuard} from './app-routing/guards/cart.guard';
 
 // todo: place this in a new module !
 import { DashboardComponent } from './pages/admin-dashboard/dashboard/dashboard.component';
+import { AccountRegistrationComponent } from './pages/admin-dashboard/account-registration/account-registration.component';
 
 // librerias
 
@@ -46,6 +47,7 @@ import { ReportService } from './services/report.service';
     CouponsComponent,
     ReportsComponent,
     DashboardComponent,
+    AccountRegistrationComponent,
   ],
   imports: [
     BrowserModule,
