@@ -13,8 +13,11 @@ import { LoginComponent } from './pages/login/login.component';
 import { WorkstationComponent } from './pages/seller-dashboard/workstation/workstation.component';
 import { InventoryComponent } from './pages/seller-dashboard/inventory/inventory.component';
 import { CouponsComponent} from './pages/seller-dashboard/coupons/coupons.component';
-import {VendorAuthGuard} from './app-routing/guards/vendor.guard';
-import {ClientAuthGuard} from './app-routing/guards/cart.guard';
+import { VendorAuthGuard} from './app-routing/guards/vendor.guard';
+import { ClientAuthGuard} from './app-routing/guards/cart.guard';
+
+// todo: place this in a new module !
+import { DashboardComponent } from './pages/admin-dashboard/dashboard/dashboard.component';
 
 // librerias
 
@@ -31,7 +34,6 @@ import { CouponService } from './services/coupon.service';
 import { ReportsComponent } from './pages/seller-dashboard/reports/reports.component';
 import { ReportService } from './services/report.service';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,6 +45,7 @@ import { ReportService } from './services/report.service';
     InventoryComponent,
     CouponsComponent,
     ReportsComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
