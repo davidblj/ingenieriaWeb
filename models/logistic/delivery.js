@@ -1,26 +1,34 @@
 let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
+let Product = require('../seller/product');
 
-let deliveryschema = {
-    identification: {
+let deliveryRecordschema = {
+  client: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  batch: [{
+    deliveryId: {
       type: String,
       required: true
     },
-    account_number:{
-      type: String,
-      required: true
-    },
-    password: {
-      type: String,
-      required: true
-    },
-    balance:{
+    products: [Product.productschema],
+    discount: {
       type: Number,
-      required: true,
+      required: true
+    },
+    subtotal: {
+      type: Number,
+      required: true
+    },
+    state: {
+      type: String,
+      required: true
     }
+  }]
 };
 
-let schema = new mongoose.Schema(accountschema);
+let schema = new mongoose.Schema(deliveryRecordschema);
 
 module.exports = schema;
-module.exports.accountschema = accountschema;
+module.exports.deliveryRecordschema = deliveryRecordschema;

@@ -13,6 +13,7 @@ module.exports = function(wagner) {
   let Account = mongoose.model('Account', require('./bank/debit_account'), 'accounts');
   let Record = mongoose.model('Record',require('./bank/record'),'records');
   let Bank_worker = mongoose.model('Bank_worker',require('./bank/user'),'bank_workers');
+  let Delivery = mongoose.model('Delivery',require('./logistic/delivery'),'deliveries');
 
   let models = {
     Product: Product,
