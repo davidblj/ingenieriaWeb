@@ -1,25 +1,32 @@
 <div class="container">
     <div class="card">
-      <div class="card-header">
-        <div class="title d-flex justify-content-center">Credenciales</div>
-      </div>
-      <div class="card-body">
-
-        <div class="col-sm-12 field">
-          <span class="tag">Cedula</span>
-          <input formControlName="id" placeholder="i.e. John Doe">
+      <form novalidate [formGroup]="accountForm">
+        <div class="card-header">
+          <div class="title d-flex justify-content-center">Credenciales</div>
         </div>
+        <div class="card-body">
 
-        <div class="col-sm-12 field">
-          <span class="tag">Contraseña</span>
-          <input type="password" formControlName="password">
+          <div class="col-sm-12 field">
+            <span class="tag">Cedula</span>
+            <input formControlName="id" placeholder="i.e. 1152209135">
+          </div>
+
+          <div class="col-sm-12 field">
+            <span class="tag">Contraseña</span>
+            <input type="password" formControlName="password">
+          </div>
+
+          <div class="col-sm-12 field">
+            <span class="tag">Saldo</span>
+            <input formControlName="balance" placeholder="$ 0.0">
+          </div>
+
         </div>
-
-        <div class="col-sm-12 field">
-          <span class="tag">Saldo</span>
-          <input formControlName="balance" placeholder="$ 0.0">
+        <div class="card-footer">
+          <div class="d-flex justify-content-center">
+            <button class="btn submit" (click)="onSubmit()">Crear</button>
+          </div>
         </div>
-
-      </div>
+      </form>
   </div>
 </div>

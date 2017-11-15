@@ -53,4 +53,23 @@ $highlight-color: #F3B196;
       }
     }
   }
+
+  .card-footer {
+
+    .submit {
+      background: $tag-color;
+      color: white;
+      font-weight: bold;
+      padding: {
+        left: 28px;
+        right: 28px;
+        top:7px;
+        bottom: 7px;
+      };
+
+      &:hover{
+        cursor: pointer;
+      }
+    }
+  }
 }
