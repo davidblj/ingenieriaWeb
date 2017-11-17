@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RestangularModule } from 'ngx-restangular';
-import {ReactiveFormsModule} from "@angular/forms";
+import { ReactiveFormsModule} from "@angular/forms";
 
 // componentes
 
@@ -19,6 +19,7 @@ import { ClientAuthGuard} from './app-routing/guards/cart.guard';
 // todo: place this in a new module !
 import { DashboardComponent } from './pages/admin-dashboard/dashboard/dashboard.component';
 import { AccountRegistrationComponent } from './pages/admin-dashboard/account-registration/account-registration.component';
+import { UserManagementComponent } from './pages/admin-dashboard/user-management/user-management.component';
 
 // librerias
 
@@ -34,6 +35,7 @@ import { LoginService } from './services/login.service';
 import { CouponService } from './services/coupon.service';
 import { ReportsComponent } from './pages/seller-dashboard/reports/reports.component';
 import { ReportService } from './services/report.service';
+import { AccountService } from './bank-services/account.service';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,7 @@ import { ReportService } from './services/report.service';
     ReportsComponent,
     DashboardComponent,
     AccountRegistrationComponent,
+    UserManagementComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,6 +64,7 @@ import { ReportService } from './services/report.service';
     CartService,
     LoginService,
     CouponService,
+    AccountService,
     VendorAuthGuard,
     ReportService,
     ClientAuthGuard

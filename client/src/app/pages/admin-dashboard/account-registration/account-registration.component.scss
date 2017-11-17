@@ -3,6 +3,9 @@ $title-color: #6D6D7B;
 $tag-color: #3F2C5F;
 $background-color: #FE9666;
 $highlight-color: #F3B196;
+$modal_title-size: 17px;
+$modal_number-size: 15px;
+$modal_text-size: 15px;
 
 .card {
   margin-top: 2em;
@@ -73,3 +76,27 @@ $highlight-color: #F3B196;
     }
   }
 }
+
+.modal-header {
+  .title {
+    font-weight: bold;
+    color: $title-color;
+  }
+}
+
+.modal-body {
+  text-align: center;
+  font-size: $modal_text-size;
+  color: $title-color;
+
+  .account-number {
+    display: block;
+    font-size: $modal_number-size;
+    letter-spacing: 2px;
+  }
+}
+
+.modal-footer {
+
+}
+

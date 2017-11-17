@@ -45,14 +45,14 @@ module.exports = function (wagner) {
   api.post('/registerAccount', wagner.invoke(function(Account){
       return function(req, res) {
           let reqAccount= req.body;
-          Account(reqAccount).save(function(error) {
+          Account(reqAccount).save(function(error, user) {
               if(error) {
                   return res
                       .status(status.INTERNAL_SERVER_ERROR)
                       .json({error: error.toString()});
               }
               let content = { message: 'Se registró exitosamente la cuenta'};
-              res.json(content);
+              res.json(user);
           })
 
       }

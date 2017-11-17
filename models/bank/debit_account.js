@@ -8,7 +8,8 @@ let accountschema = {
     },
     account_number:{
       type: String,
-      required: true
+      required: true,
+        unique: true
     },
     password: {
       type: String,

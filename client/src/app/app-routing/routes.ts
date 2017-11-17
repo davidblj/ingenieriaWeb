@@ -11,6 +11,7 @@ import {ClientAuthGuard} from './guards/cart.guard';
 import {ReportsComponent} from '../pages/seller-dashboard/reports/reports.component';
 import {DashboardComponent} from '../pages/admin-dashboard/dashboard/dashboard.component';
 import {AccountRegistrationComponent} from '../pages/admin-dashboard/account-registration/account-registration.component';
+import { UserManagementComponent } from '../pages/admin-dashboard/user-management/user-management.component';
 
 export const routes: Routes = [
 
@@ -19,6 +20,9 @@ export const routes: Routes = [
     children: [
       {
         path: '', component: AccountRegistrationComponent
+      },
+      {
+        path: 'user-management', component: UserManagementComponent
       }
     ]
   },
