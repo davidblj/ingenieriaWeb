@@ -23,7 +23,8 @@ module.exports = function(wagner) {
     Report: Report,
     Account: Account,
     Record: Record,
-    Bank_worker: Bank_worker
+    Bank_worker: Bank_worker,
+    Delivery: Delivery
   };
 
   _.each(models, function (value, key) {

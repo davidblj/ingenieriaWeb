@@ -45,6 +45,7 @@ export class CartListComponent implements OnInit {
 
         this.cartProducts = cartProducts;
         this.batch = cartProducts.batch;
+        this.batch['delivery'] = true;
         this.getPriceByVendor(this.batch);
       }
     )
@@ -110,10 +111,12 @@ export class CartListComponent implements OnInit {
     if(this.shipping === 15000) {
       this.totalPrice -= this.shipping;
       this.shipping = 0;
+      this.batch['delivery'] = false;
     } else {
       this.shipping = 15000;
       this.totalPrice += this.shipping;
-    }
+      this.batch['delivery'] = true;
+    }    
   }
 
 
