@@ -1,6 +1,7 @@
 let express = require('express');
 let status = require('http-status');
 let auth = require('../middleware/auth');
+let axios = require('axios');
 let ObjectId = require('mongodb').ObjectId;
 
 module.exports = function (wagner) {
@@ -106,8 +107,6 @@ module.exports = function (wagner) {
         return function (req, res) {
 
             let userRole = req.decoded.role;
-            console.log(userRole);
-
             if(userRole !== 'vendor') {
                 return res
                     .status(status.FORBIDDEN)
@@ -180,6 +179,10 @@ module.exports = function (wagner) {
 
         let productsByVendor = req.body.content;
         let idClient = req.decoded._id;
+
+        // todo: update the front end Request
+        let password = req.body.password;
+        let account_number = req.body.account_number;
 
         let productsDelivery = [];
         let productList = [];
@@ -278,8 +281,6 @@ module.exports = function (wagner) {
                   .json({error: err.toString()});
           }
 
-          console.log(idClient);
-
           Cart.findOne({client: idClient}).remove(function (err) {
 
               console.log('Se elimino el carrito');
@@ -313,8 +314,19 @@ module.exports = function (wagner) {
                      ];
                     let id = components.join("");
 
+                    // debite el valor
+                    let totalDebit = parseFloat(totalDiscount) + parseFloat(totalSubtotals);
+
+                    axios.put('http://localhost:3000/bank/debitAccount', {
+                      account_number: account_number,
+                      value: totalDebit,
+                      password: password,
+                      place: 'shop'
+                    }).then(function(response){
+                      //console.log(response.data.message);
+                    })
+
                     if(delivery) {
-                      console.log("i do exist");
 
                       let batch  = {
                         deliveryId: id,
@@ -332,9 +344,6 @@ module.exports = function (wagner) {
 
                     } else {
 
-                      console.log("lista: ", productList);
-
-                      // r: rechazado, a: aceptado, e: espera
                       let deliveryRecord = {
                         client: ObjectId(idClient),
                         batch: [{
@@ -345,7 +354,6 @@ module.exports = function (wagner) {
                           state: 'e',
                         }]
                       }
-                      console.log('delivery', deliveryRecord);
 
                       Delivery(deliveryRecord).save(function(error){
                         if(error){
@@ -362,13 +370,12 @@ module.exports = function (wagner) {
               } else {
                 return res.json({message: "Se realizo la compra"});
               }
-
           })
       });
     }
   }));
 
-  api.post('/processDelivery', wagner.invoke(function (Delivery){
+  api.post('/processDelivery', wagner.invoke(function (Delivery, User){
 
     return function(req, res) {
 
@@ -383,14 +390,13 @@ module.exports = function (wagner) {
         if(err){
             return res
                 .status(status.INTERNAL_SERVER_ERROR)
-                .json({error: error.toString()});
+                .json({error: err.toString()});
         }
 
         if(!delivery) {
-
           return res
               .status(status.BAD_REQUEST)
-              .json({error: error.toString()});
+              .json({error: 'No se encontro el domicilio'});
         }
 
         let deliveryIndex;
@@ -403,13 +409,61 @@ module.exports = function (wagner) {
         })
 
         if(deliveryResponse === 'true') {
+          console.log('El envio se entrego')
           delivery.batch[deliveryIndex].state = 'a';
         } else {
           delivery.batch[deliveryIndex].state = 'r';
 
           // acreditar la cuenta
-          // backup del inventario
-          // todo: eliminar del reporte
+          User.findOne({_id: client}, function(err, user){
+
+            if(err) {
+              return res
+                  .status(status.INTERNAL_SERVER_ERROR)
+                  .json({error: err.toString()});
+            }
+
+            if(!user) {
+              return res
+                  .status(status.BAD_REQUEST)
+                  .json({error: 'No se encontro el usuario'});
+            }
+
+            let id = user.identification;
+
+            axios.get('http://localhost:3000/bank/getAccount', {
+              params: {
+                identification: id
+              }
+            }).then(function (response) {
+
+              console.log('respuesta : ', response.data.account_number);
+
+              let item = delivery.batch[deliveryIndex];
+              let cost  = item.subtotal - item.discount;
+
+              let deliveryCost = cost*0.05;
+              if(deliveryCost < 5000) deliveryCost = 5000;
+              let valueToRestore = parseFloat(cost) + parseFloat(deliveryCost);
+              console.log(valueToRestore);
+
+              axios.put('http://localhost:3000/bank/accreditAccount', {
+                account_number: response.data.account_number,
+                value: valueToRestore,
+                place: 'shop'
+              }).then(function(response){
+                //console.log(response.data.message);
+
+                // haga el backup del inventario
+
+
+                // eliminar del reporte (opcional)
+              })
+            });
+
+          })
+
+
         }
 
         delivery.save();
@@ -420,3 +474,5 @@ module.exports = function (wagner) {
 
   return api;
 };
+
+// todo:  debite, y luego consumea buy products

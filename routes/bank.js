@@ -8,6 +8,7 @@ module.exports = function (wagner) {
     return function (req, res){
 
       let user_identification = req.query.identification;
+      console.log("id: ", user_identification)
 
       Account.findOne({identification:user_identification}, function (error, account){
         if(error){
