@@ -63,6 +63,11 @@ module.exports = function (wagner) {
 
       let reqDebitAccount = req.body;
       let account_number = req.body.account_number;
+
+      let deliveryCost = reqDebitAccount.value*0.05;
+      if(deliveryCost < 5000) deliveryCost = 5000;
+      let valueToCharge = parseFloat(reqDebitAccount.value) + parseFloat(deliveryCost);
+
       console.log(account_number);
 
       Account.findOne({account_number:account_number}, function (error, account){
@@ -95,8 +100,8 @@ module.exports = function (wagner) {
             .json({error: "El usuario no tiene saldo"});
         }
 
-        if(account.balance >= reqDebitAccount.value){
-          account.balance -= reqDebitAccount.value;
+        if(account.balance >= valueToCharge){
+          account.balance -= valueToCharge;
           account.save();
 
           // todo: create in a function
@@ -105,7 +110,7 @@ module.exports = function (wagner) {
 
                 let transaction = {
                   date: new Date(),
-                  value: reqDebitAccount.value,
+                  value: valueToCharge,
                   type: 'debit',
                   place: reqDebitAccount.place
                 };
@@ -119,7 +124,7 @@ module.exports = function (wagner) {
               account_number: account_number,
               tx: [{
                 date: new Date(),
-                value: reqDebitAccount.value,
+                value: valueToCharge,
                 type: 'debit',
                 place: reqDebitAccount.place
               }]

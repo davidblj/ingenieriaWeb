@@ -2,6 +2,7 @@ let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 let Product = require('../seller/product');
 
+// r: rechazado, a: aceptado, e: espera
 let deliveryRecordschema = {
   client: {
     type: Schema.Types.ObjectId,

@@ -181,6 +181,7 @@ module.exports = function (wagner) {
         let productsByVendor = req.body.content;
         let idClient = req.decoded._id;
 
+        let productsDelivery = [];
         let productList = [];
         let totalDiscount = 0;
         let totalSubtotals = 0;
@@ -194,6 +195,7 @@ module.exports = function (wagner) {
 
           // calcule el total
           vendorBatch.products.forEach((products) => {
+            productsDelivery.push(products);
             productList.push(products._id);
             subtotal += products.price;
           });
@@ -242,14 +244,16 @@ module.exports = function (wagner) {
               console.log('Se agrego un grupo de productos al vendedor')
 
               } else {
+
                   let report = {
                     id_vendor: idVendor,
                     batch: [{
-                        products: products,
+                        products: productList,
                         discount: discount,
                         subtotal: subtotal
                     }]
                   };
+
                 Report(report).save(function(error){
                   if(error){
                       return res
@@ -262,14 +266,6 @@ module.exports = function (wagner) {
         });
 
       });
-
-      // todo: inserte el documento con la lista de productos, el descuento
-      // todo: calcular domicilio
-      // todo: asociar cliente
-      // todo: debite la cuenta
-      // y la id del cliente
-
-      // todo:
 
       // actualize el inventario
       // todo: validate an empty cart and products with no items in the inventory
@@ -294,7 +290,7 @@ module.exports = function (wagner) {
                       .json({error: err.toString()});
               }
 
-
+              // cree el domicilio
               let deliveryRequest = req.body.deliveryFlag;
 
                 if(deliveryRequest) {
@@ -306,27 +302,44 @@ module.exports = function (wagner) {
                             .json({error: error.toString()});
                     }
 
+                    let date = new Date();
+                    let components = [
+                       date.getMonth(),
+                       date.getDate(),
+                       date.getHours(),
+                       date.getMinutes(),
+                       date.getSeconds(),
+                       date.getMilliseconds()
+                     ];
+                    let id = components.join("");
+
                     if(delivery) {
                       console.log("i do exist");
+
+                      let batch  = {
+                        deliveryId: id,
+                        products: productsDelivery,
+                        discount: totalDiscount,
+                        subtotal: totalSubtotals,
+                        state: 'e',
+                      }
+
+                      delivery.batch.push(batch);
+                      delivery.save();
+
+                      console.log('Se agrego el domicilio');
+                      return res.json({message: "Se ha realizado la compra y el domicilio esta en camino"})
+
                     } else {
 
-                      let date = new Date();
-                      let components = [
-                         date.getMonth(),
-                         date.getDate(),
-                         date.getHours(),
-                         date.getMinutes(),
-                         date.getSeconds(),
-                         date.getMilliseconds()
-                       ];
-                      let id = components.join("");
+                      console.log("lista: ", productList);
 
                       // r: rechazado, a: aceptado, e: espera
                       let deliveryRecord = {
                         client: ObjectId(idClient),
                         batch: [{
                           deliveryId: id,
-                          products: productList,
+                          products: productsDelivery,
                           discount: totalDiscount,
                           subtotal: totalSubtotals,
                           state: 'e',
@@ -342,19 +355,68 @@ module.exports = function (wagner) {
                         }
 
                         console.log('Se creo el domicilio');
-                        return res.json({message: "Los productos se han comprado satisfactoriamente"});
+                        return res.json({message: "Se ha realizado la compra y el domicilio esta en camino"});
                       });
                     }
                   });
+              } else {
+                return res.json({message: "Se realizo la compra"});
               }
 
-              console.log("o no !");
           })
       });
     }
   }));
 
-  // todo: quitar la cantidad de productos vendidos
-  // todo: acredite la cuenta087701
+  api.post('/processDelivery', wagner.invoke(function (Delivery){
+
+    return function(req, res) {
+
+      let deliveryResponse = req.body.deliveryResponse;
+      let deliveryId = req.body.deliveryId;
+
+      // todo: use the auth middleware
+      let client = req.body.client;
+
+      Delivery.findOne({client: client}, function(err, delivery){
+
+        if(err){
+            return res
+                .status(status.INTERNAL_SERVER_ERROR)
+                .json({error: error.toString()});
+        }
+
+        if(!delivery) {
+
+          return res
+              .status(status.BAD_REQUEST)
+              .json({error: error.toString()});
+        }
+
+        let deliveryIndex;
+
+        delivery.batch.forEach((deliveryItem, index) => {
+
+          if(deliveryItem.deliveryId === deliveryId) {
+              deliveryIndex = index;
+          }
+        })
+
+        if(deliveryResponse === 'true') {
+          delivery.batch[deliveryIndex].state = 'a';
+        } else {
+          delivery.batch[deliveryIndex].state = 'r';
+
+          // acreditar la cuenta
+          // backup del inventario
+          // todo: eliminar del reporte
+        }
+
+        delivery.save();
+        res.json()
+      })
+    }
+  }));
+
   return api;
 };
