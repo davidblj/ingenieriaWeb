@@ -51,7 +51,7 @@ module.exports = function (wagner) {
                       .status(status.INTERNAL_SERVER_ERROR)
                       .json({error: error.toString()});
               }
-              let content = { message: 'Se registró exitosamente la cuenta'};
+              console.log('Se registró exitosamente la cuenta');
               res.json(user);
           })
 
@@ -62,7 +62,7 @@ module.exports = function (wagner) {
     return function(req, res){
 
       let reqDebitAccount = req.body;
-      let account_number = req.body.account_number
+      let account_number = req.body.account_number;
       console.log(account_number);
 
       Account.findOne({account_number:account_number}, function (error, account){
@@ -108,7 +108,7 @@ module.exports = function (wagner) {
                   value: reqDebitAccount.value,
                   type: 'debit',
                   place: reqDebitAccount.place
-                }
+                };
 
                 record.tx.push(transaction);
                 record.save();
@@ -123,7 +123,7 @@ module.exports = function (wagner) {
                 type: 'debit',
                 place: reqDebitAccount.place
               }]
-            }
+            };
 
             Record(record_tx).save(function(error){
               if(error){
@@ -150,10 +150,11 @@ module.exports = function (wagner) {
     return function(req, res){
 
       let reqAccreditAccount = req.body;
-      let account_number = req.body.account_number
+      let account_number = req.body.account_number;
       console.log(account_number);
 
       Account.findOne({account_number:account_number}, function (error, account){
+
         if(error){
           return res
             .status(status.INTERNAL_SERVER_ERROR)
@@ -162,6 +163,15 @@ module.exports = function (wagner) {
             });
         }
 
+        if(!account){
+            return res
+                .status(status.BAD_REQUEST)
+                .json({
+                    error: "El numero de la cuenta ingresada no existe"
+                });
+        }
+
+        console.log(account.balance);
         account.balance += reqAccreditAccount.value;
         account.save();
 
@@ -173,7 +183,7 @@ module.exports = function (wagner) {
                 value: reqAccreditAccount.value,
                 type: 'accredit',
                 place: reqAccreditAccount.place
-              }
+              };
 
               record.tx.push(transaction);
               record.save();
@@ -188,7 +198,7 @@ module.exports = function (wagner) {
               type: 'accredit',
               place: reqAccreditAccount.place
             }]
-          }
+          };
 
           Record(record_tx).save(function(error){
             if(error){
@@ -210,7 +220,7 @@ module.exports = function (wagner) {
   api.get('/getRecord',wagner.invoke(function(Account,Record){
     return function (req, res){
       let user_account = req.query.account;
-      Record.findOne({account_number:user_account}, function (error, account){
+      Record.findOne({account_number:user_account}, function (error, record){
         if(error){
           return res
             .status(status.INTERNAL_SERVER_ERROR)
@@ -218,10 +228,17 @@ module.exports = function (wagner) {
               error: error.toString()
             });
         }
-        console.log(account);
-        res.json(account);
+
+        if(!record) {
+            return res
+                .json({message: 'No se encontraron resultados con el numero de la cuenta ingresada'});
+        }
+
+        console.log(record);
+        res.json(record);
       })
     }
   }));
+
   return api;
-}
+};

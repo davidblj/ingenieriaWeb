@@ -12,7 +12,8 @@ const PROXY_CONFIG = [
       "/client/listCart",
       "/client/buyProducts",
       "/user/login",
-      "/bank/registerAccount"
+      "/bank/registerAccount",
+      "/bank/getRecord"
     ],
     "target": "http://localhost:3000",
     "secure": false

@@ -12,5 +12,8 @@ export class AccountService {
     return this.restangular.all('bank/registerAccount').post(accountDetails);
   }
 
+  getRecord(accountNumber: number): Observable<any>{
 
+    return this.restangular.one('bank/getRecord').get({'account': accountNumber});
+  }
 }

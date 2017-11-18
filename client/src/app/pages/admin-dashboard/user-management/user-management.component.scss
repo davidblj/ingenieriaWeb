@@ -1,12 +1,91 @@
 $search-background-color: #3E918F;
+$highlight-color: #F08655;
+$text-color: #848CA0;
+$divider: #CCD0D5;
+$balance-color: #303D54;
+$content-size: 17px;
+$small-text-size: 13px;
 
 .search-list {
-  margin-left: 1em;
   height: 100%;
-  background: $search-background-color;
+  // background: $search-background-color;
+
+  .header {
+    margin: {
+      top: 2em;
+      bottom: 3em;
+    };
+
+    input {
+      text-align: center;
+      color: $text-color;
+      width: 50%;
+      border-radius: 18px;
+
+      padding:  {
+        right: 20px;
+        left: 20px;
+      };
+
+      &:focus {
+        border: {
+          color: $highlight-color;
+          style: solid;
+          width: 1px;
+        };
+      }
+    }
+  }
+
+  .list {
+
+    padding: {
+      left: 2em;
+      right: 2em;
+    };
+
+    .list-item {
+
+      padding: {
+        left: 2em;
+        right: 2em;
+      };
+
+      border-bottom: {
+        style: solid;
+        color: $divider;
+        width: 1px;
+      };
+
+      .content {
+        margin: {
+          bottom: 0.7em;
+          top: 1em;
+        }
+
+        .date {
+          color: $text-color;
+          letter-spacing: 2px;
+        }
+
+        .price {
+          color: $balance-color;
+          font-size: $content-size;
+          font-weight: bold;
+        }
+      }
+    }
+
+    .message {
+      font-size: $small-text-size;
+      font-weight: bold;
+      color: $text-color;
+    }
+  }
 }
 
 .new-credit {
-  height: 100%
+  max-width: 100%;
+  height: 100%;
 }
 

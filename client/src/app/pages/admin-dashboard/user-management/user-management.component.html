@@ -1,6 +1,22 @@
-<div class="row">
+<div class="row no-gutters">
   <div class="col-sm-4 search-list">
-    <p>test</p>
+    <div class="header d-flex justify-content-center">
+      <input class="form-control search-bar" (keyup.enter)="onEnterPressed($event)">
+    </div>
+    <div class="list">
+
+      <div *ngIf="showMessage">
+        <span class="message d-flex justify-content-center">Sin resultados</span>
+      </div>
+
+      <div *ngFor="let transaction of transactions" class="list-item">
+        <div class="content">
+          <span class="date">{{getDate(transaction.date)}}</span>
+          <span class="price float-right">{{getValue(transaction.value, transaction.type)}}</span>
+        </div>
+      </div>
+
+    </div>
   </div>
   <div class="col new-credit">
     <p>test</p>
