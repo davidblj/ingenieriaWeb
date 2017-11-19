@@ -8,7 +8,7 @@ module.exports = function (wagner) {
     return function (req, res){
 
       let user_identification = req.query.identification;
-      console.log("id: ", user_identification)
+      console.log("id: ", user_identification);
 
       Account.findOne({identification:user_identification}, function (error, account){
         if(error){
@@ -152,6 +152,7 @@ module.exports = function (wagner) {
     }
   }));
 
+  // todo:use the auth middleware
   api.put('/accreditAccount', wagner.invoke(function(Account, Record){
     return function(req, res){
 
@@ -193,7 +194,8 @@ module.exports = function (wagner) {
 
               record.tx.push(transaction);
               record.save();
-              return res.json('La transaccion se agrego al historial');
+              console.log('La transaccion se agrego al historial');
+              return res.json({transaction: transaction});
           }
 
           let record_tx = {

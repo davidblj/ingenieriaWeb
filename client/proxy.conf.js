@@ -13,6 +13,7 @@ const PROXY_CONFIG = [
       "/client/buyProducts",
       "/user/login",
       "/bank/registerAccount",
+      "/bank/accreditAccount",
       "/bank/getRecord"
     ],
     "target": "http://localhost:3000",

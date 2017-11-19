@@ -9,6 +9,7 @@ import { AccountService } from "../../../bank-services/account.service";
 export class UserManagementComponent implements OnInit {
 
   transactions;
+  clientAccount;
   showMessage = true;
 
   constructor(private accountService: AccountService) { }
@@ -16,23 +17,20 @@ export class UserManagementComponent implements OnInit {
   ngOnInit() {
   }
 
-  onEnterPressed(event) {
+  onSubmitAccount(event) {
 
     this.showMessage = false;
 
-    console.log(event.target.value);
     this.accountService.getRecord(event.target.value).subscribe(
       (response) => {
 
-        console.log(response);
         if(response.message) {
-          console.log('working');
           this.showMessage = true;
+          this.transactions = null;
+        } else {
+          this.transactions = response.tx;
+          this.clientAccount = response.account_number;
         }
-
-        this.transactions = response.tx;
-        console.log(this.transactions);
-        // todo: create a global variable or pass down a value to a new component
       }
     )
   }
@@ -40,7 +38,6 @@ export class UserManagementComponent implements OnInit {
   getDate(dateString: string) {
 
     let date:Date = new Date(dateString);
-    console.log(typeof date);
     console.log(date);
     let formattedDate = [
       date.getMonth(),
@@ -61,5 +58,20 @@ export class UserManagementComponent implements OnInit {
     }
 
     return (symbol + value);
+  }
+
+  onSubmitCredit(event) {
+
+    let credit = {
+      account_number: this.clientAccount,
+      value: event.target.value,
+      place: 'bank'
+    };
+
+    this.accountService.accreditAccount(credit).subscribe(
+      (response) => {
+        this.transactions.push(response.transaction);
+      }
+    )
   }
 }
