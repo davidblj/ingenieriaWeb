@@ -12,10 +12,14 @@ import {ReportsComponent} from '../pages/seller-dashboard/reports/reports.compon
 import {DashboardComponent} from '../pages/admin-dashboard/dashboard/dashboard.component';
 import {AccountRegistrationComponent} from '../pages/admin-dashboard/account-registration/account-registration.component';
 import { UserManagementComponent } from '../pages/admin-dashboard/user-management/user-management.component';
+import { AdminLoginComponent } from '../pages/admin-dashboard/admin-login/admin-login.component';
 
 export const routes: Routes = [
 
   // todo: fake a new page or a new module on each entity
+  {
+    path: 'admin-login', component: AdminLoginComponent
+  },
   {path: 'bank', component: DashboardComponent,
     children: [
       {

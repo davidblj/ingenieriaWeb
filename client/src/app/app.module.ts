@@ -20,6 +20,7 @@ import { ClientAuthGuard} from './app-routing/guards/cart.guard';
 import { DashboardComponent } from './pages/admin-dashboard/dashboard/dashboard.component';
 import { AccountRegistrationComponent } from './pages/admin-dashboard/account-registration/account-registration.component';
 import { UserManagementComponent } from './pages/admin-dashboard/user-management/user-management.component';
+import { AdminLoginComponent } from './pages/admin-dashboard/admin-login/admin-login.component';
 
 // librerias
 
@@ -51,6 +52,7 @@ import { AccountService } from './bank-services/account.service';
     DashboardComponent,
     AccountRegistrationComponent,
     UserManagementComponent,
+    AdminLoginComponent,
   ],
   imports: [
     BrowserModule,
