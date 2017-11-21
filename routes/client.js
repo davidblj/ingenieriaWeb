@@ -8,7 +8,7 @@ module.exports = function (wagner) {
 
   let api = express.Router();
 
-  api.post('/addToCart', auth.verifyToken, wagner.invoke(function(Cart, Product) {
+    api.post('/addToCart', auth.verifyToken, wagner.invoke(function(Cart, Product) {
     return function(req, res) {
 
         let idClient = req.decoded._id;
@@ -173,7 +173,6 @@ module.exports = function (wagner) {
         }
     }));
 
-    // todo: use the authentication middleware
     api.post('/buyProducts', auth.verifyToken, wagner.invoke(function (Product, Cart, Report, Coupon, Delivery) {
       return function (req, res) {
 
@@ -375,7 +374,7 @@ module.exports = function (wagner) {
     }
   }));
 
-  api.post('/processDelivery', wagner.invoke(function (Delivery, User){
+    api.post('/processDelivery', wagner.invoke(function (Delivery, User){
 
     return function(req, res) {
 
@@ -460,10 +459,7 @@ module.exports = function (wagner) {
                 // eliminar del reporte (opcional)
               })
             });
-
           })
-
-
         }
 
         delivery.save();
@@ -471,6 +467,63 @@ module.exports = function (wagner) {
       })
     }
   }));
+
+    api.get('/getRecord',wagner.invoke(function(Account,Record){
+        return function (req, res){
+
+            let user_account = req.query.account;
+            let password = req.query.password;
+
+            Account.findOne({account_number: user_account}, function (error, account) {
+
+                if (error) {
+                    return res
+                        .status(status.INTERNAL_SERVER_ERROR)
+                        .json({
+                            error: error.toString()
+                        });
+                }
+
+                if (!account) {
+                    return res
+                        .status(status.BAD_REQUEST)
+                        .json({message: 'El numero de la cuenta o la contraseña es incorrecta'});
+                }
+
+                if (!(account.password === password)) {
+                        return res
+                            .status(status.BAD_REQUEST)
+                            .json({message: 'El numero de la cuenta o la contraseña es incorrecta'});
+
+                }
+
+                let balance = account.balance;
+
+                Record.findOne({account_number:user_account}, function (error, record){
+
+                    if(error){
+                        return res
+                            .status(status.INTERNAL_SERVER_ERROR)
+                            .json({
+                                error: error.toString()
+                            });
+                    }
+
+                    if(!record) {
+                        return res
+                            .json({message: 'No se encontraron resultados con el numero de la cuenta ingresada'});
+                    }
+
+                    let accountDetails = {
+                        balance: balance,
+                        record: record
+                    };
+                    console.log(accountDetails);
+                    res.json(accountDetails);
+                })
+            });
+        }
+    }));
 
   return api;
 };
