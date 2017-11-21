@@ -9,10 +9,10 @@ import {CouponsComponent} from '../pages/seller-dashboard/coupons/coupons.compon
 import {VendorAuthGuard} from './guards/vendor.guard';
 import {ClientAuthGuard} from './guards/cart.guard';
 import {ReportsComponent} from '../pages/seller-dashboard/reports/reports.component';
-import {DashboardComponent} from '../pages/admin-dashboard/dashboard/dashboard.component';
-import {AccountRegistrationComponent} from '../pages/admin-dashboard/account-registration/account-registration.component';
-import { UserManagementComponent } from '../pages/admin-dashboard/user-management/user-management.component';
-import { AdminLoginComponent } from '../pages/admin-dashboard/admin-login/admin-login.component';
+import {DashboardComponent} from '../pages/admin/admin-dashboard/dashboard/dashboard.component';
+import {AccountRegistrationComponent} from '../pages/admin/admin-dashboard/account-registration/account-registration.component';
+import { UserManagementComponent } from '../pages/admin/admin-dashboard/user-management/user-management.component';
+import { AdminLoginComponent } from '../pages/admin/admin-dashboard/admin-login/admin-login.component';
 
 export const routes: Routes = [
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { AccountService } from '../../../bank-services/account.service';
+import { AccountService } from '../../../../bank-services/account.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({

@@ -1,6 +1,6 @@
 $background-color: #FE9666;
-$title-color: #6D6D7B;
-$margin-color: #2A2E31;
+$title-color: #6B6C98;
+$margin-color: #6D6D7B;
 $placeholder-color: #2A2E31;
 $small-text-color: #F3B196;
 $small-text-size: 14px;
@@ -30,8 +30,8 @@ section {
       font-size: 20px;
       color: $placeholder-color;
       padding: {
-        top: 8px;
-        bottom: 8px;
+        top: 12px;
+        bottom: 12px;
         left: 8px
       }
 
@@ -49,6 +49,7 @@ section {
 
     input::placeholder  {
       color: $margin-color !important;
+      font-size: $small-text-size;
     }
 
     .submit {
