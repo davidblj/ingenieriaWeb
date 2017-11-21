@@ -11,14 +11,18 @@ import {ClientAuthGuard} from './guards/cart.guard';
 import {ReportsComponent} from '../pages/seller-dashboard/reports/reports.component';
 import {DashboardComponent} from '../pages/admin/admin-dashboard/dashboard/dashboard.component';
 import {AccountRegistrationComponent} from '../pages/admin/admin-dashboard/account-registration/account-registration.component';
-import { UserManagementComponent } from '../pages/admin/admin-dashboard/user-management/user-management.component';
-import { AdminLoginComponent } from '../pages/admin/admin-dashboard/admin-login/admin-login.component';
+import {UserManagementComponent} from '../pages/admin/admin-dashboard/user-management/user-management.component';
+import {AdminLoginComponent} from '../pages/admin/admin-dashboard/admin-login/admin-login.component';
+import {TransactionsRecordComponent} from '../pages/admin/transactions-record/transactions-record.component';
 
 export const routes: Routes = [
 
   // todo: fake a new page or a new module on each entity
   {
     path: 'admin-login', component: AdminLoginComponent
+  },
+  {
+    path: 'transactions-record', component: TransactionsRecordComponent
   },
   {path: 'bank', component: DashboardComponent,
     children: [

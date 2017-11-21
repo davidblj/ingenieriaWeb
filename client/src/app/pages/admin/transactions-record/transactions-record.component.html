@@ -1,0 +1,39 @@
+<div class="container-fluid">
+
+  <div class="d-flex justify-content-center">
+
+    <div *ngIf="response">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+        <div class="form-group">
+          <label>Cuenta Bancaria</label>
+          <input formControlName="account" class="form-control" title="account_number"/>
+        </div>
+
+        <div class="form-group">
+          <label>Contraseña</label>
+          <input formControlName="password" class="form-control" title="password" type="password"/>
+        </div>
+
+        <button title="submit" class="btn btn-primary">Buscar</button>
+      </form>
+    </div>
+
+  </div>
+
+  <div class="container results">
+
+    <div class="balance d-flex justify-content-center">Saldo: <span class="value"> {{balance}}</span></div>
+    <div class="list">
+      <div class="list-item" *ngFor="let transaction of transactions">
+
+        <div class="content">
+          <span class="date">{{getDate(transaction.date)}}</span>
+          <span class="price float-right">{{getValue(transaction.value, transaction.type)}}</span>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

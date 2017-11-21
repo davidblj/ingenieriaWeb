@@ -11,6 +11,7 @@ const PROXY_CONFIG = [
       "/client/listClients",
       "/client/listCart",
       "/client/buyProducts",
+      "/client/getRecord",
       "/user/login",
       "/bank/registerAccount",
       "/bank/accreditAccount",

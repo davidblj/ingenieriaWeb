@@ -17,6 +17,11 @@ export class AccountService {
     return this.restangular.one('bank/getRecord').get({'account': accountNumber});
   }
 
+  getAccountStatus(accountDetails: any): Observable<any>{
+
+    return this.restangular.one('client/getRecord').get({'account': accountDetails.account, 'password': accountDetails.password});
+  }
+
   accreditAccount(credit): Observable<any> {
 
     return this.restangular.one('bank/accreditAccount').customPUT(credit);

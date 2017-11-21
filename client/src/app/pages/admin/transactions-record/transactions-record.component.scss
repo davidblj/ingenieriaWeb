@@ -1,0 +1,55 @@
+$divider: #CCD0D5;
+$title-color: #303D54;
+$title-size: 20px;
+$balance-color: #303D54;
+$text-color: #848CA0;
+$content-size: 17px;
+
+.balance {
+  margin-top: 5em;
+  color: $title-color;
+  font: {
+    weight: bold;
+    size: $title-size;
+  }
+
+  .value {
+    font-weight: 500 !important;
+  }
+}
+
+.list {
+  margin-top: 2em;
+
+  .list-item {
+    padding: {
+      left: 2em;
+      right: 2em;
+    };
+
+    border-bottom: {
+      style: solid;
+      color: $divider;
+      width: 1px;
+    };
+
+    .content {
+      margin: {
+        bottom: 0.7em;
+        top: 1em;
+      }
+
+      .date {
+        color: $text-color;
+        letter-spacing: 2px;
+      }
+
+      .price {
+        color: $balance-color;
+        font-size: $content-size;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
