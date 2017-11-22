@@ -250,7 +250,7 @@ module.exports = function (wagner) {
                   let report = {
                     id_vendor: idVendor,
                     batch: [{
-                        products: productList,
+                        products: products,
                         discount: discount,
                         subtotal: subtotal
                     }]
@@ -266,7 +266,6 @@ module.exports = function (wagner) {
                 });
             }
         });
-
       });
 
       // actualize el inventario
@@ -296,7 +295,8 @@ module.exports = function (wagner) {
                 if(deliveryRequest) {
 
                   Delivery.findOne({client: idClient}).exec(function(err, delivery) {
-                    if(err){
+
+                      if(err){
                         return res
                             .status(status.INTERNAL_SERVER_ERROR)
                             .json({error: error.toString()});
@@ -323,7 +323,7 @@ module.exports = function (wagner) {
                       place: 'shop'
                     }).then(function(response){
                       //console.log(response.data.message);
-                    })
+                    });
 
                     if(delivery) {
 
@@ -333,7 +333,7 @@ module.exports = function (wagner) {
                         discount: totalDiscount,
                         subtotal: totalSubtotals,
                         state: 'e',
-                      }
+                      };
 
                       delivery.batch.push(batch);
                       delivery.save();
@@ -352,7 +352,7 @@ module.exports = function (wagner) {
                           subtotal: totalSubtotals,
                           state: 'e',
                         }]
-                      }
+                      };
 
                       Delivery(deliveryRecord).save(function(error){
                         if(error){

@@ -179,7 +179,8 @@ module.exports = function (wagner) {
         }
 
         console.log(account.balance);
-        account.balance += reqAccreditAccount.value;
+        account.balance += parseFloat(reqAccreditAccount.value);
+        console.log(account.balance);
         account.save();
 
         Record.findOne({account_number: account_number}, function(error, record){
