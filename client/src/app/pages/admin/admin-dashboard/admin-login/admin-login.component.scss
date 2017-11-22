@@ -62,7 +62,7 @@ section {
       margin: {
         top: 4em;
         bottom: 3em;
-        left: 35%;
+        left: 38%;
       };
       padding: {
         top: 10px;
@@ -88,6 +88,7 @@ section {
     .link {
       color: $link-color !important;
       font-weight: bold;
+      text-decoration: underline;
     }
   }
 }

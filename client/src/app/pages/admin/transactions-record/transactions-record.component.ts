@@ -10,7 +10,7 @@ import { AccountService } from '../../../bank-services/account.service';
 export class TransactionsRecordComponent implements OnInit {
 
   loginForm: FormGroup;
-  response: boolean = true;
+  response: boolean = false;
   balance;
   transactions;
 
@@ -59,12 +59,12 @@ export class TransactionsRecordComponent implements OnInit {
     this.accountService.getAccountStatus(this.loginForm.value).subscribe(
       (accountDetails) => {
 
-        this.response = false;
+        this.response = true;
         this.transactions = accountDetails.record.tx;
         this.balance = accountDetails.balance;
       },
       () => {
-        this.response = true;
+        this.response = false;
       }
     )
   }

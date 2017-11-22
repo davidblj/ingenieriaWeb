@@ -5,51 +5,79 @@ $balance-color: #303D54;
 $text-color: #848CA0;
 $content-size: 17px;
 
-.balance {
-  margin-top: 5em;
-  color: $title-color;
-  font: {
-    weight: bold;
-    size: $title-size;
+.credentials {
+  margin-top: 15em;
+
+  input {
+    width: 25.5em;
   }
 
-  .value {
-    font-weight: 500 !important;
+  .account {
+    margin-left: 10em;
+  }
+
+  .password {
+    margin-left: 11em;
+  }
+
+  button {
+    margin-left: 11em;
+    padding: {
+      left: 1em;
+      right: 1em;
+    };
   }
 }
 
-.list {
-  margin-top: 2em;
+.results {
 
-  .list-item {
-    padding: {
-      left: 2em;
-      right: 2em;
-    };
+  .balance {
+    margin-top: 5em;
+    color: $title-color;
+    font-size: $title-size;
+  }
 
-    border-bottom: {
-      style: solid;
-      color: $divider;
-      width: 1px;
-    };
+  .list {
+    margin-top: 2em;
 
-    .content {
-      margin: {
-        bottom: 0.7em;
-        top: 1em;
-      }
+    .list-item {
+      padding: {
+        left: 2em;
+        right: 2em;
+      };
 
-      .date {
-        color: $text-color;
-        letter-spacing: 2px;
-      }
+      border-bottom: {
+        style: solid;
+        color: $divider;
+        width: 1px;
+      };
 
-      .price {
-        color: $balance-color;
-        font-size: $content-size;
-        font-weight: bold;
+      .content {
+        margin: {
+          bottom: 1.5em;
+          top: 1em;
+        }
+
+        .date {
+          color: $text-color;
+          letter-spacing: 2px;
+        }
+
+        .place {
+          position: relative;
+          top: 20px;
+          left: -65px;
+          color: #FFB367;
+        }
+
+        .price {
+          color: $balance-color;
+          font-size: $content-size;
+          font-weight: bold;
+        }
       }
     }
   }
 }
+
 
