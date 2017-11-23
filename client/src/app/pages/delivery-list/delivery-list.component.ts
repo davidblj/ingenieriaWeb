@@ -13,7 +13,8 @@ export class DeliveryListComponent implements OnInit {
 
   credentialsForm;
   batch;
-  error = true;
+  price;
+  error = false;
 
   constructor(private storageService: StorageService,
               private cartService: CartService,
@@ -24,6 +25,7 @@ export class DeliveryListComponent implements OnInit {
   ngOnInit() {
     console.log(this.storageService.getScope());
     this.batch = this.storageService.getScope();
+    this.price = this.storageService.getPrice();
   }
 
   public createForm() {
@@ -45,6 +47,9 @@ export class DeliveryListComponent implements OnInit {
 
         // todo: close modal when clicked outside the modal
         console.log(response);
+      },
+      () => {
+        this.error = true;
       }
     );
   }

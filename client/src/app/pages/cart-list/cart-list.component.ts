@@ -30,7 +30,7 @@ export class CartListComponent implements OnInit {
   subtotalPrice;
   totalPrice;
   discount;
-  shipping = 15000;
+  shipping = 0;
 
   constructor(private cartService: CartService,
               private location: Location,
@@ -101,6 +101,7 @@ export class CartListComponent implements OnInit {
       console.log(this.totalPrice);
     });
 
+    this.getDeliveryPrice();
     this.totalPrice += this.shipping;
   }
 
@@ -112,17 +113,26 @@ export class CartListComponent implements OnInit {
 
   public onCheckboxClicked() {
 
-    if(this.shipping === 15000) {
+    if(this.shipping !== 0) {
       this.totalPrice -= this.shipping;
       this.shipping = 0;
       this.batch['delivery'] = false;
     } else {
-      this.shipping = 15000;
+      // this.shipping = 15000;
+      this.getDeliveryPrice();
       this.totalPrice += this.shipping;
       this.batch['delivery'] = true;
     }
   }
 
+  getDeliveryPrice() {
+
+    if (this.totalPrice*0.05 > 5000) {
+      this.shipping = this.totalPrice*0.05
+    } else {
+      this.shipping = 5000;
+    }
+  };
 
   public onCouponClicked(id_vendor: string, index: number) {
 
@@ -160,7 +170,7 @@ export class CartListComponent implements OnInit {
         }
       );
     } else {
-      this.storageService.setScope(this.batch);
+      this.storageService.setScope(this.batch, this.totalPrice);
       this.router.navigate(['/delivery-list']);
     }
   }
