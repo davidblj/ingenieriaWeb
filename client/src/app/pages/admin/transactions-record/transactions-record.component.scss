@@ -74,6 +74,8 @@ $content-size: 17px;
           color: $balance-color;
           font-size: $content-size;
           font-weight: bold;
+          position: relative;
+          top: 15px;
         }
       }
     }

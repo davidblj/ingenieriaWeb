@@ -6,6 +6,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { CartService } from '../../services/cart.service';
 import { CartList } from '../../models/cart-list';
+import { StorageService } from '../../services/storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart-list',
@@ -32,7 +34,9 @@ export class CartListComponent implements OnInit {
 
   constructor(private cartService: CartService,
               private location: Location,
-              private modalService: NgbModal) { }
+              private modalService: NgbModal,
+              private storageService: StorageService,
+              private router: Router) { }
 
   ngOnInit() {
 
@@ -116,7 +120,7 @@ export class CartListComponent implements OnInit {
       this.shipping = 15000;
       this.totalPrice += this.shipping;
       this.batch['delivery'] = true;
-    }    
+    }
   }
 
 
@@ -145,13 +149,19 @@ export class CartListComponent implements OnInit {
 
     // let cart = JSON.stringify(this.batch);
     let cart = new CartList(this.batch);
-    this.cartService.buyProducts(cart).subscribe(
-      (response) => {
+    this.storageService.setScope('cart information');
 
-        console.log(response);
-        // todo: close modal when clicked outside the modal
-        this.modalService.open(content);
-      }
-    );
+    if(this.shipping === 0) {
+
+      this.cartService.buyProducts(cart).subscribe(
+        (response) => {
+          // todo: close modal when clicked outside the modal
+          console.log(response);
+          this.modalService.open(content);
+        }
+      );
+    } else {
+      this.router.navigate(['/delivery-list']);
+    }
   }
 }

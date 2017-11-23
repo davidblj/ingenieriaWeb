@@ -38,6 +38,8 @@ import { ReportsComponent } from './pages/seller-dashboard/reports/reports.compo
 import { ReportService } from './services/report.service';
 import { AccountService } from './bank-services/account.service';
 import { TransactionsRecordComponent } from './pages/admin/transactions-record/transactions-record.component';
+import { DeliveryListComponent } from './pages/delivery-list/delivery-list.component';
+import { StorageService} from './services/storage.service';
 
 @NgModule({
   declarations: [
@@ -55,6 +57,7 @@ import { TransactionsRecordComponent } from './pages/admin/transactions-record/t
     UserManagementComponent,
     AdminLoginComponent,
     TransactionsRecordComponent,
+    DeliveryListComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,6 +74,7 @@ import { TransactionsRecordComponent } from './pages/admin/transactions-record/t
     AccountService,
     VendorAuthGuard,
     ReportService,
+    StorageService,
     ClientAuthGuard
   ],
   bootstrap: [AppComponent]

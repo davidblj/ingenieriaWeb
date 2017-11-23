@@ -14,6 +14,7 @@ import {AccountRegistrationComponent} from '../pages/admin/admin-dashboard/accou
 import {UserManagementComponent} from '../pages/admin/admin-dashboard/user-management/user-management.component';
 import {AdminLoginComponent} from '../pages/admin/admin-dashboard/admin-login/admin-login.component';
 import {TransactionsRecordComponent} from '../pages/admin/transactions-record/transactions-record.component';
+import { DeliveryListComponent } from '../pages/delivery-list/delivery-list.component';
 
 export const routes: Routes = [
 
@@ -40,6 +41,7 @@ export const routes: Routes = [
   {path: 'new', component: ProductFormComponent},
   {path: 'cart-list', component: CartListComponent, canActivate: [ClientAuthGuard]},
   {path: 'login', component: LoginComponent},
+  {path: 'delivery-list', component: DeliveryListComponent, canActivate: [ClientAuthGuard]},
   {
     path: 'dashboard', component: WorkstationComponent, canActivate: [VendorAuthGuard],
     children: [
