@@ -180,8 +180,16 @@ module.exports = function (wagner) {
         let idClient = req.decoded._id;
 
         // todo: update the front end Request
-        let password = req.body.password;
-        let account_number = req.body.account_number;
+        /*let password = req.body.password;
+        let account_number = req.body.account_number;*/
+        let password;
+        let account_number;
+        if(req.body.credentials) {
+            password = req.body.credentials.password;
+            account_number = req.body.credentials.account_number;
+        }
+        console.log('contraseña', password);
+          console.log('cuenta', password);
 
         let productsDelivery = [];
         let productList = [];
@@ -316,6 +324,7 @@ module.exports = function (wagner) {
                     // debite el valor
                     let totalDebit = parseFloat(totalDiscount) + parseFloat(totalSubtotals);
 
+                    // todo: do this before anything else !
                     axios.put('http://localhost:3000/bank/debitAccount', {
                       account_number: account_number,
                       value: totalDebit,
@@ -323,6 +332,8 @@ module.exports = function (wagner) {
                       place: 'shop'
                     }).then(function(response){
                       //console.log(response.data.message);
+                    }).catch(function () {
+                        console.log('transaccion rechazada');
                     });
 
                     if(delivery) {
@@ -366,6 +377,7 @@ module.exports = function (wagner) {
                       });
                     }
                   });
+
               } else {
                 return res.json({message: "Se realizo la compra"});
               }

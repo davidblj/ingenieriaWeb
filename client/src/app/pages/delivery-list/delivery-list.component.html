@@ -10,19 +10,23 @@
         <span class="price">$ 80,000</span>
       </div>
       <div class="card-body">
-        <div>
+
+        <form novalidate [formGroup] = "credentialsForm">
+
           <div class="form-group">
-            <input class="form-control" placeholder="Numero de la cuenta">
+            <input formControlName="account_number" class="form-control" placeholder="Numero de la cuenta">
           </div>
           <div class="form-group">
-            <input class="form-control" placeholder="Contraseña">
+            <input formControlName="password" class="form-control" placeholder="Contraseña">
           </div>
           <small *ngIf="error">La cuenta o la contraseña ingresada es incorrecta</small>
-        </div>
 
-        <div class="button ml-auto mb-1">
-          <i class="fa fa-check"></i>
-        </div>
+          <div class="button ml-auto mb-1" (click)="onSubmit()">
+            <i class="fa fa-check"></i>
+          </div>
+
+        </form>
+
       </div>
     </div>
   </div>

@@ -148,19 +148,19 @@ export class CartListComponent implements OnInit {
   public buyProducts(content) {
 
     // let cart = JSON.stringify(this.batch);
-    let cart = new CartList(this.batch);
-    this.storageService.setScope('cart information');
-
     if(this.shipping === 0) {
 
+      let cart = new CartList(this.batch);
       this.cartService.buyProducts(cart).subscribe(
         (response) => {
+
           // todo: close modal when clicked outside the modal
           console.log(response);
           this.modalService.open(content);
         }
       );
     } else {
+      this.storageService.setScope(this.batch);
       this.router.navigate(['/delivery-list']);
     }
   }

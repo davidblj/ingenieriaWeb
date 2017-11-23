@@ -3,11 +3,11 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class StorageService {
 
-  cart: any;
+  cart:any;
 
   constructor() { }
 
-  public getScope(): Array<any> | boolean {
+  public getScope(): any{
     return this.cart;
   }
 
