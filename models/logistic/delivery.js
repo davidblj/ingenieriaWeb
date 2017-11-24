@@ -14,6 +14,10 @@ let deliveryRecordschema = {
       required: true
     },
     products: [Product.productschema],
+    vendorList: [{
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    }],
     discount: {
       type: Number,
       required: true
