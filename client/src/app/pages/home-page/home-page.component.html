@@ -6,6 +6,11 @@
     </div>
 
     <div class="navbar-nav ml-auto">
+
+      <div class="nav-item">
+        <i class="fa fa-truck onMouseOver delivery" routerLink="/delivery-list" routerLinkActive="active"></i>
+      </div>
+
       <div class="nav-item">
         <i class="fa fa-shopping-cart onMouseOver" routerLink="/cart-list" routerLinkActive="active"></i>
         <span class="count">{{itemsInCart}}</span>
@@ -14,6 +19,7 @@
       <div class="nav-item" *ngIf="!username" >
         <i class="fa fa-sign-in onMouseOver" routerLink="/login" routerLinkActive="active"></i>
       </div>
+
       <div class="nav-item" *ngIf="username" style="color: #D94C44;">
         <i class="fa fa-sign-out onMouseOver"  (click)="logOut()" routerLinkActive="active"></i>
       </div>

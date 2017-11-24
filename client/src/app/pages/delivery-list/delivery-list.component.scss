@@ -1,53 +1,97 @@
-$background-color: #CB5053;
-$btn-color: #FE8A82;
-$btn-text-size: 20px;
+$background-color: #C8CCCF;
+$btn-refuse-color: #F4646A;
+$btn-accept-color: #79B162;
+$title-color: #303D54;
+$text-color: #848CA0;
+$label-color: #424144;
+$text-size: 15px;
+$medium-text-size: 14px;
+$small-text-size: 13px;
 
 section {
-  // position: absolute;
-  width: 100%;
   height: 100%;
+  background: $background-color;
 
-  .card-container {
-    padding-top: 12%;
-    padding-left: 30%;
-    height: 100%;
-  }
+  .delivery-list {
+    padding-top: 2em;
 
-  .card {
-    min-height: 50%;
-    height: auto;
-    width: 55%;
-    border-style: none;
-    border-radius: 10px;
-    box-shadow: 10px 6px 13px rgba(0, 0, 0, 0.2);
+    .card {
+      width: 50%;
+      box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.1);
 
-    .card-header {
-      background-color: $background-color;
+      border: none;
+      margin: {
+        top: 3em;
+        right: 1em;
+      };
 
-      .price {
-        color: white;
-        font-size: 5em;
-        // padding-left: 2.5em;
-      }
-    }
+      .card-header {
 
-    .card-body {
-      margin-top: 1em;
-
-      .button {
-        cursor: pointer;
-        background: $background-color;
-        border-radius: 100%;
-        width: 4em;
-        height: 4em;
+        .id {
+          letter-spacing: 1px;
+          padding-top: 5px;
+          font-size: $text-size;
+          color: $text-color;
+        }
 
         i {
-          position: relative;
-          top: 0.27em;
-          left: 0.3em;
+          font-size: 15px;
+        }
+      }
+
+      .card-body {
+
+        .label {
+          color: $label-color;
+          font-size: $small-text-size;
+        }
+
+        .total-label {
+          color: $label-color;
+          font: {
+            weight: bold;
+            size: $text-size;
+          }
+        }
+
+        .price {
+          letter-spacing: 3px;
+          color: $title-color;
+          font-size: $medium-text-size;
+        }
+
+        .total-price {
+          letter-spacing: 3px;
+          color: $title-color;
           font-weight: bold;
-          font-size: 2.5em;
+        }
+      }
+
+      .card-footer {
+
+        button {
+          cursor: pointer;
+          padding: 5px 29px;
+          margin-left: 0.5em;
+          box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+          border: {
+            style: none;
+            radius: 10px;
+          };
+        }
+
+        .accept {
+          background: white;
+
+          &:hover {
+            background: $btn-accept-color;
+            color: white;
+          }
+        }
+
+        .refuse {
           color: white;
+          background: $btn-refuse-color;
         }
       }
     }

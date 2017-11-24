@@ -171,7 +171,7 @@ export class CartListComponent implements OnInit {
       );
     } else {
       this.storageService.setScope(this.batch, this.totalPrice);
-      this.router.navigate(['/delivery-list']);
+      this.router.navigate(['/checkout']);
     }
   }
 }

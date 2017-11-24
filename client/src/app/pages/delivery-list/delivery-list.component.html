@@ -1,34 +1,76 @@
-<section class="container-fluid">
-  <!--<div class="checkout-box">
-    <div class="price">Total</div>
-    &lt;!&ndash;<div class="checkout-details">username</div>&ndash;&gt;
-  </div>-->
-  <div class="card-container">
+<section>
+  <div class="container">
 
-    <div class="card">
-      <div class="card-header price">
-        <span class="price d-flex justify-content-center">$ {{price | number:'.2-2'}}</span>
+    <div class="delivery-list">
+
+      <div class="card" *ngIf="show">
+        <div class="card-header">
+          <div class="d-flex">
+            <div class="mr-auto id">10240263740</div>
+            <div class=""><i class="fa fa-chevron-right"></i></div>
+          </div>
+
+        </div>
+        <div class="card-body">
+          <div class="d-flex">
+            <div class="mr-auto label">Subtotal</div>
+            <div class="price">$ 98,000</div>
+          </div>
+
+          <div class="d-flex">
+            <div class="mr-auto label">Descuento</div>
+            <div class="price">$ -8,000</div>
+          </div>
+
+          <div class="d-flex">
+            <div class="mr-auto total-label">TOTAL</div>
+            <div class="total-price">$ 90,000</div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="d-flex justify-content-end ">
+            <div class="options">
+              <button class="accept">Aceptar</button>
+              <button class="refuse">Rechazar</button>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="card-body">
 
-        <form novalidate [formGroup] = "credentialsForm">
-
-          <div class="form-group">
-            <input formControlName="account_number" class="form-control" placeholder="Numero de la cuenta">
-          </div>
-          <div class="form-group">
-            <input formControlName="password" type="password" class="form-control" placeholder="Contraseña">
-          </div>
-          <small *ngIf="error">La cuenta o la contraseña ingresada es incorrecta</small>
-
-          <div class="button ml-auto mb-1" (click)="onSubmit()">
-            <i class="fa fa-check"></i>
+      <div class="card">
+        <div class="card-header">
+          <div class="d-flex">
+            <div class="mr-auto id">10240263740</div>
+            <div class=""><i class="fa fa-chevron-right"></i></div>
           </div>
 
-        </form>
+        </div>
+        <div class="card-body">
+          <div class="d-flex">
+            <div class="mr-auto label">Subtotal</div>
+            <div class="price">$ 99,000</div>
+          </div>
 
+          <div class="d-flex">
+            <div class="mr-auto label">Descuento</div>
+            <div class="price">$ -8,000</div>
+          </div>
+
+          <div class="d-flex">
+            <div class="mr-auto total-label">TOTAL</div>
+            <div class="total-price">$ 91,000</div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="d-flex justify-content-end ">
+            <div class="options">
+              <button class="accept" (click)="toggle()">Aceptar</button>
+              <button class="refuse">Rechazar</button>
+            </div>
+          </div>
+        </div>
       </div>
+
     </div>
   </div>
-
 </section>

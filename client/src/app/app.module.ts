@@ -21,6 +21,8 @@ import { DashboardComponent } from './pages/admin/admin-dashboard/dashboard/dash
 import { AccountRegistrationComponent } from './pages/admin/admin-dashboard/account-registration/account-registration.component';
 import { UserManagementComponent } from './pages/admin/admin-dashboard/user-management/user-management.component';
 import { AdminLoginComponent } from './pages/admin/admin-dashboard/admin-login/admin-login.component';
+import { CheckoutComponent } from './pages/checkout/checkout.component';
+import { DeliveryListComponent } from './pages/delivery-list/delivery-list.component';
 
 // librerias
 
@@ -38,7 +40,6 @@ import { ReportsComponent } from './pages/seller-dashboard/reports/reports.compo
 import { ReportService } from './services/report.service';
 import { AccountService } from './bank-services/account.service';
 import { TransactionsRecordComponent } from './pages/admin/transactions-record/transactions-record.component';
-import { DeliveryListComponent } from './pages/delivery-list/delivery-list.component';
 import { StorageService} from './services/storage.service';
 
 @NgModule({
@@ -57,7 +58,8 @@ import { StorageService} from './services/storage.service';
     UserManagementComponent,
     AdminLoginComponent,
     TransactionsRecordComponent,
-    DeliveryListComponent,
+    CheckoutComponent,
+    DeliveryListComponent
   ],
   imports: [
     BrowserModule,
