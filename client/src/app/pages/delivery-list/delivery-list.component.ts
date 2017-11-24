@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DeliveryService } from '../../services/delivery.service';
 
 @Component({
   selector: 'app-delivery-list',
@@ -7,15 +8,39 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DeliveryListComponent implements OnInit {
 
-  show = false;
+  deliveries;
+  show = true;
 
-  constructor() { }
+  constructor(private deliveryService: DeliveryService) { }
 
   ngOnInit() {
+
+    this.deliveryService.getDeliveries().subscribe(
+      (deliveries) => {
+        this.deliveries = deliveries;
+        console.log(deliveries);
+      }
+    );
   }
 
-  toggle() {
+  getTotalPrice(delivery) {
+    return delivery.subtotal - delivery.discount;
+  }
+
+  accept(delivery) {
+    this.toggle(delivery);
+    // todo: processDelivery
+  }
+
+  refuse (delivery) {
+    this.toggle(delivery);
+    // todo: processDelivery
+  }
+
+  toggle(delivery) {
     this.show = !this.show;
+    this.deliveries = this.deliveries.filter((deliveryItem) => {
+       return (deliveryItem.deliveryId !== delivery.deliveryId);
+    })
   }
-
 }

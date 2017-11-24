@@ -554,6 +554,32 @@ module.exports = function (wagner) {
         }
     }));
 
+    api.get('/getDelivery', auth.verifyToken, wagner.invoke(function(Delivery){
+
+      return function(req, res) {
+
+        let clientId = req.decoded._id;
+        console.log(clientId);
+
+        Delivery.findOne({client: clientId}, function (error, delivery) {
+
+          if(error) {
+            return res
+                .status(status.INTERNAL_SERVER_ERROR)
+                .json({error: error.toString()});
+          }
+
+          let filteredDeliveries = delivery.batch.filter((deliveryItem) => {
+            console.log(deliveryItem.state);
+            return (deliveryItem.state === 'e');
+          })
+
+          console.log(filteredDeliveries);
+          res.json(filteredDeliveries);
+        });
+      }
+    }));
+
   return api;
 };
 

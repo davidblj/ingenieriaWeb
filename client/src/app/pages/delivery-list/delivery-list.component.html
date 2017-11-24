@@ -3,10 +3,10 @@
 
     <div class="delivery-list">
 
-      <div class="card" *ngIf="show">
+      <div class="card" *ngFor="let delivery of deliveries">
         <div class="card-header">
           <div class="d-flex">
-            <div class="mr-auto id">10240263740</div>
+            <div class="mr-auto id">{{delivery.deliveryId}}</div>
             <div class=""><i class="fa fa-chevron-right"></i></div>
           </div>
 
@@ -14,58 +14,24 @@
         <div class="card-body">
           <div class="d-flex">
             <div class="mr-auto label">Subtotal</div>
-            <div class="price">$ 98,000</div>
+            <div class="price">$ {{delivery.subtotal}}</div>
           </div>
 
           <div class="d-flex">
             <div class="mr-auto label">Descuento</div>
-            <div class="price">$ -8,000</div>
+            <div class="price">-{{delivery.discount}}</div>
           </div>
 
           <div class="d-flex">
             <div class="mr-auto total-label">TOTAL</div>
-            <div class="total-price">$ 90,000</div>
+            <div class="total-price">$ {{getTotalPrice(delivery)}}</div>
           </div>
         </div>
         <div class="card-footer">
           <div class="d-flex justify-content-end ">
             <div class="options">
-              <button class="accept">Aceptar</button>
-              <button class="refuse">Rechazar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <div class="d-flex">
-            <div class="mr-auto id">10240263740</div>
-            <div class=""><i class="fa fa-chevron-right"></i></div>
-          </div>
-
-        </div>
-        <div class="card-body">
-          <div class="d-flex">
-            <div class="mr-auto label">Subtotal</div>
-            <div class="price">$ 99,000</div>
-          </div>
-
-          <div class="d-flex">
-            <div class="mr-auto label">Descuento</div>
-            <div class="price">$ -8,000</div>
-          </div>
-
-          <div class="d-flex">
-            <div class="mr-auto total-label">TOTAL</div>
-            <div class="total-price">$ 91,000</div>
-          </div>
-        </div>
-        <div class="card-footer">
-          <div class="d-flex justify-content-end ">
-            <div class="options">
-              <button class="accept" (click)="toggle()">Aceptar</button>
-              <button class="refuse">Rechazar</button>
+              <button class="accept" (click)="accept(delivery)">Aceptar</button>
+              <button class="refuse" (click)="refuse(delivery)">Rechazar</button>
             </div>
           </div>
         </div>

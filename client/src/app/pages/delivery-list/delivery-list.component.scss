@@ -1,5 +1,6 @@
 $background-color: #C8CCCF;
-$btn-refuse-color: #F4646A;
+$btn-dim-refuse-color: #FE666F;
+$btn-refuse-color: #F04A54;
 $btn-accept-color: #79B162;
 $title-color: #303D54;
 $text-color: #848CA0;
@@ -91,7 +92,11 @@ section {
 
         .refuse {
           color: white;
-          background: $btn-refuse-color;
+          background: $btn-dim-refuse-color;
+
+          &:hover {
+            background: $btn-refuse-color;
+          }
         }
       }
     }

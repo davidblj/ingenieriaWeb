@@ -41,6 +41,7 @@ import { ReportService } from './services/report.service';
 import { AccountService } from './bank-services/account.service';
 import { TransactionsRecordComponent } from './pages/admin/transactions-record/transactions-record.component';
 import { StorageService} from './services/storage.service';
+import { DeliveryService} from './services/delivery.service';
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import { StorageService} from './services/storage.service';
     VendorAuthGuard,
     ReportService,
     StorageService,
+    DeliveryService,
     ClientAuthGuard
   ],
   bootstrap: [AppComponent]

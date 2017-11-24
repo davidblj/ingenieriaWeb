@@ -12,6 +12,7 @@ const PROXY_CONFIG = [
       "/client/listCart",
       "/client/buyProducts",
       "/client/getRecord",
+      "/client/getDelivery",
       "/user/login",
       "/bank/registerAccount",
       "/bank/accreditAccount",
@@ -23,4 +24,3 @@ const PROXY_CONFIG = [
 ];
 
 module.exports = PROXY_CONFIG;
-

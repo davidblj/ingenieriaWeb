@@ -122,6 +122,13 @@ section {
   cursor: pointer;
 }
 
+.onComponentHover {
+
+  &:hover {
+    color: #F4646A !important;
+  }
+}
+
 .card-01.height-fix {
   height: 455px;
   overflow: hidden;
