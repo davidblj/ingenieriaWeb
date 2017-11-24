@@ -30,8 +30,8 @@
         <div class="card-footer">
           <div class="d-flex justify-content-end ">
             <div class="options">
-              <button class="accept" (click)="accept(delivery)">Aceptar</button>
-              <button class="refuse" (click)="refuse(delivery)">Rechazar</button>
+              <button class="accept" (click)="accept(delivery, content)">Aceptar</button>
+              <button class="refuse" (click)="refuse(delivery, content)">Rechazar</button>
             </div>
           </div>
         </div>
@@ -40,3 +40,9 @@
     </div>
   </div>
 </section>
+
+<ng-template #content let-c="close">
+  <div class="modal-body message">
+    <span class="title">Gracias por comprar con nosotros !</span>
+  </div>
+</ng-template>
