@@ -188,13 +188,22 @@ module.exports = function (wagner) {
             password = req.body.credentials.password;
             account_number = req.body.credentials.account_number;
         }
-        console.log('contraseña', password);
-          console.log('cuenta', password);
 
         let productsDelivery = [];
         let productList = [];
         let totalDiscount = 0;
         let totalSubtotals = 0;
+        let date = new Date();
+        let components = [
+           date.getMonth(),
+           date.getDate(),
+           date.getHours(),
+           date.getMinutes(),
+           date.getSeconds(),
+           date.getMilliseconds()
+         ];
+        let id = components.join("");
+
 
         productsByVendor.forEach((vendorBatch) => {
 
@@ -204,10 +213,10 @@ module.exports = function (wagner) {
           let subtotal = 0;
 
           // calcule el total
-          vendorBatch.products.forEach((products) => {
-            productsDelivery.push(products);
-            productList.push(products._id);
-            subtotal += products.price;
+          vendorBatch.products.forEach((product) => {
+            productsDelivery.push(product);
+            productList.push(product._id);
+            subtotal += product.price;
           });
 
           totalSubtotals += subtotal;
@@ -232,64 +241,64 @@ module.exports = function (wagner) {
                 }
               });
           }
+          // debite el valor
+          let totalDebit = parseFloat(totalDiscount) + parseFloat(totalSubtotals);
 
-          // haga el reporte
-          Report.findOne({id_vendor: idVendor}).exec(function(err, report) {
-            if(err){
-                return res
-                    .status(status.INTERNAL_SERVER_ERROR)
-                    .json({error: error.toString()});
-            }
+          // todo: do this before anything else !
+          axios.put('http://localhost:3000/bank/debitAccount', {
+            account_number: account_number,
+            value: totalDebit,
+            password: password,
+            place: 'shop'
+          }).then(function(response){
+            // haga el reporte
+            Report.findOne({id_vendor: idVendor}).exec(function(err, report) {
+              if(err){
+                  return res
+                      .status(status.INTERNAL_SERVER_ERROR)
+                      .json({error: error.toString()});
+              }
 
-            if(report) {
-              let batch = {
-                    products: products,
-                    discount: discount,
-                    subtotal: subtotal
-                };
-
-              report.batch.push(batch);
-              report.save();
-
-              console.log('Se agrego un grupo de productos al vendedor')
-
-              } else {
-
-                  let report = {
-                    id_vendor: idVendor,
-                    batch: [{
-                        products: products,
-                        discount: discount,
-                        subtotal: subtotal
-                    }]
+              if(report) {
+                let batch = {
+                      products: products,
+                      deliveryId: id,
+                      discount: discount,
+                      subtotal: subtotal
                   };
 
-                Report(report).save(function(error){
-                  if(error){
-                      return res
-                          .status(status.INTERNAL_SERVER_ERROR)
-                          .json({error: error.toString()});
-                  }
-                  console.log('Se creo el reporte')
-                });
-            }
-        });
-      });
+                report.batch.push(batch);
+                report.save();
 
-      // actualize el inventario
-      // todo: validate an empty cart and products with no items in the inventory
-      // todo: bug fix - repeated products in the productList are not updating more than once at a time
-      Product.update({_id:  { $in: productList}}, {$inc: { soldQuantity: 1,  quantity: -1}}, {multi: true}, function (err) {
+                console.log('Se agrego un grupo de productos al vendedor')
 
-          if(err) {
-              return res
-                  .status(status.INTERNAL_SERVER_ERROR)
-                  .json({error: err.toString()});
-          }
+                } else {
 
-          Cart.findOne({client: idClient}).remove(function (err) {
+                    let report = {
+                      id_vendor: idVendor,
+                      batch: [{
+                          products: products,
+                          deliveryId: id,
+                          discount: discount,
+                          subtotal: subtotal
+                      }]
+                    };
 
-              console.log('Se elimino el carrito');
+                  Report(report).save(function(error){
+                    if(error){
+                        return res
+                            .status(status.INTERNAL_SERVER_ERROR)
+                            .json({error: error.toString()});
+                    }
+                    console.log('Se creo el reporte')
+                  });
+              }
+          });
+
+          // actualize el inventario
+          // todo: validate an empty cart and products with no items in the inventory
+          // todo: bug fix - repeated products in the productList are not updating more than once at a time
+          Product.update({_id:  { $in: productList}}, {$inc: { soldQuantity: 1,  quantity: -1}}, {multi: true}, function (err) {
 
               if(err) {
                   return res
@@ -297,96 +306,87 @@ module.exports = function (wagner) {
                       .json({error: err.toString()});
               }
 
-              // cree el domicilio
-              let deliveryRequest = req.body.deliveryFlag;
+              Cart.findOne({client: idClient}).remove(function (err) {
 
-                if(deliveryRequest) {
+                  console.log('Se elimino el carrito');
 
-                  Delivery.findOne({client: idClient}).exec(function(err, delivery) {
+                  if(err) {
+                      return res
+                          .status(status.INTERNAL_SERVER_ERROR)
+                          .json({error: err.toString()});
+                  }
 
-                      if(err){
-                        return res
-                            .status(status.INTERNAL_SERVER_ERROR)
-                            .json({error: error.toString()});
-                    }
+                  // cree el domicilio
+                  let deliveryRequest = req.body.deliveryFlag;
 
-                    let date = new Date();
-                    let components = [
-                       date.getMonth(),
-                       date.getDate(),
-                       date.getHours(),
-                       date.getMinutes(),
-                       date.getSeconds(),
-                       date.getMilliseconds()
-                     ];
-                    let id = components.join("");
+                    if(deliveryRequest) {
 
-                    // debite el valor
-                    let totalDebit = parseFloat(totalDiscount) + parseFloat(totalSubtotals);
+                      Delivery.findOne({client: idClient}).exec(function(err, delivery) {
 
-                    // todo: do this before anything else !
-                    axios.put('http://localhost:3000/bank/debitAccount', {
-                      account_number: account_number,
-                      value: totalDebit,
-                      password: password,
-                      place: 'shop'
-                    }).then(function(response){
-                      //console.log(response.data.message);
-                    }).catch(function () {
-                        console.log('transaccion rechazada');
-                    });
-
-                    if(delivery) {
-
-                      let batch  = {
-                        deliveryId: id,
-                        products: productsDelivery,
-                        discount: totalDiscount,
-                        subtotal: totalSubtotals,
-                        state: 'e',
-                      };
-
-                      delivery.batch.push(batch);
-                      delivery.save();
-
-                      console.log('Se agrego el domicilio');
-                      return res.json({message: "Se ha realizado la compra y el domicilio esta en camino"})
-
-                    } else {
-
-                      let deliveryRecord = {
-                        client: ObjectId(idClient),
-                        batch: [{
-                          deliveryId: id,
-                          products: productsDelivery,
-                          discount: totalDiscount,
-                          subtotal: totalSubtotals,
-                          state: 'e',
-                        }]
-                      };
-
-                      Delivery(deliveryRecord).save(function(error){
-                        if(error){
+                          if(err){
                             return res
                                 .status(status.INTERNAL_SERVER_ERROR)
                                 .json({error: error.toString()});
                         }
 
-                        console.log('Se creo el domicilio');
-                        return res.json({message: "Se ha realizado la compra y el domicilio esta en camino"});
-                      });
-                    }
-                  });
+                        if(delivery) {
+                          let batch  = {
+                            deliveryId: id,
+                            products: productsDelivery,
+                            discount: totalDiscount,
+                            subtotal: totalSubtotals,
+                            state: 'e',
+                          };
 
-              } else {
-                return res.json({message: "Se realizo la compra"});
-              }
-          })
+                          delivery.batch.push(batch);
+                          delivery.save();
+
+                          console.log('Se agrego el domicilio');
+                          return res.json({message: "Se ha realizado la compra y el domicilio esta en camino"})
+
+                        } else {
+
+                          let deliveryRecord = {
+                            client: ObjectId(idClient),
+                            batch: [{
+                              deliveryId: id,
+                              products: productsDelivery,
+                              discount: totalDiscount,
+                              subtotal: totalSubtotals,
+                              state: 'e',
+                            }]
+                          };
+
+                          Delivery(deliveryRecord).save(function(error){
+                            if(error){
+                                return res
+                                    .status(status.INTERNAL_SERVER_ERROR)
+                                    .json({error: error.toString()});
+                            }
+
+                            console.log('Se creo el domicilio');
+                            return res.json({message: "Se ha realizado la compra y el domicilio esta en camino"});
+                          });
+                        }
+                      });
+
+                  } else {
+                    return res.json({message: "Se realizo la compra"});
+                  }
+              })
+          });
+          }).catch(function () {
+              console.log('transaccion rechazada');
+
+              return res
+                     .status(status.BAD_REQUEST)
+                     .json({error: "transaccion rechazada"});
+          });
       });
     }
   }));
 
-    api.post('/processDelivery', wagner.invoke(function (Delivery, User){
+    api.post('/processDelivery', wagner.invoke(function (Delivery, User, Product){
 
     return function(req, res) {
 
@@ -422,12 +422,16 @@ module.exports = function (wagner) {
         if(deliveryResponse === 'true') {
           console.log('El envio se entrego')
           delivery.batch[deliveryIndex].state = 'a';
+          delivery.save();
+          res.json()
         } else {
+          console.log('1');
           delivery.batch[deliveryIndex].state = 'r';
+          delivery.save();
 
           // acreditar la cuenta
           User.findOne({_id: client}, function(err, user){
-
+            console.log('2');
             if(err) {
               return res
                   .status(status.INTERNAL_SERVER_ERROR)
@@ -447,7 +451,7 @@ module.exports = function (wagner) {
                 identification: id
               }
             }).then(function (response) {
-
+              console.log('3');
               console.log('respuesta : ', response.data.account_number);
 
               let item = delivery.batch[deliveryIndex];
@@ -467,15 +471,28 @@ module.exports = function (wagner) {
 
                 // haga el backup del inventario
 
+                  let deliveryProducts = delivery.batch[deliveryIndex].products;
+                  let length = deliveryProducts.length;
+                  let counter = 0;
 
-                // eliminar del reporte (opcional)
+                  deliveryProducts.forEach(function (value) {
+
+                    Product.update({ _id: value._id }, { $inc: { quantity: 1, soldQuantity: -1 } }, function(error) {
+
+                      counter ++;
+                      if(counter === length) {
+                        // eliminar del reporte
+
+                        delivery.batch.splice(deliveryIndex, 1);
+                        delivery.save();
+                        res.json('Se actualizo la lista de productos');
+                      }
+                    });
+                  })
               })
             });
           })
         }
-
-        delivery.save();
-        res.json()
       })
     }
   }));

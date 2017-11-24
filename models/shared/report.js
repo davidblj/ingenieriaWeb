@@ -10,6 +10,9 @@ let reportschema = {
   },
   batch: [{
     products: [Product.productschema],
+    deliveryId: {
+      type: String
+    },
     discount: {
       type: Number,
       required: true
