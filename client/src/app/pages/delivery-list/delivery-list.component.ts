@@ -38,6 +38,9 @@ export class DeliveryListComponent implements OnInit {
       () => {
         console.log('success');
         this.toggle(delivery, content);
+      },
+      () => {
+        // todo: display the message error
       }
     );
   }

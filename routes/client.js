@@ -333,16 +333,6 @@ module.exports = function (wagner) {
               }
             })
           });
-          // Product.update({_id:  { $in: products}}, {$inc: { soldQuantity: 1,  quantity: -1}}, {multi: true}, function (err) {
-          //
-          //   if(err) {
-          //     return res
-          //     .status(status.INTERNAL_SERVER_ERROR)
-          //     .json({error: err.toString()});
-          //   }
-          //
-          // });
-
         });
 
         Cart.findOne({client: idClient}).remove(function (err) {
@@ -353,7 +343,7 @@ module.exports = function (wagner) {
             .json({error: err.toString()});
           }
         })
-        
+
         // cree el domicilio
         let deliveryRequest = req.body.deliveryFlag;
 
@@ -367,7 +357,12 @@ module.exports = function (wagner) {
               .json({error: error.toString()});
             }
 
+            let deliveryCost = (totalSubtotals - totalDiscount)*0.05;
+            if(deliveryCost < 5000) deliveryCost = 5000;
+            let valueToCharge = parseFloat(deliveryCost) + (parseFloat(totalSubtotals) - parseFloat(totalDiscount));
+
             console.log('total', totalSubtotals);
+            console.log('total', valueToCharge);
             if(delivery) {
               let batch  = {
                 deliveryId: id,
@@ -375,8 +370,10 @@ module.exports = function (wagner) {
                 vendorList: vendorList,
                 discount: totalDiscount,
                 subtotal: totalSubtotals,
+                total: valueToCharge,
                 state: 'e',
               };
+              console.log('batch', batch);
 
               delivery.batch.push(batch);
               delivery.save();
@@ -393,9 +390,12 @@ module.exports = function (wagner) {
                   vendorList: vendorList,
                   discount: totalDiscount,
                   subtotal: totalSubtotals,
+                  total: valueToCharge,
                   state: 'e',
                 }]
               };
+
+              console.log('delivery', deliveryRecord);
 
               Delivery(deliveryRecord).save(function(error){
                 if(error){
