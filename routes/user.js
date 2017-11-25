@@ -11,7 +11,7 @@ module.exports = function (wagner) {
             User(reqClient).save(function(error) {
                 if(error) {
                     return res
-                        .status(status.INTERNAL_SERVER_ERROR)
+                        .status(status.BAD_REQUEST)
                         .json({error: error.toString()});
                 }
                 let content = { message: 'Se registró exitosamente el cliente'};

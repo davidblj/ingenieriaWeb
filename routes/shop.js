@@ -22,7 +22,7 @@ module.exports = function (wagner) {
       });
     }
   }));
-  
+
   api.get('/listProductsByVendor', auth.verifyToken, wagner.invoke(function (Product) {
 
       return function (req, res) {
@@ -79,7 +79,7 @@ module.exports = function (wagner) {
 
           reqProduct.id_vendor = id_vendor;
           reqProduct.vendorName = vendorName;
-          console.log(reqProduct);
+          
 
           Product(reqProduct).save(function (error) {
               if (error) {
