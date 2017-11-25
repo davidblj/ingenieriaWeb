@@ -3,6 +3,7 @@ import { StorageService } from '../../services/storage.service';
 import { CartService } from '../../services/cart.service';
 import { FormBuilder } from '@angular/forms';
 import { CartList } from '../../models/cart-list';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 
 @Component({
@@ -20,7 +21,8 @@ export class CheckoutComponent implements OnInit {
   constructor(private storageService: StorageService,
               private cartService: CartService,
               private formBuilder: FormBuilder,
-              private router: Router) {
+              private router: Router,
+              private modalService: NgbModal) {
     this.createForm();
   }
 
@@ -38,7 +40,7 @@ export class CheckoutComponent implements OnInit {
     });
   }
 
-  onSubmit() {
+  onSubmit(content) {
 
     let credentials = this.credentialsForm.value;
     let cart = new CartList(this.batch, credentials);
@@ -46,8 +48,12 @@ export class CheckoutComponent implements OnInit {
     console.log(cart);
     this.cartService.buyProducts(cart).subscribe(
       (response) => {
-        console.log(response);
-        this.router.navigate(['/home']);
+
+        this.modalService.open(content).result.then(() => {},
+         () => {
+           // dismissed callback
+          this.router.navigate(['/home']);
+        });
       },
       () => {
         this.error = true;

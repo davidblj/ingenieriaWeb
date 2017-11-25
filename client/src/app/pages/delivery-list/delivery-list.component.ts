@@ -39,7 +39,7 @@ export class DeliveryListComponent implements OnInit {
   }
 
   send(delivery, content, state) {
-  
+
     this.state = state;
     this.deliveryService.processDelivery(state, delivery.deliveryId).subscribe(
       () => {
@@ -53,11 +53,13 @@ export class DeliveryListComponent implements OnInit {
   }
 
   toggle(delivery, content) {
-    this.show = !this.show;
     this.deliveries = this.deliveries.filter((deliveryItem) => {
        return (deliveryItem.deliveryId !== delivery.deliveryId);
     });
 
+    if(this.deliveries.length === 0) {
+      this.show = true;
+    }
     this.modalService.open(content);
   }
 }
