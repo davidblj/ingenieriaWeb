@@ -119,28 +119,32 @@ module.exports = function (wagner) {
                 record.tx.push(transaction);
                 record.save();
                 return res.json('La transaccion se agrego al historial');
+            } else {
+
+              let record_tx = {
+                account_number: account_number,
+                tx: [{
+                  date: new Date(),
+                  value: valueToCharge,
+                  type: 'debit',
+                  place: reqDebitAccount.place
+                }]
+              };
+
+              Record(record_tx).save(function(error){
+                if(error){
+                  return res
+                    .status(status.INTERNAL_SERVER_ERROR)
+                    .json({
+                      error: error.toString()
+                    });
+                }
+
+                return res.json('La transaccion se agrego al historial');
+              });
             }
-
-            let record_tx = {
-              account_number: account_number,
-              tx: [{
-                date: new Date(),
-                value: valueToCharge,
-                type: 'debit',
-                place: reqDebitAccount.place
-              }]
-            };
-
-            Record(record_tx).save(function(error){
-              if(error){
-                return res
-                  .status(status.INTERNAL_SERVER_ERROR)
-                  .json({
-                    error: error.toString()
-                  });
-              }
-            });
           });
+
         } else {
           return res
             .status(status.BAD_REQUEST)

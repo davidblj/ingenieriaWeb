@@ -226,6 +226,8 @@ module.exports = function (wagner) {
       });
 
       // debite el valor
+      console.log("total", totalSubtotals);
+      console.log("discount", totalDiscount);
       let totalDebit = parseFloat(totalSubtotals) - parseFloat(totalDiscount);
 
       // todo: do this before anything else !
@@ -236,6 +238,8 @@ module.exports = function (wagner) {
         place: 'shop'
       }).then(function(response){
 
+        console.log('entre aqui !');
+        totalSubtotals = 0;
         productsByVendor.forEach((vendorBatch) => {
 
           let idVendor = vendorBatch.id_vendor;
@@ -352,6 +356,7 @@ module.exports = function (wagner) {
               .json({error: error.toString()});
             }
 
+            console.log('total', totalSubtotals);
             if(delivery) {
               let batch  = {
                 deliveryId: id,
@@ -406,7 +411,7 @@ module.exports = function (wagner) {
     };
   }));
 
-  api.post('/processDelivery', wagner.invoke(function (Delivery, User, Product){
+  api.post('/processDelivery', wagner.invoke(function (Delivery, User, Product, Report){
 
     return function(req, res) {
 
@@ -501,10 +506,17 @@ module.exports = function (wagner) {
 
                     counter ++;
                     if(counter === length) {
-                      // eliminar del reporte
 
-                      delivery.batch.splice(deliveryIndex, 1);
-                      delivery.save();
+                      // eliminar del reporte
+                      let vendorList = delivery.batch[deliveryIndex].vendorList;
+
+                      Report.find({
+                        'id_vendor': { $in: vendorList}
+                      }, function (error, reports) {
+                        console.log(JSON.stringify(reports));
+                      })
+                      // delivery.batch.splice(deliveryIndex, 1);
+                      // delivery.save();
                       res.json('Se actualizo la lista de productos');
                     }
                   });
