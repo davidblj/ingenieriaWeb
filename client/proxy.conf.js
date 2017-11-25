@@ -16,6 +16,7 @@ const PROXY_CONFIG = [
       "/user/login",
       "/bank/registerAccount",
       "/bank/accreditAccount",
+      "/bank/getAccountByNumber",
       "/bank/getRecord"
     ],
     "target": "http://localhost:3000",

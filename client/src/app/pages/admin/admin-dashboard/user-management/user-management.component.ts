@@ -11,6 +11,8 @@ export class UserManagementComponent implements OnInit {
   transactions;
   clientAccount;
   showMessage = true;
+  message;
+  showInput = false;
 
   constructor(private accountService: AccountService) { }
 
@@ -27,7 +29,23 @@ export class UserManagementComponent implements OnInit {
         if(response.message) {
           this.showMessage = true;
           this.transactions = null;
+
+          this.accountService.confirmAccount(event.target.value).subscribe(
+            (exists) => {
+
+              if(exists) {
+                this.message = 'El usuario aun no tiene historial de transacciones';
+                this.showInput = true;
+              } else {
+                this.message = 'Sin resultados';
+                this.showInput = false;
+              }
+            }
+          )
+
         } else {
+          this.showMessage = false;
+          this.showInput = true;
           this.transactions = response.tx;
           this.clientAccount = response.account_number;
         }

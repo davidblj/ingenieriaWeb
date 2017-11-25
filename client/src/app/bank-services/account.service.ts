@@ -22,6 +22,18 @@ export class AccountService {
     return this.restangular.one('client/getRecord').get({'account': accountDetails.account, 'password': accountDetails.password});
   }
 
+  confirmAccount(account_number: number): Observable<boolean>{
+
+    return this.restangular.one('bank/getAccountByNumber')
+      .get({'account_number': account_number})
+      .map((results) => {
+
+        console.log('numero de la cuenta',results);
+        if (results.account_number) return true;
+        return false;
+      });
+  }
+
   accreditAccount(credit): Observable<any> {
 
     return this.restangular.one('bank/accreditAccount').customPUT(credit);

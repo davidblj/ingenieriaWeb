@@ -43,6 +43,25 @@ module.exports = function (wagner) {
     }
   }));
 
+    api.get('/getAccountByNumber', wagner.invoke(function (Account) {
+        return function (req, res) {
+
+            let account_number = req.query.account_number;
+
+            Account.findOne({account_number: account_number}, 'account_number', function (error, account) {
+                if (error) {
+                    return res
+                        .status(status.INTERNAL_SERVER_ERROR)
+                        .json({
+                            error: error.toString()
+                        });
+                }
+                console.log(account);
+                res.json(account);
+            })
+        }
+    }));
+
   api.post('/registerAccount', wagner.invoke(function(Account){
       return function(req, res) {
           let reqAccount= req.body;

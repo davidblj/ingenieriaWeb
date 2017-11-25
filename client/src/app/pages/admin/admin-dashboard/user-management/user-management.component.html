@@ -8,10 +8,10 @@
     <div class="list">
 
       <div *ngIf="showMessage">
-        <span class="message d-flex justify-content-center">Sin resultados</span>
+        <span class="message d-flex justify-content-center">{{message}}</span>
       </div>
 
-      <div class="input-container ml-auto mb-2" *ngIf="!showMessage">
+      <div class="input-container ml-auto mb-2" *ngIf="showInput">
         <i class="fa fa-plus"></i>
         <input title="credit-value" placeholder="Credito" (keyup.enter)="onSubmitCredit($event)">
       </div>
