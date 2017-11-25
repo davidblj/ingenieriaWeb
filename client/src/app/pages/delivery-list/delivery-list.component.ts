@@ -11,7 +11,7 @@ import { logging } from 'selenium-webdriver';
 export class DeliveryListComponent implements OnInit {
 
   deliveries;
-  show = true;
+  show = false;
   state;
 
   constructor(private deliveryService: DeliveryService,
@@ -22,17 +22,24 @@ export class DeliveryListComponent implements OnInit {
     this.deliveryService.getDeliveries().subscribe(
       (deliveries) => {
         this.deliveries = deliveries;
+        if(deliveries.length === 0) {
+          this.show = true;
+        }
         console.log(deliveries);
       }
     );
   }
 
   getTotalPrice(delivery) {
-    return delivery.subtotal - delivery.discount;
+    return delivery.total;
+  }
+
+  getShippingPrice(delivery) {
+    return delivery.total - (delivery.subtotal - delivery.discount)
   }
 
   send(delivery, content, state) {
-
+  
     this.state = state;
     this.deliveryService.processDelivery(state, delivery.deliveryId).subscribe(
       () => {

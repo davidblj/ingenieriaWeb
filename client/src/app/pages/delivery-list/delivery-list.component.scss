@@ -8,12 +8,20 @@ $label-color: #424144;
 $text-size: 15px;
 $medium-text-size: 14px;
 $small-text-size: 13px;
+$big-text-size: 70px;
 
 section {
   min-height: 100%;
   height: auto;
   padding-bottom: 2em;
   background: $background-color;
+
+  .hint {
+    text-align: center;
+    font-size: $big-text-size;
+    padding-top: 3em;
+    color: #928D96;
+  }
 
   .delivery-list {
     padding-top: 2em;
@@ -103,4 +111,8 @@ section {
       }
     }
   }
+}
+
+.title {
+  padding: 2em;   
 }
