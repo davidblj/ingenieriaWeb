@@ -8,7 +8,7 @@
     "start": "node server.js",
     "startClient": "cd client && ng build --watch",
     "startServer": "NODE_ENV=development nodemon ./server.js",
-    "test": "NODE_ENV=test node ./server.js",
+    "test": "NODE_ENV=test mocha ./test/shop.spect.js",
     "startDataBase": "mongod --dbpath /data/db/"
   },
   "author": "",
