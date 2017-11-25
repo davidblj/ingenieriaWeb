@@ -248,7 +248,7 @@ module.exports = function (wagner) {
           let subtotal = 0;
 
           // calcule el total
-          vendorBatch.products.forEach((product) => {
+          products.forEach((product) => {
             productsDelivery.push(product);
             productList.push(product._id);
             subtotal += product.price;
@@ -324,16 +324,8 @@ module.exports = function (wagner) {
           // actualize el inventario
           // todo: validate an empty cart and products with no items in the inventory
           // todo: bug fix - repeated products in the productList are not updating more than once at a time
-          Product.update({_id:  { $in: productList}}, {$inc: { soldQuantity: 1,  quantity: -1}}, {multi: true}, function (err) {
-
-            if(err) {
-              return res
-              .status(status.INTERNAL_SERVER_ERROR)
-              .json({error: err.toString()});
-            }
-
-            Cart.findOne({client: idClient}).remove(function (err) {
-
+          products.forEach(function(product) {
+            Product.update({_id: product._id}, {$inc: { soldQuantity: 1,  quantity: -1}}, function(err) {
               if(err) {
                 return res
                 .status(status.INTERNAL_SERVER_ERROR)
@@ -341,8 +333,27 @@ module.exports = function (wagner) {
               }
             })
           });
+          // Product.update({_id:  { $in: products}}, {$inc: { soldQuantity: 1,  quantity: -1}}, {multi: true}, function (err) {
+          //
+          //   if(err) {
+          //     return res
+          //     .status(status.INTERNAL_SERVER_ERROR)
+          //     .json({error: err.toString()});
+          //   }
+          //
+          // });
 
         });
+
+        Cart.findOne({client: idClient}).remove(function (err) {
+
+          if(err) {
+            return res
+            .status(status.INTERNAL_SERVER_ERROR)
+            .json({error: err.toString()});
+          }
+        })
+        
         // cree el domicilio
         let deliveryRequest = req.body.deliveryFlag;
 
@@ -420,7 +431,7 @@ module.exports = function (wagner) {
       // todo: use the auth middleware
       // let client = req.body.client;
       let client = req.decoded._id;
-
+      console.log('cliente: ',client);
 
         Delivery.findOne({client: client}, function(err, delivery){
 
@@ -471,21 +482,27 @@ module.exports = function (wagner) {
             }
 
             let id = user.identification;
+            console.log('identificacion: ',id);
 
             axios.get('http://localhost:3000/bank/getAccount', {
               params: {
                 identification: id
               }
             }).then(function (response) {
-              console.log('respuesta : ', response.data.account_number);
-
+              console.log('Estoy en el then');
               let item = delivery.batch[deliveryIndex];
               let cost  = item.subtotal - item.discount;
 
               let deliveryCost = cost*0.05;
               if(deliveryCost < 5000) deliveryCost = 5000;
               let valueToRestore = parseFloat(cost) + parseFloat(deliveryCost);
-              console.log(valueToRestore);
+              console.log(response);
+
+              if(!response.data) {
+                return res
+                .status(status.BAD_REQUEST)
+                .json({error: 'La cuenta no existe al usuario asociado'});
+              }
 
               axios.put('http://localhost:3000/bank/accreditAccount', {
                 account_number: response.data.account_number,
@@ -495,7 +512,7 @@ module.exports = function (wagner) {
                 //console.log(response.data.message);
 
                 // haga el backup del inventario
-
+                console.log('Estoy por acá');
                 let deliveryProducts = delivery.batch[deliveryIndex].products;
                 let length = deliveryProducts.length;
                 let counter = 0;
@@ -512,16 +529,27 @@ module.exports = function (wagner) {
 
                       Report.find({
                         'id_vendor': { $in: vendorList}
-                      }, function (error, reports) {
-                        console.log(JSON.stringify(reports));
+                      }, function (error, reportsByVendor) {
+
+                        reportsByVendor.forEach(function(reportByVendor) {
+                          reportByVendor.batch.forEach(function(report,index) {
+                            if(deliveryId === report.deliveryId) {
+                              console.log('antes', reportByVendor);
+                              reportByVendor.batch.splice(index, 1);
+                              reportByVendor.save();
+                              console.log('despues', reportByVendor);
+                            }
+                          })
+                        })
                       })
                       // delivery.batch.splice(deliveryIndex, 1);
                       // delivery.save();
-                      res.json('Se actualizo la lista de productos');
+                      res.json({message: 'Se actualizo la lista de productos'});
                     }
                   });
                 })
               })
+
             });
           })
         }

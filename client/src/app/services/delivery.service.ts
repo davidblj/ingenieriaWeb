@@ -14,7 +14,7 @@ export class DeliveryService {
     return this.restangular.one('client/getDelivery').get({}, {'x-access-token': token});
   }
 
-  processDelivery(response: boolean, id: string): Observable<any> {
+  processDelivery(response: boolean, id: string): Observable<string> {
 
      let requestContent = {
        content: {

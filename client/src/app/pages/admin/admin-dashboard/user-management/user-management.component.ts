@@ -24,6 +24,7 @@ export class UserManagementComponent implements OnInit {
 
     this.showMessage = false;
     this.clientAccount = event.target.value;
+    this.transactions = [];
 
     this.accountService.getRecord(event.target.value).subscribe(
       (response) => {
@@ -91,6 +92,7 @@ export class UserManagementComponent implements OnInit {
     this.accountService.accreditAccount(credit).subscribe(
       (response) => {
         console.log(response.transaction);
+        this.message = '';
         this.transactions.push(response.transaction);
         (<HTMLInputElement>document.getElementById("credit")).value = '0';
       }
