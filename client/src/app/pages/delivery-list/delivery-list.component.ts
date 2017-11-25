@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DeliveryService } from '../../services/delivery.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { logging } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-delivery-list',
@@ -11,6 +12,7 @@ export class DeliveryListComponent implements OnInit {
 
   deliveries;
   show = true;
+  state;
 
   constructor(private deliveryService: DeliveryService,
               private modalService: NgbModal) { }
@@ -29,21 +31,22 @@ export class DeliveryListComponent implements OnInit {
     return delivery.subtotal - delivery.discount;
   }
 
-  accept(delivery, content) {
-    this.toggle(delivery, content);
-    // todo: processDelivery
-  }
+  send(delivery, content, state) {
 
-  refuse (delivery, content) {
-    this.toggle(delivery, content);
-    // todo: processDelivery
+    this.state = state;
+    this.deliveryService.processDelivery(state, delivery.deliveryId).subscribe(
+      () => {
+        console.log('success');
+        this.toggle(delivery, content);
+      }
+    );
   }
 
   toggle(delivery, content) {
     this.show = !this.show;
     this.deliveries = this.deliveries.filter((deliveryItem) => {
        return (deliveryItem.deliveryId !== delivery.deliveryId);
-    })
+    });
 
     this.modalService.open(content);
   }

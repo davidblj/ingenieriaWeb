@@ -13,7 +13,7 @@
 
       <div class="input-container ml-auto mb-2" *ngIf="showInput">
         <i class="fa fa-plus"></i>
-        <input title="credit-value" placeholder="Credito" (keyup.enter)="onSubmitCredit($event)">
+        <input type="text" placeholder="Credito" id="credit" (keyup.enter)="onSubmitCredit($event)">
       </div>
 
       <div *ngFor="let transaction of transactions" class="list-item">

@@ -411,17 +411,18 @@ module.exports = function (wagner) {
     };
   }));
 
-  api.post('/processDelivery', wagner.invoke(function (Delivery, User, Product, Report){
+  api.post('/processDelivery', auth.verifyToken, wagner.invoke(function (Delivery, User, Product, Report){
 
     return function(req, res) {
 
-      let deliveryResponse = req.body.deliveryResponse;
-      let deliveryId = req.body.deliveryId;
-
+      let deliveryResponse = req.body.content.deliveryResponse;
+      let deliveryId = req.body.content.deliveryId;
       // todo: use the auth middleware
-      let client = req.body.client;
+      // let client = req.body.client;
+      let client = req.decoded._id;
 
-      Delivery.findOne({client: client}, function(err, delivery){
+
+        Delivery.findOne({client: client}, function(err, delivery){
 
         if(err){
           return res
@@ -442,13 +443,13 @@ module.exports = function (wagner) {
           if(deliveryItem.deliveryId === deliveryId) {
             deliveryIndex = index;
           }
-        })
+        });
 
-        if(deliveryResponse === 'true') {
+        if(deliveryResponse === true) {
           console.log('El envio se entrego')
           delivery.batch[deliveryIndex].state = 'a';
           delivery.save();
-          res.json()
+          return res.json({});
         } else {
           console.log('1');
           delivery.batch[deliveryIndex].state = 'r';
@@ -476,7 +477,6 @@ module.exports = function (wagner) {
                 identification: id
               }
             }).then(function (response) {
-              console.log('3');
               console.log('respuesta : ', response.data.account_number);
 
               let item = delivery.batch[deliveryIndex];

@@ -20,7 +20,7 @@ import { AdminAuthGuard } from './guards/admin.guard';
 
 export const routes: Routes = [
 
-  // todo: fake a new page or a new module on each entity
+  // todo: fake a new page or a new module
   {path: 'admin-login', component: AdminLoginComponent},
   {path: 'transactions-record', component: TransactionsRecordComponent},
   {path: 'bank', component: DashboardComponent, canActivate: [AdminAuthGuard],

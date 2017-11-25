@@ -8,11 +8,12 @@ import { AccountService } from "../../../../bank-services/account.service";
 })
 export class UserManagementComponent implements OnInit {
 
-  transactions;
+  transactions = [];
   clientAccount;
   showMessage = true;
   message;
   showInput = false;
+  credit;
 
   constructor(private accountService: AccountService) { }
 
@@ -22,13 +23,13 @@ export class UserManagementComponent implements OnInit {
   onSubmitAccount(event) {
 
     this.showMessage = false;
+    this.clientAccount = event.target.value;
 
     this.accountService.getRecord(event.target.value).subscribe(
       (response) => {
 
         if(response.message) {
           this.showMessage = true;
-          this.transactions = null;
 
           this.accountService.confirmAccount(event.target.value).subscribe(
             (exists) => {
@@ -86,9 +87,12 @@ export class UserManagementComponent implements OnInit {
       place: 'bank'
     };
 
+    console.log(credit);
     this.accountService.accreditAccount(credit).subscribe(
       (response) => {
+        console.log(response.transaction);
         this.transactions.push(response.transaction);
+        (<HTMLInputElement>document.getElementById("credit")).value = '0';
       }
     )
   }

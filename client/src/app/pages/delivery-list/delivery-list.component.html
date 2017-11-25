@@ -30,8 +30,8 @@
         <div class="card-footer">
           <div class="d-flex justify-content-end ">
             <div class="options">
-              <button class="accept" (click)="accept(delivery, content)">Aceptar</button>
-              <button class="refuse" (click)="refuse(delivery, content)">Rechazar</button>
+              <button class="accept" (click)="send(delivery, content, true)">Aceptar</button>
+              <button class="refuse" (click)="send(delivery, content, false)">Rechazar</button>
             </div>
           </div>
         </div>
@@ -43,6 +43,15 @@
 
 <ng-template #content let-c="close">
   <div class="modal-body message">
-    <span class="title">Gracias por comprar con nosotros !</span>
+
+    <div *ngIf="state; else refusedDelivery">
+      <span class="title">Gracias por comprar con nosotros !</span>
+    </div>
+
+    <ng-template #refusedDelivery>
+      <span class="title">Especifica por favor cual es tu causa</span>
+      <input class="form-control">
+    </ng-template>
+
   </div>
 </ng-template>

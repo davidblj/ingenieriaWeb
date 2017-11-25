@@ -43,7 +43,7 @@ module.exports = function (wagner) {
     }
   }));
 
-    api.get('/getAccountByNumber', wagner.invoke(function (Account) {
+  api.get('/getAccountByNumber', wagner.invoke(function (Account) {
         return function (req, res) {
 
             let account_number = req.query.account_number;
@@ -240,9 +240,9 @@ module.exports = function (wagner) {
                   error: error.toString()
                 });
             }
-
-            let content = { message: 'La transaccion fue exitosa' };
-            res.json(content);
+              console.log(record_tx.tx[0]);
+            console.log('La transaccion fue exitosa');
+            res.json({transaction: record_tx.tx[0]});
           })
         })
       })

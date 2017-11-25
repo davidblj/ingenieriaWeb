@@ -14,8 +14,16 @@ export class DeliveryService {
     return this.restangular.one('client/getDelivery').get({}, {'x-access-token': token});
   }
 
-  // processDelivery(): Observable<any> {
-  //
-  //   return this.restangular.all('client/processDelivery').post
-  // }
+  processDelivery(response: boolean, id: string): Observable<any> {
+
+     let requestContent = {
+       content: {
+         deliveryResponse: response,
+         deliveryId: id
+       },
+       user: JSON.parse(localStorage.getItem('currentUser'))
+     };
+
+     return this.restangular.all('client/processDelivery').post(requestContent);
+  }
 }
