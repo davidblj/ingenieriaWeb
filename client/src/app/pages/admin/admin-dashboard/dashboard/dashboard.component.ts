@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
+  username;
+
   constructor() { }
 
   ngOnInit() {
+    const userInformation = JSON.parse(localStorage.getItem('currentUser'));
+
+    if(userInformation) {
+      this.username = userInformation.user;
+    }
   }
 
 }

@@ -16,26 +16,27 @@ import {AdminLoginComponent} from '../pages/admin/admin-dashboard/admin-login/ad
 import {TransactionsRecordComponent} from '../pages/admin/transactions-record/transactions-record.component';
 import { CheckoutComponent } from '../pages/checkout/checkout.component';
 import { DeliveryListComponent } from '../pages/delivery-list/delivery-list.component';
+import { AdminAuthGuard } from './guards/admin.guard';
 
 export const routes: Routes = [
 
   // todo: fake a new page or a new module on each entity
-  {
-    path: 'admin-login', component: AdminLoginComponent
-  },
-  {
-    path: 'transactions-record', component: TransactionsRecordComponent
-  },
-  {path: 'bank', component: DashboardComponent,
+  {path: 'admin-login', component: AdminLoginComponent},
+  {path: 'transactions-record', component: TransactionsRecordComponent},
+  {path: 'bank', component: DashboardComponent, canActivate: [AdminAuthGuard],
     children: [
       {
-        path: '', component: AccountRegistrationComponent
+        path: '', redirectTo: 'account-registration', pathMatch: 'full'
+      },
+      {
+        path: 'account-registration', component: AccountRegistrationComponent
       },
       {
         path: 'user-management', component: UserManagementComponent
       }
     ]
   },
+
   // todo: redirect a vendor to its dashboard whenever he access the homepage
   {path: 'home', component: HomePageComponent},
   {path: 'new', component: ProductFormComponent},
@@ -43,8 +44,7 @@ export const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'checkout', component: CheckoutComponent, canActivate: [ClientAuthGuard]},
   {path: 'delivery-list', component: DeliveryListComponent, canActivate: [ClientAuthGuard]},
-  {
-    path: 'dashboard', component: WorkstationComponent, canActivate: [VendorAuthGuard],
+  {path: 'dashboard', component: WorkstationComponent, canActivate: [VendorAuthGuard],
     children: [
       {
         path: '', redirectTo: 'inventory', pathMatch: 'full'

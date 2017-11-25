@@ -28,7 +28,6 @@ export class AccountService {
       .get({'account_number': account_number})
       .map((results) => {
 
-        console.log('numero de la cuenta',results);
         if (results.account_number) return true;
         return false;
       });

@@ -3,19 +3,24 @@
     <!-- todo: use a basic authentication -->
     <!--<form></form>-->
     <div class="login-container">
-      <span class="title">¡Bienvenido!</span>
-      <input class="form-control" title="username" placeholder="Username"/>
-      <input class="form-control" title="password" placeholder="Password"/>
+      <form [formGroup]="formLogin" (ngSubmit)="onSubmit()">
 
-      <button class="submit ">Ingresar</button>
+        <span class="title">¡Bienvenido!</span>
+        <input formControlName="username" class="form-control" title="username" placeholder="Username"/>
+        <input formControlName="password" class="form-control" title="password" placeholder="Password"/>
+
+        <button class="submit ">Ingresar</button>
+        <span *ngIf="errmess" class="error">Incorrect username or password</span>
+
+      </form>
     </div>
 
     <div class="footer">
-      <div class="line">
+      <!--<div class="line">
         <span>Si eres un usuario regular puedes consultar el numero de tu cuenta &nbsp;</span><span class="link">aqui</span>
-      </div>
+      </div>-->
       <div class="line">
-        <span>Si quieres consultar el historial de tus transacciones, lo puedes hacer &nbsp;</span><span class="link">aqui</span>
+        <span>Si eres un usuario regular y si quieres consultar el historial de tus transacciones, lo puedes hacer &nbsp;</span><span class="link">aqui</span>
       </div>
     </div>
   </div>

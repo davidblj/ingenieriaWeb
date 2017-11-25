@@ -23,6 +23,7 @@ import { UserManagementComponent } from './pages/admin/admin-dashboard/user-mana
 import { AdminLoginComponent } from './pages/admin/admin-dashboard/admin-login/admin-login.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { DeliveryListComponent } from './pages/delivery-list/delivery-list.component';
+import { AdminAuthGuard } from './app-routing/guards/admin.guard';
 
 // librerias
 
@@ -79,7 +80,8 @@ import { DeliveryService} from './services/delivery.service';
     ReportService,
     StorageService,
     DeliveryService,
-    ClientAuthGuard
+    ClientAuthGuard,
+    AdminAuthGuard
   ],
   bootstrap: [AppComponent]
 })

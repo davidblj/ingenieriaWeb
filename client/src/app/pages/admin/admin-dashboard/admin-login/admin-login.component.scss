@@ -1,5 +1,6 @@
 $background-color: #FE9666;
 $title-color: #6B6C98;
+$error-color: #3F2C5F;
 $margin-color: #6D6D7B;
 $placeholder-color: #2A2E31;
 $small-text-color: #F3B196;
@@ -20,7 +21,7 @@ section {
       color: $title-color;
       margin: {
         bottom: 3em;
-        left: 35%;
+        left: 33%;
       };
     }
 
@@ -53,6 +54,7 @@ section {
     }
 
     .submit {
+      cursor: pointer;
       display: block;
       border-style: none;
       border-radius: 5px;
@@ -62,7 +64,7 @@ section {
       margin: {
         top: 4em;
         bottom: 3em;
-        left: 38%;
+        left: 35%;
       };
       padding: {
         top: 10px;
@@ -71,6 +73,12 @@ section {
         left: 2em;
       }
       font-size: 20px;
+    }
+
+    .error {
+      color: $error-color;
+      margin-left: 8.5em;
+      font-weight: bold;
     }
   }
 
