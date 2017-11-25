@@ -1,6 +1,8 @@
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 let express = require('express');
+const config = require('./index');
+
 
 module.exports = function (app) {
 
@@ -10,5 +12,5 @@ module.exports = function (app) {
   app.use(bodyParser.json({limit: '50mb'}));
   app.use(bodyParser.urlencoded({limit: '50mb', extended : true, parameterLimit:50000}));
   app.use(logger('dev'));
-  app.set('port',  process.env.PORT || 3000);
+  app.set('port',  config.port);
 };

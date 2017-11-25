@@ -1,9 +1,10 @@
 let mongoose = require('mongoose');
 let _ = require('underscore');
-let config = require('../config/settings');
+let config = require('../config/index');
 
 module.exports = function(wagner) {
-  mongoose.connect(config.database);
+  mongoose.Promise = global.Promise;
+  mongoose.connect(config.database, {useMongoClient: true});
 
   let Product = mongoose.model('Product', require('./seller/product'), 'products');
   let User = mongoose.model('User', require('./shared/user'), 'users');
