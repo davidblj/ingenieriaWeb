@@ -1,6 +1,8 @@
 <section>
   <div class="container">
 
+    <span *ngIf="show" class="d-flex justify-content-center  hint">No hay domicilios activos</span>
+
     <div class="delivery-list">
 
       <div class="card" *ngFor="let delivery of deliveries">
@@ -20,6 +22,11 @@
           <div class="d-flex">
             <div class="mr-auto label">Descuento</div>
             <div class="price">-{{delivery.discount}}</div>
+          </div>
+
+          <div class="d-flex">
+            <div class="mr-auto label">Domicilio</div>
+            <div class="price">+{{getShippingPrice(delivery)}}</div>
           </div>
 
           <div class="d-flex">
@@ -45,12 +52,16 @@
   <div class="modal-body message">
 
     <div *ngIf="state; else refusedDelivery">
-      <span class="title">Gracias por comprar con nosotros !</span>
+      <div class="d-flex justify-content-center">
+        <span class="title">¡ Gracias por realizar una compra con nosotros !</span>
+      </div>
     </div>
 
     <ng-template #refusedDelivery>
-      <span class="title">Especifica por favor cual es tu causa</span>
-      <input class="form-control">
+      <div class="d-flex justify-content-center" style="text-align: center">
+        <span class="title">Lo sentimos mucho. Especifica una causa por favor y te acreditaremos el valor del domicilio en breve: </span>
+      </div>
+      <input class="form-control" placeholder="detalles de la queja">
     </ng-template>
 
   </div>

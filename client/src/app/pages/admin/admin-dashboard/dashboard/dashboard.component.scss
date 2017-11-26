@@ -1,5 +1,5 @@
 $background-color: #2A2E31;
-$header-color: #FCFCFD;
+$header-color: #C3CCCB;
 $icon-color: #F08655;
 $font-size: 2.2em;
 $font-title-size: 18px;
@@ -26,8 +26,14 @@ $font-title-size: 18px;
     }
 
     i {
+      transition: all .2s ease-in-out;
+      cursor: pointer;
       font-size: $font-size;
       color: $icon-color;
+
+      &:hover {
+        transform: scale(1.3);
+      }
     }
   }
 }
@@ -42,7 +48,7 @@ $font-title-size: 18px;
     position: relative;
     width: 100%;
     height: auto;
-    background-color: $header-color;
+    background-color: rgba($header-color, 0.3);
 
     .float-right {
       // pull down

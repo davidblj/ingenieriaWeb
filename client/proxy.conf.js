@@ -15,6 +15,7 @@ const PROXY_CONFIG = [
       "/client/getDelivery",
       "/client/processDelivery",
       "/user/login",
+      "/user/registerUser",
       "/bank/registerAccount",
       "/bank/accreditAccount",
       "/bank/getAccountByNumber",

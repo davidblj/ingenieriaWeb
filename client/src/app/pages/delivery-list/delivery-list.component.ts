@@ -11,7 +11,7 @@ import { logging } from 'selenium-webdriver';
 export class DeliveryListComponent implements OnInit {
 
   deliveries;
-  show = true;
+  show = false;
   state;
 
   constructor(private deliveryService: DeliveryService,
@@ -22,13 +22,20 @@ export class DeliveryListComponent implements OnInit {
     this.deliveryService.getDeliveries().subscribe(
       (deliveries) => {
         this.deliveries = deliveries;
+        if(deliveries.length === 0) {
+          this.show = true;
+        }
         console.log(deliveries);
       }
     );
   }
 
   getTotalPrice(delivery) {
-    return delivery.subtotal - delivery.discount;
+    return delivery.total;
+  }
+
+  getShippingPrice(delivery) {
+    return delivery.total - (delivery.subtotal - delivery.discount)
   }
 
   send(delivery, content, state) {
@@ -38,16 +45,21 @@ export class DeliveryListComponent implements OnInit {
       () => {
         console.log('success');
         this.toggle(delivery, content);
+      },
+      () => {
+        // todo: display the message error
       }
     );
   }
 
   toggle(delivery, content) {
-    this.show = !this.show;
     this.deliveries = this.deliveries.filter((deliveryItem) => {
        return (deliveryItem.deliveryId !== delivery.deliveryId);
     });
 
+    if(this.deliveries.length === 0) {
+      this.show = true;
+    }
     this.modalService.open(content);
   }
 }

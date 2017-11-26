@@ -12,7 +12,7 @@ export class LoginService {
   userToken: UserToken;
 
   authenticate(user: UserModel): Observable<string> {
-    return  this.restangular.all('/user/login').post(user)
+    return this.restangular.all('/user/login').post(user)
       .map(
         response => {
           this.userToken = new UserToken(response.user, response.role, response.token);
@@ -22,5 +22,11 @@ export class LoginService {
           return response.role;
         }
       );
+  }
+
+  signUp(user): Observable<any> {
+
+    return this.restangular.all('/user/registerUser')
+      .post(user)
   }
 }

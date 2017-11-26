@@ -5,11 +5,13 @@
     <div class="login-container">
       <form [formGroup]="formLogin" (ngSubmit)="onSubmit()">
 
-        <span class="title">¡Bienvenido!</span>
+        <span class="d-flex justify-content-center title">¡Bienvenido!</span>
         <input formControlName="username" class="form-control" title="username" placeholder="Username"/>
-        <input formControlName="password" class="form-control" title="password" placeholder="Password"/>
+        <input type="password"formControlName="password" class="form-control" title="password" placeholder="Password"/>
 
-        <button class="submit ">Ingresar</button>
+        <div class="d-flex justify-content-center">
+          <button class="submit">Ingresar</button>
+        </div>
         <span *ngIf="errmess" class="error">Incorrect username or password</span>
 
       </form>
@@ -20,7 +22,8 @@
         <span>Si eres un usuario regular puedes consultar el numero de tu cuenta &nbsp;</span><span class="link">aqui</span>
       </div>-->
       <div class="line">
-        <span>Si eres un usuario regular y si quieres consultar el historial de tus transacciones, lo puedes hacer &nbsp;</span><span class="link">aqui</span>
+        <span>Si eres un usuario regular y si quieres consultar el historial de tus
+          transacciones, lo puedes hacer &nbsp;</span><span class="link" routerLink="/transactions-record">aqui</span>
       </div>
     </div>
   </div>

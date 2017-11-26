@@ -26,6 +26,10 @@ let deliveryRecordschema = {
       type: Number,
       required: true
     },
+    total: {
+      type: Number,
+      required: true
+    },    
     state: {
       type: String,
       required: true

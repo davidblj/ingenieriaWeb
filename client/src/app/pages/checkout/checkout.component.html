@@ -1,8 +1,5 @@
 <section class="container-fluid">
-  <!--<div class="checkout-box">
-    <div class="price">Total</div>
-    &lt;!&ndash;<div class="checkout-details">username</div>&ndash;&gt;
-  </div>-->
+  
   <div class="card-container">
 
     <div class="card">
@@ -21,7 +18,7 @@
           </div>
           <small *ngIf="error">Transaccion rechazada. Verifica tus credenciales o revisa tu saldo.</small>
 
-          <div class="button ml-auto mb-1" (click)="onSubmit()">
+          <div class="button ml-auto mb-1" (click)="onSubmit(content)">
             <i class="fa fa-check"></i>
           </div>
 
@@ -32,3 +29,11 @@
   </div>
 
 </section>
+
+<ng-template #content let-c="close">
+  <div class="modal-body">
+    <div class="d-flex justify-content-center">
+      <span class="title">La transaccion se ha realizado con exito y el domicilio se agrego a tu lista de domicilios activos.</span>
+    </div>
+  </div>
+</ng-template>

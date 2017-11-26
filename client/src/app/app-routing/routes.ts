@@ -17,6 +17,7 @@ import {TransactionsRecordComponent} from '../pages/admin/transactions-record/tr
 import { CheckoutComponent } from '../pages/checkout/checkout.component';
 import { DeliveryListComponent } from '../pages/delivery-list/delivery-list.component';
 import { AdminAuthGuard } from './guards/admin.guard';
+import { SignUpComponent } from '../pages/sign-up/sign-up.component';
 
 export const routes: Routes = [
 
@@ -42,6 +43,7 @@ export const routes: Routes = [
   {path: 'new', component: ProductFormComponent},
   {path: 'cart-list', component: CartListComponent, canActivate: [ClientAuthGuard]},
   {path: 'login', component: LoginComponent},
+  {path: 'sign-up', component: SignUpComponent},
   {path: 'checkout', component: CheckoutComponent, canActivate: [ClientAuthGuard]},
   {path: 'delivery-list', component: DeliveryListComponent, canActivate: [ClientAuthGuard]},
   {path: 'dashboard', component: WorkstationComponent, canActivate: [VendorAuthGuard],

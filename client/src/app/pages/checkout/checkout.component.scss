@@ -1,6 +1,7 @@
 $background-color: #CB5053;
 $btn-color: #FE8A82;
 $btn-text-size: 20px;
+$modal-text-color: #6D6D7B;
 
 section {
   // position: absolute;
@@ -52,4 +53,9 @@ section {
       }
     }
   }
+}
+
+.title {
+  padding: 2em;
+  color: $modal-text-color;
 }
