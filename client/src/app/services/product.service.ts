@@ -22,8 +22,8 @@ export class ProductService {
     let formData = new FormData();
     formData.append('photo', file);
 
-    // let URL = 'https://ingeweb.herokuapp.com/shop/postImage';
-    let URL = 'http://localhost:4200/shop/postImage';
+    let URL = 'https://ingeweb.herokuapp.com/shop/postImage';
+    // let URL = 'http://localhost:4200/shop/postImage';
 
     return this.http.post(URL, formData).map((res: Response) => res.json().route);
   }
