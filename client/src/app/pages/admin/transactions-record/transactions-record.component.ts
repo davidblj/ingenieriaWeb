@@ -24,8 +24,8 @@ export class TransactionsRecordComponent implements OnInit {
 
   createForm() {
     this.loginForm = this.formBuilder.group({
-      account : '10202130267',
-      password: 'david'
+      account : '',
+      password: ''
     })
   }
 

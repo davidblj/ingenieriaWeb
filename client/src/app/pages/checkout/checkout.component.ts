@@ -35,8 +35,8 @@ export class CheckoutComponent implements OnInit {
   public createForm() {
 
     this.credentialsForm = this.formBuilder.group({
-      account_number: '10251045138',
-      password: 'david'
+      account_number: '',
+      password: ''
     });
   }
 
