@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "NODE_ENV=test mocha ./test/shop.spect.js",
-    "start": "node server.js",
+    "start": "NODE_ENV=development node server.js",
     "startClient": "cd client && ng build --watch",
     "startServer": "NODE_ENV=development nodemon ./server.js",
     "startDataBase": "mongod --dbpath /data/db/"

@@ -2,4 +2,3 @@ node_modules
 .vs
 .idea
 public
-client/dist
