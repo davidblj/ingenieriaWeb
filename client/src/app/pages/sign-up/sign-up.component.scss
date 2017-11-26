@@ -1,0 +1,136 @@
+$background-color: #232331;
+$label-size: 10px;
+$input-size: 14px;
+$small-text-size: 12px;
+$title-size: 22px;
+$field-color: #6D6D7B;
+$button-color: #F4646A;
+
+section {
+  height: 100%;
+  background: $background-color;
+
+  .hint {
+    color: white;
+    font-size: 50px;
+
+    .underline {
+      text-decoration: underline;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .box {
+    // height: 5em;
+    // background: white;
+
+    .content {
+      background: white;
+      height: auto;
+      width: 30em;
+      margin: {
+        top: 20%;
+        right: 30%;
+      }
+      border-radius: 15px;
+
+      .header {
+        margin-top: 2em;
+
+        .title {
+          font-size: $title-size;
+          padding-left: 1.2em;
+          padding-bottom: 1em;
+          color: $button-color;
+          letter-spacing: 1px;
+        }
+
+        .sign-in {
+          position: relative;
+          top: 10px;
+          padding-right: 1em;
+          font-size: $small-text-size;
+          font-weight: bold;
+        }
+
+        .header-divider {
+          padding: 0;
+          border-bottom: {
+            style: solid;
+            color: rgba(black, 0.1);
+            width: 3px;
+          }
+        }
+      }
+
+      .form {
+        padding: {
+          top: 1.5em;
+          bottom:1em;
+          left: 2.7em;
+          right: 2.7em;
+        }
+
+        .field {
+          letter-spacing: 2px;
+          margin-top: 1em;
+          color: $field-color;
+          font-weight: bold;
+        }
+
+        label {
+          position: relative;
+          top:9px;
+          font-size: $label-size;
+        }
+
+        input {
+          width: 80%;
+          border: none;
+          padding-bottom: 0.9em;
+          font-size: $input-size;
+        }
+
+        button {
+          margin-top: 4.5em;
+          border-radius: 30px;
+          background: $button-color;
+          color: white;
+          // font-weight: bold;
+          padding: {
+            top: 18px;
+            bottom: 18px;
+          }
+
+          &:hover {
+            color: $button-color;
+            background: white;
+            border: {
+              style: solid;
+              width: 2px;
+              color: $button-color;
+            };
+          }
+        }
+      }
+
+      .divider {
+        padding: 0;
+        border-bottom: {
+          style: solid;
+          color: rgba(black, 0.2);
+          width: 1px;
+        }
+      }
+    }
+  }
+
+  .onMouseOver {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

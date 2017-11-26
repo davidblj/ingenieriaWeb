@@ -24,6 +24,7 @@ import { AdminLoginComponent } from './pages/admin/admin-dashboard/admin-login/a
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { DeliveryListComponent } from './pages/delivery-list/delivery-list.component';
 import { AdminAuthGuard } from './app-routing/guards/admin.guard';
+import { SignUpComponent } from './pages/sign-up/sign-up.component';
 
 // librerias
 
@@ -61,7 +62,8 @@ import { DeliveryService} from './services/delivery.service';
     AdminLoginComponent,
     TransactionsRecordComponent,
     CheckoutComponent,
-    DeliveryListComponent
+    DeliveryListComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
