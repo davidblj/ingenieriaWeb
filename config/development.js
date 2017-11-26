@@ -1,6 +1,6 @@
 module.exports = {
     'secret':  'omega',
-    'port': 3000,
+    'port': process.env.PORT || 3000,
     'database': 'mongodb://admin:admin123@ds237855.mlab.com:37855/heroku_tvjsm4s9'
 };
 
